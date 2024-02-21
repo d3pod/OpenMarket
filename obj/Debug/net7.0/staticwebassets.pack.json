@@ -1,0 +1,529 @@
+{
+  "Files": [
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/css/account.css",
+      "PackagePath": "staticwebassets/css/account.css"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/css/admin.css",
+      "PackagePath": "staticwebassets/css/admin.css"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/css/ads.css",
+      "PackagePath": "staticwebassets/css/ads.css"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/css/adverts.css",
+      "PackagePath": "staticwebassets/css/adverts.css"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/css/alerts.css",
+      "PackagePath": "staticwebassets/css/alerts.css"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/css/chat.css",
+      "PackagePath": "staticwebassets/css/chat.css"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/css/index.css",
+      "PackagePath": "staticwebassets/css/index.css"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/css/layout.css",
+      "PackagePath": "staticwebassets/css/layout.css"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/css/loading.css",
+      "PackagePath": "staticwebassets/css/loading.css"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/css/login.css",
+      "PackagePath": "staticwebassets/css/login.css"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/css/pages.css",
+      "PackagePath": "staticwebassets/css/pages.css"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/grupos/Agricultura.png",
+      "PackagePath": "staticwebassets/grupos/Agricultura.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/grupos/Animais.png",
+      "PackagePath": "staticwebassets/grupos/Animais.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/grupos/Carros.png",
+      "PackagePath": "staticwebassets/grupos/Carros.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/grupos/Casa.png",
+      "PackagePath": "staticwebassets/grupos/Casa.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/grupos/Computadores.png",
+      "PackagePath": "staticwebassets/grupos/Computadores.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/grupos/Decoracao.png",
+      "PackagePath": "staticwebassets/grupos/Decoracao.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/grupos/Desporto.png",
+      "PackagePath": "staticwebassets/grupos/Desporto.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/grupos/Emprego.png",
+      "PackagePath": "staticwebassets/grupos/Emprego.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/grupos/Ferramentas.png",
+      "PackagePath": "staticwebassets/grupos/Ferramentas.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/grupos/Lazer.png",
+      "PackagePath": "staticwebassets/grupos/Lazer.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/grupos/Outros.png",
+      "PackagePath": "staticwebassets/grupos/Outros.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/grupos/Roupa.png",
+      "PackagePath": "staticwebassets/grupos/Roupa.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/grupos/Servicos.png",
+      "PackagePath": "staticwebassets/grupos/Servicos.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/grupos/Smartphones.png",
+      "PackagePath": "staticwebassets/grupos/Smartphones.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/grupos/Todos.png",
+      "PackagePath": "staticwebassets/grupos/Todos.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/AddImage.jpg",
+      "PackagePath": "staticwebassets/imgs/AddImage.jpg"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/WithoutImage.jpg",
+      "PackagePath": "staticwebassets/imgs/WithoutImage.jpg"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/WithoutPicture.jpg",
+      "PackagePath": "staticwebassets/imgs/WithoutPicture.jpg"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/accept.png",
+      "PackagePath": "staticwebassets/imgs/accept.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/active.png",
+      "PackagePath": "staticwebassets/imgs/active.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/adverts.png",
+      "PackagePath": "staticwebassets/imgs/adverts.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/artigos.png",
+      "PackagePath": "staticwebassets/imgs/artigos.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/categories.png",
+      "PackagePath": "staticwebassets/imgs/categories.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/categories/Agricultura.png",
+      "PackagePath": "staticwebassets/imgs/categories/Agricultura.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/categories/Animais.png",
+      "PackagePath": "staticwebassets/imgs/categories/Animais.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/categories/Carros.png",
+      "PackagePath": "staticwebassets/imgs/categories/Carros.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/categories/Casa.png",
+      "PackagePath": "staticwebassets/imgs/categories/Casa.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/categories/Computadores.png",
+      "PackagePath": "staticwebassets/imgs/categories/Computadores.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/categories/Criança.png",
+      "PackagePath": "staticwebassets/imgs/categories/Criança.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/categories/Decoracao.png",
+      "PackagePath": "staticwebassets/imgs/categories/Decoracao.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/categories/Desporto.png",
+      "PackagePath": "staticwebassets/imgs/categories/Desporto.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/categories/Ferramentas.png",
+      "PackagePath": "staticwebassets/imgs/categories/Ferramentas.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/categories/Lazer.png",
+      "PackagePath": "staticwebassets/imgs/categories/Lazer.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/categories/Outros.png",
+      "PackagePath": "staticwebassets/imgs/categories/Outros.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/categories/Roupa.png",
+      "PackagePath": "staticwebassets/imgs/categories/Roupa.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/categories/Smartphones.png",
+      "PackagePath": "staticwebassets/imgs/categories/Smartphones.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/chat.png",
+      "PackagePath": "staticwebassets/imgs/chat.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/close.png",
+      "PackagePath": "staticwebassets/imgs/close.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/concluido.png",
+      "PackagePath": "staticwebassets/imgs/concluido.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/confusion.png",
+      "PackagePath": "staticwebassets/imgs/confusion.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/contact.png",
+      "PackagePath": "staticwebassets/imgs/contact.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/contactar.png",
+      "PackagePath": "staticwebassets/imgs/contactar.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/delete.png",
+      "PackagePath": "staticwebassets/imgs/delete.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/edit.png",
+      "PackagePath": "staticwebassets/imgs/edit.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/evaluation/1stars.png",
+      "PackagePath": "staticwebassets/imgs/evaluation/1stars.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/evaluation/2stars.png",
+      "PackagePath": "staticwebassets/imgs/evaluation/2stars.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/evaluation/3stars.png",
+      "PackagePath": "staticwebassets/imgs/evaluation/3stars.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/evaluation/4stars.png",
+      "PackagePath": "staticwebassets/imgs/evaluation/4stars.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/evaluation/5stars.png",
+      "PackagePath": "staticwebassets/imgs/evaluation/5stars.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/finalizado.png",
+      "PackagePath": "staticwebassets/imgs/finalizado.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/formulario.png",
+      "PackagePath": "staticwebassets/imgs/formulario.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/heart-added.png",
+      "PackagePath": "staticwebassets/imgs/heart-added.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/heart-line.png",
+      "PackagePath": "staticwebassets/imgs/heart-line.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/heart-marked.png",
+      "PackagePath": "staticwebassets/imgs/heart-marked.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/heart.png",
+      "PackagePath": "staticwebassets/imgs/heart.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/increase.png",
+      "PackagePath": "staticwebassets/imgs/increase.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/info.png",
+      "PackagePath": "staticwebassets/imgs/info.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/location.png",
+      "PackagePath": "staticwebassets/imgs/location.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/mail.png",
+      "PackagePath": "staticwebassets/imgs/mail.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/mensagens.png",
+      "PackagePath": "staticwebassets/imgs/mensagens.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/menu.png",
+      "PackagePath": "staticwebassets/imgs/menu.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/phone.png",
+      "PackagePath": "staticwebassets/imgs/phone.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/pin.png",
+      "PackagePath": "staticwebassets/imgs/pin.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/privacy.png",
+      "PackagePath": "staticwebassets/imgs/privacy.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/procurar.png",
+      "PackagePath": "staticwebassets/imgs/procurar.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/report.png",
+      "PackagePath": "staticwebassets/imgs/report.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/search.png",
+      "PackagePath": "staticwebassets/imgs/search.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/settings.png",
+      "PackagePath": "staticwebassets/imgs/settings.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/shopping-bag.png",
+      "PackagePath": "staticwebassets/imgs/shopping-bag.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/social/facebook.png",
+      "PackagePath": "staticwebassets/imgs/social/facebook.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/social/instagram.png",
+      "PackagePath": "staticwebassets/imgs/social/instagram.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/social/link.png",
+      "PackagePath": "staticwebassets/imgs/social/link.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/social/linkedin.png",
+      "PackagePath": "staticwebassets/imgs/social/linkedin.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/social/twitter.png",
+      "PackagePath": "staticwebassets/imgs/social/twitter.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/social/whatsapp.png",
+      "PackagePath": "staticwebassets/imgs/social/whatsapp.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/user.png",
+      "PackagePath": "staticwebassets/imgs/user.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/user_login.png",
+      "PackagePath": "staticwebassets/imgs/user_login.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/verificado.png",
+      "PackagePath": "staticwebassets/imgs/verificado.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/verified.png",
+      "PackagePath": "staticwebassets/imgs/verified.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/view.png",
+      "PackagePath": "staticwebassets/imgs/view.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/imgs/website.png",
+      "PackagePath": "staticwebassets/imgs/website.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/js/admin.js",
+      "PackagePath": "staticwebassets/js/admin.js"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/js/ads.js",
+      "PackagePath": "staticwebassets/js/ads.js"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/js/advert.js",
+      "PackagePath": "staticwebassets/js/advert.js"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/js/adverts.js",
+      "PackagePath": "staticwebassets/js/adverts.js"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/js/chat.js",
+      "PackagePath": "staticwebassets/js/chat.js"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/js/default.js",
+      "PackagePath": "staticwebassets/js/default.js"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/js/index.js",
+      "PackagePath": "staticwebassets/js/index.js"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/js/main.js",
+      "PackagePath": "staticwebassets/js/main.js"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/js/menu.js",
+      "PackagePath": "staticwebassets/js/menu.js"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/js/social.js",
+      "PackagePath": "staticwebassets/js/social.js"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/static/imgs/active.png",
+      "PackagePath": "staticwebassets/static/imgs/active.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/static/imgs/ads.png",
+      "PackagePath": "staticwebassets/static/imgs/ads.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/static/imgs/chat.png",
+      "PackagePath": "staticwebassets/static/imgs/chat.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/static/imgs/delete.png",
+      "PackagePath": "staticwebassets/static/imgs/delete.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/static/imgs/edit.png",
+      "PackagePath": "staticwebassets/static/imgs/edit.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/static/imgs/menu/add.png",
+      "PackagePath": "staticwebassets/static/imgs/menu/add.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/static/imgs/menu/chat-1.png",
+      "PackagePath": "staticwebassets/static/imgs/menu/chat-1.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/static/imgs/menu/chat.png",
+      "PackagePath": "staticwebassets/static/imgs/menu/chat.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/static/imgs/menu/home-1.png",
+      "PackagePath": "staticwebassets/static/imgs/menu/home-1.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/static/imgs/menu/home.png",
+      "PackagePath": "staticwebassets/static/imgs/menu/home.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/static/imgs/menu/user-1.png",
+      "PackagePath": "staticwebassets/static/imgs/menu/user-1.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/static/imgs/menu/user.png",
+      "PackagePath": "staticwebassets/static/imgs/menu/user.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/static/imgs/menu/wishlist-1.png",
+      "PackagePath": "staticwebassets/static/imgs/menu/wishlist-1.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/static/imgs/menu/wishlist.png",
+      "PackagePath": "staticwebassets/static/imgs/menu/wishlist.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/static/imgs/wallet.png",
+      "PackagePath": "staticwebassets/static/imgs/wallet.png"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/templates/emails/account-blocked.htm",
+      "PackagePath": "staticwebassets/templates/emails/account-blocked.htm"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/templates/emails/added-points.htm",
+      "PackagePath": "staticwebassets/templates/emails/added-points.htm"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/templates/emails/advert-accepted.htm",
+      "PackagePath": "staticwebassets/templates/emails/advert-accepted.htm"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/templates/emails/advert-contact.htm",
+      "PackagePath": "staticwebassets/templates/emails/advert-contact.htm"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/templates/emails/advert-status.htm",
+      "PackagePath": "staticwebassets/templates/emails/advert-status.htm"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/templates/emails/contact-client.htm",
+      "PackagePath": "staticwebassets/templates/emails/contact-client.htm"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/templates/emails/contact-us.htm",
+      "PackagePath": "staticwebassets/templates/emails/contact-us.htm"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/templates/emails/create-account.htm",
+      "PackagePath": "staticwebassets/templates/emails/create-account.htm"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/templates/emails/new-password.htm",
+      "PackagePath": "staticwebassets/templates/emails/new-password.htm"
+    },
+    {
+      "Id": "/Users/diogolamego/Dev/OpenMarket/wwwroot/templates/emails/used-points.htm",
+      "PackagePath": "staticwebassets/templates/emails/used-points.htm"
+    },
+    {
+      "Id": "obj/Debug/net7.0/staticwebassets/msbuild.build.openmarket.props",
+      "PackagePath": "build\\openmarket.props"
+    },
+    {
+      "Id": "obj/Debug/net7.0/staticwebassets/msbuild.buildMultiTargeting.openmarket.props",
+      "PackagePath": "buildMultiTargeting\\openmarket.props"
+    },
+    {
+      "Id": "obj/Debug/net7.0/staticwebassets/msbuild.buildTransitive.openmarket.props",
+      "PackagePath": "buildTransitive\\openmarket.props"
+    },
+    {
+      "Id": "obj/Debug/net7.0/staticwebassets/msbuild.openmarket.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
