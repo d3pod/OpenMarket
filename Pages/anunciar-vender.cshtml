@@ -1,0 +1,463 @@
+﻿@page "{Msg?}"
+@model MyApp.Namespace.anunciar_venderModel
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+@section head{
+<title>OpenMarket - Anunciar</title>
+<meta name="title" content="OpenMarket - Classificados" />
+<meta name="description"
+    content="Anuncia o teu artigo ou serviço no OpenMarket." />
+@* Facebook, Others *@
+<meta property="og:title" content="OpenMarket - Anunciar">
+<meta property="og:image" content="https://www.openmarket.com/imgs/Logotipo.jpg">
+<meta property="og:image:width" content="400" />
+<meta property="og:image:height" content="300" />
+<meta property="og:url" content="https://www.openmarket.com/anunciar-vender">
+<meta property="og:type" content="article" />
+<meta property="og:description"
+    content="Anuncia o teu artigo ou serviço no OpenMarket.">
+@* Twitter *@
+<meta property="twitter:title" content="OpenMarket - Anunciar">
+<meta name="twitter:description"
+    content="Anuncia o teu artigo ou serviço no OpenMarket.">
+<meta name="twitter:image" content="https://www.openmarket.com/imgs/Logotipo.jpg">
+<meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://www.openmarket.com/anunciar-vender/" />
+    <link rel="stylesheet" href="~/css/adverts.css?v=104" />
+    <link rel="stylesheet" href="~/css/loading.css?v=104" />
+    <script src="~/js/main.js?v=104"></script>
+}
+@section login{
+<div class="navbar-login">
+    <a class="login-link" href="~/entrar">My OpenMarket</a>
+</div>
+}
+<div id="alert-message-container" style="display: none;">
+    <div class="alert-content">
+        <h3 id="alert-message-title"></h3>
+        <p>O teu anúncio será publicado em breve.</p>
+        <p>Aguarda enquanto a nossa equipa verifica se está de acordo com os <a href="termos-condicoes">Termos e
+                Condições</a>.</p>
+        <p>Receberás um email assim que estiver disponivel.</p>
+        <a href="/minha-conta?status=0">Minha conta</a>
+    </div>
+</div>
+<form method="POST" asp-page-handler="Add" id="new-advert-form" class="new-advert-container form-container"
+    enctype="multipart/form-data">
+    <h1>Publicar anúncio</h1>
+    <div class="new-advert-header">
+        <h3>Quanto mais detalhado, melhor!</h3>
+        <div class="new-advert-name">
+            <p>Primeiro, escolhe um nome apelativo, simples e que identifique o artigo ou serviço.</p>
+            <p>Exemplos: <span class="advert-span">Hyundai i20 2014</span>, <span class="advert-span">iPhone 12 Pro novo com garantia</span>, <span class="advert-span">Relógio Swatch Disney Azul</span></p>
+            <input onblur="empty_check('advert-title', 'title-advert-alert', 'Introduz um título')" class="input-style new-advert-title"
+                id="advert-title" type="text" asp-for="adverts.title" maxlength="60"
+                placeholder="ex. Samsung S21 com garantia">
+            <span id="title-advert-alert" class="new-advert-alert new-advert-alert-name"></span>
+        </div>
+        <div class="new-advert-category">
+            <p>Categoria</p>
+            <div>
+                <select onchange="loadCategories('anunciar-vender', '')" id="group-selector" asp-for="adverts.groupName" class="select-style">
+                    <option>Escolhe a categoria</option>
+                    @foreach (var item in Model.groups)
+                    {
+                        <option value="@item.name">@item.name</option>
+                    }
+                </select>
+                    @if(Model.categories != null)
+                    {
+                        <select id="category-selector" class="category-selector select-style" asp-for="adverts.category">
+                        @foreach (var item in Model.categories)
+                        {
+                        if(Model.adverts.category == item.name)
+                        {
+                            <option selected value="@item.name">@item.name</option>
+                        }
+                        else
+                        {
+                            <option value="@item.name">@item.name</option>
+                        }
+                        }
+                    </select>
+                    }
+                    else{
+                        <select id="category-selector" class="category-selector select-style" asp-for="adverts.category"
+                    style="display: none;">
+                    </select>
+                    }
+                
+            </div>
+            <span id="category-advert-alert" class="new-advert-alert new-advert-alert-category"></span>
+        </div>
+        <div class="new-advert-need advert-needs-content">
+            <p>O que pretendo?</p>
+            @if(Model.advert_id > 0)
+            {
+                @switch (Model.adverts.groupName)
+                {
+                    case "Serviços":
+                        <select class="select-style" id="advert-needs" asp-for="adverts.type">
+                            <option selected value="Serviço">Prestar Serviço</option>
+                            <option value="Contratar">Contratar</option>
+                        </select>
+                    break;
+
+                    case "Imóveis":
+                        <select class="select-style" id="advert-needs" asp-for="adverts.type">
+                            <option selected value="Venda">Vender</option>
+                            <option value="Arrendar">Arrendar</option>
+                            <option value="Procura">Procurar</option>
+                        </select>
+                    break;
+
+                    default:
+                    <select class="select-style" id="advert-needs" asp-for="adverts.type">
+                    <option value="Venda">Vender</option>
+                    <option value="Compra">Comprar</option>
+                    @* <option value="Troca">Trocar</option> *@
+                </select>
+                break;
+                }
+            }
+            else{
+                <select class="select-style" id="advert-needs" asp-for="adverts.type">
+                    <option selected value="Venda">Vender</option>
+                    <option value="Compra">Comprar</option>
+                    @* <option value="Troca">Trocar</option> *@
+                </select>
+            }
+            <span id="status-advert-alert" class="new-advert-alert new-advert-alert-status"></span>
+        </div>
+    </div>
+    <div class="new-advert-images advert-images-content">
+        <h3>Imagens</h3>
+        <p>A primeira imagem é a foto principal do teu anúncio.</p>
+        <div onmouseleave="closeAlert('image-float-alert')" onmouseover="showAlert('image-float-alert')">
+            @if(Model.TotalImages > 0)
+            {
+                @foreach (var item in Model.images)
+            {
+                <input type="file" asp-for="uploadImages" id="image@item.id" accept="image/jpg, image/jpeg" style="display: none;"
+                onchange="PreviewImage('image@item.id')">
+                    var imgSrc = "/anuncios/" + @item.filename;
+                    var button = "button_image" + @item.id;
+                    var image = "image" + @item.id;
+                    <div>
+                        <img alt="Imagem do artigo" src="@imgSrc" id="@button"
+                onclick="document.getElementById('@image').click();">
+                <button value="@item.id" name="image_id" type="submit">&times;</button>
+                    </div>
+            }
+            }
+            <div id="image-float-alert">
+                <p>Adicione imagens reais do artigo, ao invés de fotografias de catálogo retiradas da internet. São aceites ficheiros nos formatos .jpg e .jpeg.</p>
+            </div>
+            @if(Model.TotalImages < 8)
+            {
+                var images = Model.TotalImages;
+                for (int i = images +1; i < 9; i++)
+                {
+                    var button = "button_image" + i;
+                    var image = "image" + i;
+                    <div>
+                        <input type="file" asp-for="uploadImages" id="@image" accept="image/jpg, image/jpeg" style="display: none;"
+                onchange="PreviewImage('@image')">
+                        <img alt="Adicionar imagem" src="/imgs/AddImage.jpg" id="@button"
+                onclick="document.getElementById('@image').click();">
+                    </div>
+                }
+            }
+        </div>
+        <span id="images-advert-alert" class="new-advert-alert new-advert-alert-images"></span>
+    </div>
+    <div class="new-advert-description">
+        <p>Descrição</p>
+        <textarea oninput="caracter_counter('advert-text','caracters-counter', '10000', '')" id="advert-text"
+            class="input-style" maxlength="10000" asp-for="adverts.description" type="text" name="adverts.description"
+            placeholder="Escreve o que gostarias de ler se fosses tu a ver este anúncio"></textarea>
+        <div>
+            <p>Escreve pelo menos mais de 80 caracteres</p>
+            <span id="caracters-counter">0/10000</span>
+            <script>caracter_counter('advert-text','caracters-counter', '10000', '');</script>
+        </div>
+        <span id="description-advert-alert" class="new-advert-alert new-advert-alert-description"></span>
+    </div>
+    <div class="new-advert-price">
+        <div id="advert-price-content">
+            <p id="price-title">Preço</p>
+        <input placeholder="0 €" onblur="empty_check('advert-price','price-advert-alert', 'Introduz um preço')" onkeyup="price_format('advert-price', 'advert-price_max')" id="advert-price"
+            class="input-style" type="number" asp-for="adverts.price">
+
+        <div class="price-range-content">
+            <input placeholder="Mín." onblur="empty_check('advert-price_min','price-advert-alert', 'Introduz o valor de salário mínimo')" onkeyup="price_format('advert-price_min', 'advert-price_max')" id="advert-price_min"
+            class="input-style" type="number" asp-for="adverts.price_min">
+            <p>-</p>
+            <input placeholder="Máx." onblur="empty_check('advert-price_max','price-advert-alert', 'Introduz o valor de salário máximo')" onkeyup="price_format('advert-price_min', 'advert-price_max')" id="advert-price_max"
+            class="input-style" type="number" asp-for="adverts.price_max">
+        </div>
+        <span id="price-advert-alert" class="new-advert-alert new-advert-alert-price"></span>
+
+            <div class="checkbox-content checkbox_orc">
+                <input onchange="under_budget()" id="checkbox_orc" type="checkbox" value="true" asp-for="adverts.orc">
+                <label>Sob orçamento</label>
+            </div>
+        </div>
+        <div class="negotiable-content">
+            <p>Negociável</p>
+            <select class="select-style" asp-for="adverts.negotiable">
+                <option selected value="0">Não</option>
+                <option value="1">Sim</option>
+            </select>
+            <span id="negotiable-advert-alert" class="new-advert-alert new-advert-alert-negotiable"></span>
+        </div>
+        <div>
+            <p>Tipo de anúncio</p>
+            <select class="select-style" asp-for="adverts.vendor">
+                <option selected value="Particular">Particular</option>
+                <option value="Profissional">Profissional</option>
+            </select>
+            <span id="vendor-advert-alert" class="new-advert-alert new-advert-alert-vendor"></span>
+        </div>
+        <div class="status-content">
+            <p>Estado</p>
+            <select class="select-style" asp-for="adverts.condition">
+                <option selected value="0">Usado</option>
+                <option value="1">Novo</option>
+            </select>
+            <span id="status-advert-alert" class="new-advert-alert new-advert-alert-status"></span>
+        </div>
+        <div class="period-content">
+            <p>Tipo de emprego</p>
+            <select id="period-select" class="select-style" asp-for="adverts.period">
+                <option selected value="">Selecionar</option>
+                <option value="Full-time">Full-time</option>
+                <option value="Part-time">Part-time</option>
+                <option value="Voluntário">Voluntário</option>
+                <option value="Freelancer">Freelancer</option>
+            </select>
+            <span id="period-advert-alert" class="new-advert-alert new-advert-alert-period"></span>
+        </div>
+        <div class="contract-content">
+            <p>Tipo de contracto</p>
+            <select id="contract-select" class="select-style" asp-for="adverts.contract">
+                <option selected value="">Selecionar</option>
+                <option value="A Definir">A Definir</option>
+                <option value="Temporário">Temporário</option>
+                <option value="Estágio">Estágio</option>
+                <option value="Sem Termo">Sem Termo</option>
+                <option value="A Termo">A Termo</option>
+            </select>
+            <span id="contract-advert-alert" class="new-advert-alert new-advert-alert-contract"></span>
+        </div>
+    </div>
+    <div class="new-advert-contacts">
+        <h3>Dados de contacto</h3>
+        <div>
+            <p>Localização</p>
+            <div>
+                <div>
+                    <select class="select-style" onchange="loadMunicipalities('anunciar-vender', '')" asp-for="adverts.city"
+                        id="cities-selector">
+                        <option>Província</option>
+                        @foreach (var item in Model.cities)
+                        {
+                            <option value="@item.name">@item.name</option>
+                        }
+                    </select>
+                </div>
+                 @if(Model.municipalities != null)
+                 {
+                     <div id="municipality-content" class="municipality-content">
+                    <select asp-for="adverts.municipality" class="municipality-selector select-style"
+                        id="municipality-selector">
+                        @foreach (var item in Model.municipalities)
+                        {
+                            if(Model.adverts.municipality == item.name)
+                            {
+                                <option selected value="@item.name">@item.name</option>
+                            }
+                            else
+                            {
+                                <option value="@item.name">@item.name</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div id="locality-content">
+                    <input asp-for="adverts.locality" id="advert-locality" type="text" class="input-style"
+                        placeholder="Localidade">
+                </div>
+                 }
+                 else
+                 {
+                     <div id="municipality-content" class="municipality-content" style="display: none;">
+                    <select asp-for="adverts.municipality" class="municipality-selector select-style"
+                        id="municipality-selector">
+
+                    </select>
+                </div>
+                <div id="locality-content" style="display: none;">
+                    <input asp-for="adverts.locality" id="advert-locality" type="text" class="input-style"
+                        placeholder="Localidade/Bairro">
+                </div>
+                 }
+            </div>
+            <span id="location-advert-alert" class="new-advert-alert new-advert-alert-location"></span>
+        </div>
+        <div>
+            <p>Desejas ser contactado por email?</p>
+            <select asp-for="adverts.email_visible" class="select-style">
+                <option selected value="1">Sim</option>
+                <option value="0">Não</option>
+            </select>
+            <span id="email-advert-alert" class="new-advert-alert new-advert-alert-email"></span>
+        </div>
+        <div class="new-advert-contact-telf">
+            <p>Número de telefone</p>
+            <input onblur="empty_check('advert-contact', 'contact-advert-alert', 'Introduz um contacto telefónico')"
+                id="advert-contact" class="input-style" type="tel" asp-for="adverts.contact">
+            <span id="contact-advert-alert" class="new-advert-alert new-advert-alert-contact"></span>
+        </div>
+    </div>
+    <div class="new-advert-buttons">
+        @if(Model.advert_id > 0)
+        { 
+            <button type="button" class="loading-button" onclick="form_validate()" name="advert_id" value="@Model.adverts.id">
+                <span class="button-text">Actualizar anúncio</span>
+            </button>
+        }
+        else
+        {
+            <button class="loading-button" type="button" onclick="form_validate()">
+                <span class="button-text">Publicar anúncio</span>
+            </button>
+        }
+    </div>
+</form>
+<div class="div-loading loading-advert">
+    <h1>Aguarde um momento, por favor!</h1>
+    <h2>Este processo pode demorar alguns minutos.</h2>
+    <span class="loading-effect effect-white"></span>
+</div>
+@if(Model.advert_id > 0)
+{
+    if(Model.adverts.groupName == "Emprego")
+                {
+                    <script type="text/javascript">
+                        employment();
+                    </script>
+                }
+                else if (Model.adverts.groupName == "Serviços")
+                {
+                    <script type="text/javascript">
+                    document.querySelector(".checkbox_orc").style.display = "flex";
+                    document.querySelector(".status-content").style.display = "none";
+                    document.getElementById("advert-needs").setAttribute("onchange", "hidePrice()");
+                    hidePrice();
+                    </script>
+                }
+}
+@if (Model.alerts_list != null)
+{
+    foreach (var alert in Model.alerts_list)
+    {
+        <div class="alerts-container">
+    <div class="alert-content">
+        <span onclick="closePanel('alerts-container');cookieAlert('fz_av', '@alert.cookie_time');">&times;</span>
+        <h2>@alert.title</h2>
+        <textarea id="alert-text" readonly>@alert.text</textarea>
+        <script>
+            var textarea = document.getElementById("alert-text");
+            textarea.style.height = textarea.scrollHeight + 20 + "px";
+        </script>
+        @if (!string.IsNullOrEmpty(@alert.button_text))
+                {
+                    <a onclick="cookieAlert('fz_av', '@alert.cookie_time')" href="@alert.button_url">@alert.button_text</a>
+                }
+            </div>
+        </div>
+    }
+}
+@if(Model._Msg != null)
+{
+    @switch (Model._Msg)
+{
+    case "Submetido":
+        <script type="text/javascript">
+    document.getElementById("alert-message-title").innerHTML =
+      "Anúncio inserido com sucesso";
+    document.getElementById("alert-message-container").style.display = "flex";
+</script>
+        break;
+    case "Titulo":
+        <script type="text/javascript">
+    document.getElementById('title-advert-alert').innerHTML = "Introduz um titulo com pelo menos com 5 caracteres";
+    window.scroll(0, 20);
+</script>
+        break;
+
+    case "Categoria":
+        <script type="text/javascript">
+    document.getElementById('category-advert-alert').innerHTML = "Escolhe uma categoria";
+    window.scroll(0, 20);
+</script>
+        break;
+
+    case "Descricao":
+        <script type="text/javascript">
+    document.getElementById('description-advert-alert').innerHTML = "Introduz uma descrição para o seu anúncio<br/>Não te esqueças de todos os pormenores";
+    window.scroll(0, 900);
+</script>
+        break;
+
+    case "Preco":
+        <script type="text/javascript">
+    document.getElementById('price-advert-alert').innerHTML = "Introduz um preço válido";
+    window.scroll(0, 1000);
+</script>
+        break;
+    
+    case "Emprego":
+        <script type="text/javascript">
+    document.getElementById('period-advert-alert').innerHTML = "Selecione um tipo de emprego";
+    window.scroll(0, 1150);
+</script>
+        break;
+
+    case "Contracto":
+        <script type="text/javascript">
+    document.getElementById('contract-advert-alert').innerHTML = "Selecione um tipo de contracto";
+    window.scroll(0, 1150);
+</script>
+        break;
+
+    case "Cidade":
+        <script type="text/javascript">
+    document.getElementById('location-advert-alert').innerHTML = "Define uma localização para o anúncio";
+    window.scroll(0, 1500);
+</script>
+        break;
+
+    case "Localiade":
+        <script type="text/javascript">
+    document.getElementById('location-advert-alert').innerHTML = "Introduz uma localidade (ex. Benfica ou Maianga)";
+    window.scroll(0, 1500);
+</script>
+        break;
+
+    case "Contacto":
+        <script type="text/javascript">
+    document.getElementById('contact-advert-alert').innerHTML = "Introduz um contacto de telefone válido";
+    window.scroll(0, 1500);
+</script>
+        break;
+}
+}
+@if(Model.advert_id > 0 && Model.adverts.orc == "false")
+{
+    <script>
+            price_format('advert-price_min', 'advert-price_max');
+        </script>
+}

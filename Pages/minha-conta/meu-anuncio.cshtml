@@ -1,0 +1,303 @@
+﻿@page
+@model MyApp.Namespace.meu_anuncioModel
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+@section head{
+<title>OpenMarket - @Model.Title</title>
+<meta name="title" content="OpenMarket - @Model.Title" />
+<meta name="description" content="O meu anúncio @Model.Title" />
+@* Facebook, Others *@
+<meta property="og:title" content="OpenMarket - @Model.Title">
+<meta property="og:image" content="https://www.openmarket.com/imgs/Logotipo.jpg">
+<meta property="og:image:width" content="400" />
+<meta property="og:image:height" content="300" />
+<meta property="og:url" content="https://www.openmarket.com/minha-conta/meu-anuncio?id=@Model.advert_id">
+<meta property="og:type" content="article" />
+<meta property="og:description" content="O meu anúncio @Model.Title">
+@* Twitter *@
+<meta property="twitter:title" content="OpenMarket - @Model.Title">
+<meta name="twitter:description" content="O meu anúncio @Model.Title">
+<meta name="twitter:image" content="https://www.openmarket.com/imgs/Logotipo.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="~/css/adverts.css?v=104" />
+<link rel="stylesheet" href="~/css/account.css?v=104" />
+<script async src="~/js/main.js?v=104"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+}
+@section login{
+<div class="navbar-login">
+    <a class="login-link" href="~/entrar">My OpenMarket</a>
+</div>
+}
+<div id="menu-container">
+    <partial name="_UserMenu" />
+    <div class="openmarket-ads ads-menu vertical-ads"></div>
+</div>
+@foreach (var item in Model.advert)
+{
+    <div id="advert-container">
+    <div id="advert">
+        @if (item.groupName != "Emprego")
+            {
+                <div ontouchstart="position(event)" ontouchmove="swipe(event)" ontouchend="swipeend()" id="advert-image">
+                    @if (Model.images.Count() > 0)
+                    {
+
+                        foreach (var image in Model.images)
+                        {
+                            var imgSrc = string.Empty;
+                            if (@image.filename != null)
+                            {
+                                imgSrc = "/anuncios/" + @image.filename;
+                                <img style="display: none;" class="advert-image" src="@imgSrc" onclick="fullscreen(this)"
+                alt="@Model.Title">
+                            }
+                        }
+                    }
+                    else
+                    {
+                        var imgSrc = string.Empty;
+                        imgSrc = "/imgs/WithoutImage.jpg";
+                        <img class="advert-image" src="@imgSrc" alt="Sem imagem">
+                    }
+                    <button class="advert-img previus" onclick="nextSlide(-1)">&#10094;</button>
+                    <button class="advert-img next" onclick="nextSlide(1)">&#10095;</button>
+                    <div class="dots-content">
+                        @for (int i = 1; i < Model.images.Count() + 1; i++)
+                        {
+                            <span class="dot" onclick="currentSlide(@i)"></span>
+                        }
+                    </div>
+                </div>
+            }
+            <script async src="~/js/advert.js?v=104"></script>
+            <div id="advert-info">
+                <div class="advert-date-favorites">
+                    @{
+                        var month = char.ToUpper(@item.date_month[0]) + @item.date_month.Substring(1);
+                        <p id="advert-date" class="advert-info date"> Publicado em @item.date.Day @month @item.date.Year</p>
+                    }
+                </div>
+                <h3 id="advert-title" class="advert-info title">@item.title</h3>
+                <div class="advert-attributes">
+                    <span>@item.type</span>
+                    <span>@item.vendor</span>
+                    @if (item.groupName != "Emprego" && item.groupName != "Serviços")
+                    {
+                        if (@item.condition == 0 || @item.condition == 10)
+                        {
+                            <span>Condição: Usado</span>
+                        }
+                        else if (@item.condition == 1)
+                        {
+                            <span>Condição: Novo</span>
+                        }
+                    }
+                </div>
+
+                @if (item.groupName == "Emprego")
+                {
+                    <div class="info-price-content">
+                        <p class="info-price-title">Faixa salarial</p>
+                        @if (item.price_min > 0 || item.price_max > 0)
+                        {
+                            double dmin = @item.price_min;
+                            double dmax = @item.price_max;
+                            string res_min = dmin.ToString("### ### ### ### ###.00");
+                            string res_max = dmax.ToString("### ### ### ### ###.00");
+                            <h2 class="info-price-value">@res_min € - @res_max €</h2>
+                        }
+                        else
+                        {
+                            <h2 class="info-price-value">Não definida</h2>
+                        }
+                    </div>
+                }
+                else
+                {
+                    if (item.price == 0 && item.price_min == 0 && item.price_max == 0)
+                    {
+                        <div class="advert-price-content">
+                            @{
+                                <h2 class="advert-info price">Sob consulta</h2>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="advert-price-content">
+                            @{
+                                double d = @item.price;
+                                string res = d.ToString("### ### ### ### ###.00");
+                                <h2 class="advert-info price">@res €</h2>
+                                switch (@item.negotiable)
+                                {
+                                    case 0:
+                                        <p>Fixo</p>
+                                        break;
+                                    case 1:
+                                        <p>Negociável</p>
+                                        break;
+                                }
+                            }
+                        </div>
+                    }
+                }
+                <h2 class="advert-info label-title">Descrição</h2>
+                <textarea readonly id="advert-description" class="advert-info description">@item.description</textarea>
+                <div class="advert-info status">
+                    <p class="advert-info id">ID do anúncio: @item.id</p>
+                    <p class="advert-info visits">Visualizações: @Model.totalViews</p>
+                </div>
+            </div>
+        </div>
+        <div id="sidebar-advert">
+            <div id="advert-location">
+                <h4>Localização</h4>
+                <div>
+                    <img src="/imgs/location.png" alt="Localização">
+                    <h4><span>@item.locality, @item.municipality,<br /></span>@item.city</h4>
+                </div>
+                <iframe id="mapa" src="@Model.GoogleMaps"></iframe>
+            </div>
+            <div id="advert-options">
+                <h4>Gerir anúncio</h4>
+                <form method="post">
+                    @switch (@item.status)
+                    {
+                        case 0:
+                            <p>Estado: Pendente</p>
+                            <div>
+                                <a href="~/anunciar-vender?anuncio=@item.id" title="Editar anúncio"><img
+                            src="/static/imgs/edit.png">Editar</a>
+                                <button value="@item.id" name="advert" type="submit" asp-page-handler="Desactivar"
+                        title="Desactivar anúncio"><img src="/static/imgs/delete.png">Desactivar</button>
+                            </div>
+                            break;
+                        case 1:
+                            <p>Estado: Activo</p>
+                            <div>
+                                <a href="~/ads/destacar?anuncio=@item.id"><img src="/static/imgs/ads.png">Destacar</a>
+                                <a href="~/anunciar-vender?anuncio=@item.id" title="Editar anúncio"><img
+                            src="/static/imgs/edit.png">Editar</a>
+                                <button name="advert" onclick="PanelDisable()" type="button" title="Desactivar anúncio">
+                                    <img src="/static/imgs/delete.png">Desactivar</button>
+                            </div>
+                            <div class="panel-disable" style="display: none;">
+                                <div>
+                                    @if (item.groupName == "Serviços")
+                                    {
+                                        <h2>Já não tens este serviço?</h2>
+                                        <p>O seu anúncio será desactivo. A qualquer momento podes voltar a activar este anúncio.</p>
+                                        <div>
+                                            <button value="@item.id" name="advert" class="disable-advert" asp-page-handler="Desactivar"
+                                type="submit">Desactivar</button>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <h2>Vendeu o seu artigo?</h2>
+                                        <p>O seu anúncio será desactivo. A qualquer momento podes voltar a activar este anúncio.</p>
+                                        <div>
+                                            <button value="@item.id" name="advert" asp-page-handler="Vendido" type="submit">Sim</button>
+                                            <button value="@item.id" name="advert" asp-page-handler="Desactivar"
+                                type="submit">Não</button>
+                                        </div>
+                                    }
+
+                                </div>
+                            </div>
+                            break;
+                        case 2:
+                            <p> Estado: Desactivo</p>
+                            <div>
+                                <button value="@item.id" name="advert" type="submit" asp-page-handler="Activar"
+                        title="Activar anúncio"><img src="/static/imgs/active.png">Activar</button>
+                            </div>
+                            break;
+                        case 3:
+                            <p>Estado: Vendido</p>
+                            break;
+                        case 10:
+                            <p>Estado: Pendente</p>
+                            <div>
+                                <a href="~/anunciar-vender?anuncio=@item.id" title="Editar anúncio"><img
+                            src="/static/imgs/edit.png">Editar</a>
+                                <button value="@item.id" name="advert" type="submit" asp-page-handler="Desactivar"
+                        title="Desactivar anúncio"><img src="/static/imgs/delete.png">Desactivar</button>
+                            </div>
+                            break;
+                    }
+                </form>
+            </div>
+            <div id="chart-views">
+                <h4>Visualizações (últimos 60 dias)</h4>
+                <canvas id="views_chart" class="charts_content"></canvas>
+                <script>
+                    var xValues = [];
+                    var yValues = [];
+                    @foreach (var views in Model.views.OrderBy(x => x.valueX))
+                    {
+                        @:yValues.push("@views.valueY");
+                        DateTime date = new DateTime(DateTime.Now.Year, 1, 1).AddDays(views.valueX - 1);
+                        string date_string = date.ToString("dd/MM");
+                        @:xValues.push("@date_string");
+                    }
+                        new Chart("views_chart", {
+                            type: "line",
+                            data: {
+                                labels: xValues,
+                                datasets: [{
+                                    fill: false,
+                                    lineTension: 0,
+                                    backgroundColor: "rgba(0,0,255,1.0)",
+                                    borderColor: "rgba(0,0,255,0.1)",
+                                    data: yValues
+                                }]
+                            },
+                            options: {
+                                tooltips: {
+                                    mode: 'index',
+                                    intersect: false,
+                                },
+                                hover: {
+                                    mode: 'nearest',
+                                    intersect: true
+                                },
+                                legend: { display: false },
+                                scales: {
+                                    yAxes: [{ ticks: { min: 0, max: @Model.views.OrderByDescending(x => x.valueY).Select(x => x.valueY).Take(1).SingleOrDefault() + 5 } }],
+                                }
+                            }
+                        });
+                </script>
+            </div>
+        </div>
+    </div>
+}
+@if (Model.alerts_list != null)
+{
+    foreach (var alert in Model.alerts_list)
+    {
+        <div class="alerts-container">
+    <div class="alert-content">
+        <span onclick="closePanel('alerts-container');cookieAlert('fz_ma', '@alert.cookie_time');">&times;</span>
+        <h2>@alert.title</h2>
+        <textarea id="alert-text" readonly>@alert.text</textarea>
+        <script>
+            var textarea = document.getElementById("alert-text");
+            textarea.style.height = textarea.scrollHeight + 20 + "px";
+        </script>
+        @if (!string.IsNullOrEmpty(@alert.button_text))
+                {
+                    <a onclick="cookieAlert('fz_ma', '@alert.cookie_time')" href="@alert.button_url">@alert.button_text</a>
+                }
+            </div>
+        </div>
+    }
+}
+<div onclick="closePanel('image-fullscreen')" style="display: none;" class="image-fullscreen" id="image-fullscreen">
+    <span onclick="closePanel('image-fullscreen')">&times;</span>
+    <img id="image-full">
+</div>

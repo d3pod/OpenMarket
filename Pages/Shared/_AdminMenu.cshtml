@@ -1,0 +1,48 @@
+﻿
+@if (Model.Permission == 1)
+    {
+        <a href="/admin/dashboard">Dashboard</a>
+        <hr>
+        <a href="/admin/adverts">Anúncios</a>
+        <a href="/admin/groups">Grupos</a>
+        <a href="/admin/categories">Categorias</a>
+        <a href="/admin/attributes">Atributos</a>
+        <a href="/admin/marks">Marcas</a>
+        <a href="/admin/models">Modelos</a>
+        <hr>
+        <a href="/admin/municipalities">Municípios</a>
+        <a href="/admin/cities">Províncias</a>
+        <a href="/admin/countries">Países</a>
+        <hr>
+        <a href="/admin/accounts">Contas</a>
+        <a href="/admin/conversations">Conversas</a>
+        <a href="/admin/alerts">Alertas</a>
+        <hr>
+        <a href="/admin/plans">Pacotes de Destaques</a>
+        <a href="/admin/points">Gestão de Pontos</a>
+        <a href="/admin/news">Novidades</a>
+        <a href="/admin/tables">Tabelas</a>
+        <form method="POST" asp-page-handler="Logout">
+            <button type="submit">Sair</button>
+        </form>
+    }
+    else
+    {
+        <a href="/admin/dashboard">Dashboard</a>
+        <hr>
+        <a href="/admin/adverts">Anúncios</a>
+        <a href="/admin/groups">Grupos</a>
+        <a href="/admin/categories">Categorias</a>
+        <a href="/admin/attributes">Atributos</a>
+        <a href="/admin/marks">Marcas</a>
+        <a href="/admin/models">Modelos</a>
+        <hr>
+        <a href="/admin/municipalities">Municípios</a>
+        <a href="/admin/cities">Províncias</a>
+        <hr>
+        <a href="/admin/accounts">Contas</a>
+        <hr>
+        <form method="POST" asp-page-handler="Logout">
+            <button type="submit">Sair</button>
+        </form>
+    }

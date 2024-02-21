@@ -1,0 +1,182 @@
+﻿@page
+@model MyApp.Namespace.contacte_nosModel
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+@section head{
+<title>OpenMarket - Contacte-nos</title>
+<meta name="title" content="OpenMarket - Contacte-nos" />
+<meta name="description"
+    content="Página de contactos do OpenMarket. Entre em contacto com a nossa equipa de forma fácil e rápida." />
+@* Facebook, Others *@
+<meta property="og:title" content="OpenMarket - Contacte-nos">
+<meta property="og:image" content="https://www.openmarket.com/imgs/Logotipo.jpg">
+<meta property="og:image:width" content="400" />
+<meta property="og:image:height" content="300" />
+<meta property="og:url" content="https://www.openmarket.com/contacte-nos">
+<meta property="og:type" content="article" />
+<meta property="og:description"
+    content="Página de contactos do OpenMarket. Entre em contacto com a nossa equipa de forma fácil e rápida.">
+@* Twitter *@
+<meta property="twitter:title" content="OpenMarket - Contacte-nos">
+<meta name="twitter:description"
+    content="Página de contactos do OpenMarket. Entre em contacto com a nossa equipa de forma fácil e rápida.">
+<meta name="twitter:image" content="https://www.openmarket.com/imgs/Logotipo.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="canonical" href="https://www.openmarket.com/contacte-nos/" />
+<link rel="stylesheet" href="~/css/pages.css?v=104" />
+<script async src="~/js/main.js?v=104"></script>
+}
+@section login{
+<div class="navbar-login">
+    <a class="login-link" href="~/entrar">My OpenMarket</a>
+</div>
+}
+<div>
+
+</div>
+<div class="openmarket-ads vertical-ads pages-ads">
+    <a href="https://www.openmarket.com">
+        <img src="/pubs/anuncios-vertical.jpg" alt="OpenMarket">
+    </a>
+    <p>OpenMarket Ads</p>
+</div>
+<form method="POST" asp-page-handler="Send" id="submitContactForm" class="contacte-nos info-content">
+
+    @if (Model.advert_id > 0 && Model.subject == "reportar_anuncio")
+    {
+        <h2>Reportar anúncio @Model.advert.id</h2>
+        <h3>O que está mal neste anúncio?</h3>
+        <div class="advert-info">
+            @{
+                var imgSrc = string.Empty;
+                if (Model.advert.image_filename != null)
+                {
+                    imgSrc = "/anuncios/" + @Model.advert.image_filename;
+                }
+                else
+                {
+                    imgSrc = "/imgs/WithoutImage.jpg";
+                }
+                <img src="@imgSrc" alt="@Model.advert.title">
+            }
+            <div>
+                <p class="advert-title">@Model.advert.title</p>
+                @if (Model.advert.groupName == "Emprego")
+                {
+                    if (Model.advert.price_min > 0 || Model.advert.price_max > 0)
+                    {
+                        double dmin = Model.advert.price_min;
+                        double dmax = Model.advert.price_max;
+                        string res_min = dmin.ToString("### ### ### ### ###.00");
+                        string res_max = dmax.ToString("### ### ### ### ###.00");
+                        <p class="employment-price-title">Faixa salarial</p>
+                        <p class="employment-price">@res_min - &nbsp;&nbsp;<br />@res_max €</p>
+                    }
+                    else
+                    {
+                        <p class="employment-price-title">Faixa salarial</p>
+                        <p class="employment-price">Não definida</p>
+                    }
+                }
+                else
+                {
+                    if (Model.advert.orc == "true" || Model.advert.price == 0)
+                    {
+                        <p class="advert-price">Sob orçamento</p>
+                    }
+                    else
+                    {
+                        double d = Model.advert.price;
+                        string res = d.ToString("### ### ### ### ###.00");
+                        <p class="advert-price">@res €</p>
+                    }
+                }
+                <p class="advert-data">@Model.advert.date.ToShortDateString()</p>
+                <p class="advert-data">@Model.advert.municipality, @Model.advert.city</p>
+            </div>
+        </div>
+    }
+    else
+    {
+        <h2>CONTACTE-NOS</h2>
+    }
+    @if (Model.SessionUser == 0)
+    {
+        <input type="text" id="name" name="Name" class="input-style" placeholder="Nome">
+        <input type="email" id="email" name="user_email" class="input-style" placeholder="Email">
+    }
+    <select id="subject" class="select-style" name="Subject">
+        @if (Model.advert_id > 0 && Model.subject == "reportar_anuncio")
+        {
+            <option selected value="Reportar anuncio">Reportar anúncio</option>
+        }
+        else
+        {
+            <option selected value="0">Selecione um assunto</option>
+            <option value="OpenMarket Ads - Publicidade">OpenMarket Ads - Publicidade</option>
+            <option value="Questões sobre a minha conta">Questões sobre a minha conta</option>
+            <option value="Questões sobre anúncios">Questões sobre anúncios</option>
+            <option value="Anúncio em falta">Anúncio em falta</option>
+            <option value="Questões sobre privacidade">Questões sobre privacidade</option>
+            <option value="Ajuda-me a usar o OpenMarket">Ajuda-me a usar o OpenMarket</option>
+            <option value="Ideias para melhorar o OpenMarket">Ideias para melhorar o OpenMarket</option>
+            <option value="Emprego">Emprego</option>
+            <option value="Parcerias">Parcerias</option>
+            <option value="Reportar erro">Reportar erro</option>
+            <option value="Outro assunto">Outro assunto</option>
+        }
+    </select>
+    <label>Mensagem</label>
+    <textarea class="input-style" asp-for="@Model.Body" cols="300" rows="10" maxlength="5000"></textarea>
+    @if (Model.SessionUser == 0)
+    {
+       <button type="button" onclick="submitContact()">Enviar</button>
+    }
+    else
+    {
+        <button type="button" onclick="submitContact('logged')">Enviar</button>
+    }
+</form>
+@if (Model.alerts_list != null)
+{
+    foreach (var alert in Model.alerts_list)
+    {
+        <div class="alerts-container">
+    <div class="alert-content">
+        <span onclick="closePanel('alerts-container');cookieAlert('fz_ctc', '@alert.cookie_time');">&times;</span>
+        <h2>@alert.title</h2>
+        <textarea id="alert-text" readonly>@alert.text</textarea>
+        <script>
+            var textarea = document.getElementById("alert-text");
+            textarea.style.height = textarea.scrollHeight + 20 + "px";
+        </script>
+        @if (!string.IsNullOrEmpty(@alert.button_text))
+                {
+                    <a onclick="cookieAlert('fz_ctc', '@alert.cookie_time')" href="@alert.button_url">@alert.button_text</a>
+                }
+            </div>
+        </div>
+    }
+}
+<div style="display: none;" id="contact_panel">
+    <div>
+        <h3>Obrigado pelo seu contacto.</h3>
+        <h4>A nossa equipa irá responder em breve para o seu email.</h4>
+
+        <button type="button" onclick="closePanel('contact_panel', 'submitContactForm')">Fechar</button>
+    </div>
+</div>
+<div style="display: none;" class="alert-panel">
+    <div>
+        <h3 class="alert-message"></h3>
+        <button type="button" onclick="closePanel('alert-panel', '')">Fechar</button>
+    </div>
+</div>
+<div class="openmarket-ads vertical-ads pages-ads">
+    <a href="https://www.openmarket.com">
+        <img src="/pubs/anuncios-vertical.jpg" alt="OpenMarket">
+    </a>
+    <p>OpenMarket Ads</p>
+</div>

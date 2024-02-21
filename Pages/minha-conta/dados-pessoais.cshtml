@@ -1,0 +1,203 @@
+﻿@page "{Msg?}"
+@model MyApp.Namespace.dados_pessoaisModel
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+@section head{
+<title>OpenMarket - Dados Pessoais</title>
+<meta name="title" content="OpenMarket - Dados Pessoais" />
+<meta name="description"
+    content="Atualiza os dados da tua conta." />
+@* Facebook, Others *@
+<meta property="og:title" content="OpenMarket - Dados Pessoais">
+<meta property="og:image" content="https://www.openmarket.com/imgs/Logotipo.jpg">
+<meta property="og:image:width" content="400" />
+<meta property="og:image:height" content="300" />
+<meta property="og:url" content="https://www.openmarket.com/minha-conta/dados-pessoais">
+<meta property="og:type" content="article" />
+<meta property="og:description"
+    content="Atualiza os dados da tua conta.">
+@* Twitter *@
+<meta property="twitter:title" content="OpenMarket - Dados Pessoais">
+<meta name="twitter:description"
+    content="Atualiza os dados da tua conta.">
+<meta name="twitter:image" content="https://www.openmarket.com/imgs/Logotipo.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="canonical" href="https://www.openmarket.com/minha-conta/dados-pessoais" />
+<link rel="stylesheet" href="~/css/account.css?v=104" />
+<script async src="~/js/main.js?v=104"></script>
+}
+@section login{
+<div class="navbar-login">
+    <a class="login-link" href="~/entrar">My OpenMarket</a>
+</div>
+}
+<div id="menu-container">
+    <partial name="_UserMenu"/>
+    <div class="openmarket-ads ads-menu vertical-ads"></div>
+</div>
+<div id="alert-message-container" style="display: none;">
+    <div class="alert-content">
+        <h3 id="alert-message-title">Dados gravados com sucesso</h3>
+        <button type="button" id="button_return"
+            onclick="document.getElementById('alert-message-container').style.display = 'none'">Voltar</button>
+    </div>
+</div>
+<div class="personal-info-container">
+    <form form method="post" class="personal-info" enctype="multipart/form-data">
+        <h3>Alterar dados</h3>
+        @{
+            <input type="file" name="uploadImages" id="image" accept="image/jpg, image/jpeg"
+                style="display: none;" onchange="PreviewImage('image')">
+            var imgSrc = string.Empty;
+            byte[] byteImage = Model.accounts.picture;
+            if (byteImage != null)
+            {
+                var base64 = Convert.ToBase64String(byteImage);
+                imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+            }
+            else
+            {
+                imgSrc = "/imgs/WithoutPicture.jpg";
+            }
+            <div class="account-info">
+                <div>
+                    <img title="Alterar imagem" alt="Imagem do artigo" src="@imgSrc" id="button_image"
+                        onclick="document.getElementById('image').click();">
+                </div>
+                <div class="account-name">
+                    <input placeholder="Nome" class="input-style" id="account-first-name" type="text"
+                    asp-for="accounts.first_name">
+                    <input placeholder="Apelido" class="input-style" id="account-last-name" type="text"
+                    asp-for="accounts.last_name">
+                    @if (!string.IsNullOrEmpty(Model.accounts.facebook_id.ToString()))
+                    {
+                        <input placeholder="Email" class="input-style" id="account-email" type="text" asp-for="accounts.email">
+                    }
+                </div>
+            </div>
+
+        }
+        <label class="account-label label-location">Localização</label>
+        <div class="account-location">
+            <div>
+                <select class="select-style" onchange="loadMunicipalities('anunciar-vender', '')"
+                    asp-for="accounts.city" id="cities-selector">
+                    <option value="">Província</option>
+                    @foreach (var item in Model.cities)
+                    {
+                        <option value="@item.name">@item.name</option>
+                    }
+                </select>
+            </div>
+            @if (Model.municipalities != null)
+            {
+                <div id="municipality-content" class="municipality-content">
+                    <select asp-for="accounts.municipality" class="municipality-selector select-style"
+                    id="municipality-selector">
+                        @foreach (var item in Model.municipalities)
+                        {
+                            if (Model.accounts.municipality == item.name)
+                            {
+                                <option selected value="@item.name">@item.name</option>
+                            }
+                            else
+                            {
+                                <option value="@item.name">@item.name</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div id="locality-content">
+                    <input asp-for="accounts.locality" id="account-locality" type="text" class="input-style"
+                    placeholder="Localidade">
+                </div>
+            }
+            else
+            {
+                <div id="municipality-content" class="municipality-content">
+                    <select asp-for="accounts.municipality" class="municipality-selector select-style"
+                    id="municipality-selector">
+                        <option value="">Município</option>
+                    </select>
+                </div>
+                <div id="locality-content">
+                    <input asp-for="accounts.locality" id="account-locality" type="text" class="input-style"
+                    placeholder="Localidade">
+                </div>
+            }
+        </div>
+        <span id="location-account-alert" class="account-alert"></span>
+        <div id="birthday-button">
+            <div>
+                <label class="account-label label-birthday">Data de nascimento</label>
+                @if (Model.accounts.birthday.ToShortDateString() == "01/01/0001")
+                {
+                    <input class="input-style" id="account-birthday" type="date" asp-for="accounts.birthday">
+                    <script type="text/javascript">
+                        document.getElementById("account-birthday").defaultValue = "2000-01-01";
+                    </script>
+                }
+                else
+                {
+                    <input class="input-style" id="account-birthday" type="date" asp-for="accounts.birthday">
+                }
+            </div>
+            <button type="submit" asp-page-handler="Data">Guardar</button>
+        </div>
+    </form>
+    <form asp-page-handler="Password" method="post" id="changePassword" class="change-password">
+        <h3>Alterar password</h3>
+        @if (!string.IsNullOrEmpty(Model.accounts.password))
+        {
+            <input placeholder="Password actual" class="input-style user-password" type="password" name="password"
+            id="user-password">
+        }
+        <input placeholder="Nova password" class="input-style user-password" type="password" name="newPassword"
+            id="user-new-password">
+        <input placeholder="Repita a password" class="input-style user-password" type="password" name="newPasswordR"
+            id="user-new-r-password">
+        <button onclick="validPassword()" type="button">Alterar</button>
+    </form>
+</div>
+@if (Model.alerts_list != null)
+{
+    foreach (var alert in Model.alerts_list)
+    {
+        <div class="alerts-container">
+    <div class="alert-content">
+        <span onclick="closePanel('alerts-container');cookieAlert('fz_dp', '@alert.cookie_time');">&times;</span>
+        <h2>@alert.title</h2>
+        <textarea id="alert-text" readonly>@alert.text</textarea>
+        <script>
+            var textarea = document.getElementById("alert-text");
+            textarea.style.height = textarea.scrollHeight + 20 + "px";
+        </script>
+        @if (!string.IsNullOrEmpty(@alert.button_text))
+                {
+                    <a onclick="cookieAlert('fz_dp', '@alert.cookie_time')" href="@alert.button_url">@alert.button_text</a>
+                }
+            </div>
+        </div>
+    }
+}
+@if (Model._Msg == "Sucesso")
+{
+    <script type="text/javascript">
+    document.getElementById("alert-message-container").style.display = "flex";
+</script>
+}
+else if (Model._Msg == "Password")
+{
+    <script type="text/javascript">
+    var password = document.getElementById("user-password");
+    var new_password = document.getElementById("user-new-password");
+    var new_r_password = document.getElementById("user-new-r-password");
+    document.getElementById("alert-message-container").style.display = "flex";
+    password.style.backgroundColor = "rgb(31, 140, 212, 0.3)";
+    new_password.style.backgroundColor = "rgb(31, 140, 212, 0.3)";
+    new_r_password.style.backgroundColor = "rgb(31, 140, 212, 0.3)";
+    document.getElementById("alert-message-title").innerHTML = "Os campos tem que estar todos preenchidos!";
+</script>
+}

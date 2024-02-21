@@ -1,0 +1,189 @@
+﻿@page
+@model MyApp.Namespace.advertsModel
+@{
+    <title>Anúncios</title>
+    Layout = "~/Pages/Shared/_LayoutAdmin.cshtml";
+    <link rel="stylesheet" href="~/css/admin.css?v=104" />
+    <script async defer src="~/js/admin.js?v=104"></script>
+}
+<section class="navbar navbar-left">
+    <partial name="_AdminMenu" />
+</section>
+<section id="adverts-container">
+    <div id="menu-container">
+        <div class="menu-account">
+            <select id="advert-status" onchange="linkStatus()">
+                @switch (Model.status)
+                {
+                    case 1:
+                        <option selected value="1">Activos</option>
+                        <option value="0">Pendentes</option>
+                        <option value="10">Atualizações</option>
+                        <option value="2">Desactivos</option>
+                        <option value="3">Vendidos</option>
+                        <option value="11">Burlas</option>
+                        break;
+                    case 0:
+                        <option value="1">Activos</option>
+                        <option selected value="0">Pendentes</option>
+                        <option value="10">Atualizações</option>
+                        <option value="2">Desactivos</option>
+                        <option value="3">Vendidos</option>
+                        <option value="11">Burlas</option>
+                        break;
+                    case 10:
+                        <option value="1">Activos</option>
+                        <option value="0">Pendentes</option>
+                        <option selected value="10">Atualizações</option>
+                        <option value="2">Desactivos</option>
+                        <option value="3">Vendidos</option>
+                        <option value="11">Burlas</option>
+                        break;
+                    case 2:
+                        <option value="1">Activos</option>
+                        <option value="0">Pendentes</option>
+                        <option value="10">Atualizações</option>
+                        <option selected value="2">Desactivos</option>
+                        <option value="3">Vendidos</option>
+                        <option value="11">Burlas</option>
+                        break;
+                    case 3:
+                        <option value="1">Activos</option>
+                        <option value="0">Pendentes</option>
+                        <option value="10">Atualizações</option>
+                        <option value="2">Desactivos</option>
+                        <option selected value="3">Vendidos</option>
+                        <option value="11">Burlas</option>
+                        break;
+                    case 11:
+                        <option value="1">Activos</option>
+                        <option value="0">Pendentes</option>
+                        <option value="10">Atualizações</option>
+                        <option value="2">Desactivos</option>
+                        <option value="3">Vendidos</option>
+                        <option selected value="11">Burlas</option>
+                        break;
+                    default:
+                        <option value="1">Activos</option>
+                        <option value="0">Pendentes</option>
+                        <option value="10">Atualizações</option>
+                        <option value="2">Desactivos</option>
+                        <option value="3">Vendidos</option>
+                        <option value="11">Burlas</option>
+                        break;
+                }
+            </select>
+        </div>
+    </div>
+    <form method="POST" asp-page-handler="Search" class="search-content">
+        <input type="text" name="searchText" class="search-text" placeholder="Procurar...">
+        <button class="search-button" type="submit"><img src="/imgs/search.png" title="Procurar utilizador"
+                alt="Search"></button>
+    </form>
+    @if (Model.adverts.Count > 0)
+    {
+        <table class="adverts-content">
+            <thead>
+                <tr class="advert-row">
+                    <th>Titulo</th>
+                    <th>Categoria</th>
+                    <th>Anuciante</th>
+                    <th>Data</th>
+                    <th>Estado</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.adverts)
+                {
+                    <tr class="account-row">
+                        <td>@item.title</td>
+                        <td>@Html.DisplayFor(x => item.category)</td>
+                        <td>@Html.DisplayFor(x => item.username)</td>
+                        <td>@Html.DisplayFor(x => item.date_text)</td>
+                        @switch (@item.status)
+                        {
+                            case 0:
+                                <td>Pendente</td>
+                                break;
+                            case 1:
+                                <td>Activo</td>
+                                break;
+                            case 2:
+                                <td>Desactivo</td>
+                                break;
+                            case 3:
+                                <td>Vendido</td>
+                                break;
+                        }
+                        @{
+                            var url = "/adverts?id=" + @item.id;
+                            <td>
+                                <a asp-page="edit-advert" asp-route-id="@item.id"><img src="/imgs/view.png" title="Editar anúncio"
+                                alt="Editar anúncio"></a>
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <h2 class="NoResults">Sem anúncios para apresentar!</h2>
+    }
+    <form method="POST" class="pagination">
+        @if (Model.TotalPages < 6)
+        {
+            @for (var i = 1; i <= Model.TotalPages; i++)
+            {
+                <li onclick="pagination('@i')" class="page-item @(i == Model.currentpage ? " active": "" )">
+                    <a name="pagination" class="page-link">@i</a>
+                </li>
+            }
+        }
+        else if (Model.TotalPages > 5 && Model.currentpage > 3)
+        {
+            if (Model.currentpage <= Model.TotalPages - 2)
+            {
+                @for (var i = @Model.currentpage - 2; i <= @Model.currentpage + 2; i++)
+                {
+                    <li onclick="pagination('@i')" class="page-item @(i == Model.currentpage ? " active": "" )">
+                        <a name="pagination" class="page-link">@i</a>
+                    </li>
+                }
+            }
+            else
+            {
+                if (Model.currentpage == Model.TotalPages - 1)
+                {
+                    @for (var i = @Model.currentpage - 3; i <= @Model.TotalPages; i++)
+                    {
+                        <li onclick="pagination('@i')" class="page-item @(i == Model.currentpage ? " active": "" )">
+                            <a name="pagination" class="page-link">@i</a>
+                        </li>
+                    }
+                }
+
+                else if (Model.currentpage == Model.TotalPages)
+                {
+                    @for (var i = @Model.currentpage - 4; i <= @Model.TotalPages; i++)
+                    {
+                        <li onclick="pagination('@i')" class="page-item @(i == Model.currentpage ? " active": "" )">
+                            <a name="pagination" class="page-link">@i</a>
+                        </li>
+                    }
+                }
+            }
+        }
+        else if (Model.TotalPages > 5 && Model.currentpage < 4)
+        {
+            @for (var i = 1; i <= 5; i++)
+            {
+                <li onclick="pagination('@i')" class="page-item @(i == Model.currentpage ? " active": "" )">
+                    <a name="pagination" class="page-link">@i</a>
+                </li>
+            }
+        }
+    </form>
+</section>

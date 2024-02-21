@@ -1,0 +1,122 @@
+﻿@page
+@model MyApp.Namespace.groupsModel
+@{
+    <title>Grupos</title>
+    <link rel="stylesheet" href="~/css/admin.css?v=104" />
+    Layout = "~/Pages/Shared/_LayoutAdmin.cshtml";
+    <script async src="~/js/admin.js?v=104"></script>
+}
+<section class="navbar navbar-left">
+    <partial name="_AdminMenu"/>
+</section>
+<section class="groups-container main-container">
+    <form method="POST" asp-page-handler="Add" class="add-group-content add-element-content"
+        enctype="multipart/form-data">
+        <div class="group-name">
+            <p>Nome</p>
+            <input class="input-style" type="text" asp-for="groups.name">
+        </div>
+        <div class="group-picture">
+            <p>Imagem</p>
+            <input type="file" accept="image/png, image/jpg, image/jpeg, image/gif" name="uploadImage">
+        </div>
+        <button type="submit">Adicionar</button>
+    </form>
+    <div class="groups-content elements-content">
+        @if (Model.TotalGroups > 0)
+        {
+            @foreach (var item in Model.groups_list)
+            {
+                var imgSrc = string.Empty;
+                if (@item.filename != null)
+                {
+                    imgSrc = "/grupos/" + @item.filename;
+                }
+                <form method="POST" class="group-content element-content">
+                    <div class="group-name element-info">
+                        <img src="@imgSrc" alt="@item.name">
+                        <p>@Html.DisplayFor(x => item.name)</p>
+                    </div>
+                    <div class="group-control element-control">
+                        <span style="cursor: pointer;"
+                    onclick="ChangeCity_Country('.element-image', '.button-image-group', '@item.id')">I</span>
+                        <button type="submit" value="@item.id" name="Delete" asp-page-handler="Delete">X</button>
+                    </div>
+                </form>
+            }
+        }
+        else
+        {
+            <h2>Sem grupos disponiveis</h2>
+        }
+
+        <form method="POST" class="image-group element-image" enctype="multipart/form-data" style="display: none;">
+            <div>
+                <span onclick="closePanel('group-country')">&times;</span>
+                <h4>Insira uma imagem que represente este grupo</h4>
+                <input type="file" accept="image/png, image/jpg, image/jpeg, image/gif" name="uploadImage">
+                <button type="submit" class="button-image-group" name="group_id"
+                    asp-page-handler="Image">Guardar</button>
+            </div>
+        </form>
+    </div>
+    <form method="POST" class="pagination">
+        @if (Model.TotalPages < 6)
+        {
+            @for (var i = 1; i <= Model.TotalPages; i++)
+            {
+                <li onclick="pagination('@i')" class="page-item @(i == Model.currentpage ? " active": "" )">
+                    <a name="pagination" class="page-link">@i</a>
+                </li>
+            }
+        }
+        else if (Model.TotalPages > 5 && Model.currentpage > 3)
+        {
+            if (Model.currentpage <= Model.TotalPages - 2)
+            {
+                @for (var i = @Model.currentpage - 2; i <= @Model.currentpage + 2; i++)
+                {
+                    <li onclick="pagination('@i')" class="page-item @(i == Model.currentpage ? " active": "" )">
+                        <a name="pagination" class="page-link">@i</a>
+                    </li>
+                }
+            }
+            else
+            {
+                if (Model.currentpage == Model.TotalPages - 1)
+                {
+                    @for (var i = @Model.currentpage - 3; i <= @Model.TotalPages; i++)
+                    {
+                        <li onclick="pagination('@i')" class="page-item @(i == Model.currentpage ? " active": "" )">
+                            <a name="pagination" class="page-link">@i</a>
+                        </li>
+                    }
+                }
+
+                else if (Model.currentpage == Model.TotalPages)
+                {
+                    @for (var i = @Model.currentpage - 4; i <= @Model.TotalPages; i++)
+                    {
+                        <li onclick="pagination('@i')" class="page-item @(i == Model.currentpage ? " active": "" )">
+                            <a name="pagination" class="page-link">@i</a>
+                        </li>
+                    }
+                }
+            }
+        }
+        else if (Model.TotalPages > 5 && Model.currentpage < 4)
+        {
+            @for (var i = 1; i <= 5; i++)
+            {
+                <li onclick="pagination('@i')" class="page-item @(i == Model.currentpage ? " active": "" )">
+                    <a name="pagination" class="page-link">@i</a>
+                </li>
+            }
+        }
+    </form>
+    </div>
+</section>
+@if (Model.Msg != null)
+{
+    <script>alert("@Model.Msg")</script>
+}

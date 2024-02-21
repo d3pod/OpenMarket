@@ -1,0 +1,158 @@
+﻿@page
+@model MyApp.Namespace.plansModel
+@{
+    <title>Planos</title>
+    Layout = "~/Pages/Shared/_LayoutAdmin.cshtml";
+    <link rel="stylesheet" href="~/css/admin.css?v=104" />
+    <script async src="~/js/admin.js?v=104"></script>
+}
+<section class="navbar navbar-left">
+    <partial name="_AdminMenu" />
+</section>
+<section id="plans-container" class="main-container">
+    <header>
+        <form id="new-plan" method="post" asp-page-handler="Add" enctype="multipart/form-data">
+            <div class="plan-data">
+                <p>Nome do Pacote</p>
+                <input type="text" asp-for="plans.name">
+            </div>
+            <div class="plan-data">
+                <p>Categoria</p>
+                <select asp-for="plans.category">
+                    @foreach (var category in Model.categoriesList)
+                    {
+                        <option value="@category.name">@category.name</option>
+                    }
+                </select>
+            </div>
+            <div class="plan-data plan-days">
+                <p>Top Anúncios (Dias)</p>
+                <input type="number" asp-for="plans.days_top">
+            </div>
+            <div class="plan-data plan-days">
+                <p>Destaques (Dias)</p>
+                <input type="number" asp-for="plans.days_featured">
+            </div>
+            <div class="plan-data plan-days">
+                <p>Página Principal (Dias)</p>
+                <input type="number" asp-for="plans.days_principal">
+            </div>
+            <div class="plan-data" id="plan-price">
+                <p>Preço</p>
+                <input type="number" asp-for="plans.price">
+            </div>
+            <div class="plan-data">
+                <p>Imagem</p>
+                <input type="file" asp-for="uploadImage" accept="image/jpg, image/jpeg, image/gif">
+            </div>
+            <button type="submit">Adicionar</button>
+        </form>
+    </header>
+    <main class="elements-content" id="plans-content">
+        @if (Model.TotalPlans > 0)
+        {
+            @foreach (var item in Model.plansList)
+            {
+                var imgSrc = string.Empty;
+                if (@item.filename != null)
+                {
+                    imgSrc = "/planos/" + @item.filename;
+                }
+                <form method="POST" class="plan-content element-content">
+                    <div class="plan-name element-info">
+                        <img src="@imgSrc" alt="@item.name - @item.category">
+                        <p>@item.category - @item.name</p>
+                        <p>Código - @item.id</p>
+                        <p>Preço: @item.price €</p>
+                        <p>@item.days_top (T) / @item.days_featured (D) / @item.days_principal (P)</p>
+                    </div>
+                    <div class="plan-control element-control">
+                        <button type="submit" value="@item.id" name="Delete" asp-page-handler="Delete">X</button>
+                    </div>
+                </form>
+            }
+        }
+        else
+        {
+            <h2>Sem planos disponiveis</h2>
+        }
+    </main>
+    <form method="POST" class="pagination">
+        @if (Model.TotalPages < 6)
+        {
+            @for (var i = 1; i <= Model.TotalPages; i++)
+            {
+                <li onclick="pagination('@i')" class="page-item @(i == Model.currentpage ? " active": "" )">
+                    <a name="pagination" class="page-link">@i</a>
+                </li>
+            }
+        }
+        else if (Model.TotalPages > 5 && Model.currentpage > 3)
+        {
+            if (Model.currentpage <= Model.TotalPages - 2)
+            {
+                @for (var i = @Model.currentpage - 2; i <= @Model.currentpage + 2; i++)
+                {
+                    <li onclick="pagination('@i')" class="page-item @(i == Model.currentpage ? " active": "" )">
+                        <a name="pagination" class="page-link">@i</a>
+                    </li>
+                }
+            }
+            else
+            {
+                if (Model.currentpage == Model.TotalPages - 1)
+                {
+                    @for (var i = @Model.currentpage - 3; i <= @Model.TotalPages; i++)
+                    {
+                        <li onclick="pagination('@i')" class="page-item @(i == Model.currentpage ? " active": "" )">
+                            <a name="pagination" class="page-link">@i</a>
+                        </li>
+                    }
+                }
+
+                else if (Model.currentpage == Model.TotalPages)
+                {
+                    @for (var i = @Model.currentpage - 4; i <= @Model.TotalPages; i++)
+                    {
+                        <li onclick="pagination('@i')" class="page-item @(i == Model.currentpage ? " active": "" )">
+                            <a name="pagination" class="page-link">@i</a>
+                        </li>
+                    }
+                }
+            }
+        }
+        else if (Model.TotalPages > 5 && Model.currentpage < 4)
+        {
+            @for (var i = 1; i <= 5; i++)
+            {
+                <li onclick="pagination('@i')" class="page-item @(i == Model.currentpage ? " active": "" )">
+                    <a name="pagination" class="page-link">@i</a>
+                </li>
+            }
+        }
+    </form>
+</section>
+<form method="post">
+    <div>
+        <label>Nome</label>
+        <input type="text" name="plan_name">
+    </div>
+    <div>
+        <label>Dias no Top</label>
+        <input type="text" name="days_top">
+    </div>
+    <div>
+        <label>Dias em destaque</label>
+        <input type="text" name="days_featured">
+    </div>
+    <div>
+        <label>Dias na página principal</label>
+        <input type="text" name="days_principal">
+    </div>
+    <div>
+        <label>Preço</label>
+        <input type="text" name="price">
+    </div>
+    <button type="submit" asp-page-handler="Plans">Criar em série</button>
+
+</form>

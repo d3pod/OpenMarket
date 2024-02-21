@@ -1,0 +1,20 @@
+﻿@page
+@model MyApp.Namespace.loginModel
+@{
+    <title>Admin - Login</title>
+    Layout = "~/Pages/Shared/_LayoutAdmin.cshtml";
+    <link rel="stylesheet" href="~/css/admin.css?v=104" />
+}
+<form method="POST" asp-page-handler="login" class="login-admin">
+    <p>admin</p>
+    <input type="email" asp-for="users.email" placeholder="Email">
+    <input type="password" asp-for="users.password" placeholder="Password">
+    <button type="submit">Entrar</button>
+</form>
+
+@if(Model.Msg != null)
+{
+    <script type="text/javascript">    
+        alert("@Model.Msg");   
+    </script> 
+}

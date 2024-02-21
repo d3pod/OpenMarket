@@ -1,0 +1,607 @@
+﻿@page
+@model MyApp.Namespace.anuncioModel
+@using openmarket.Models;
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+@section head{
+    <meta name="title" content="Anúncio no OpenMarket - @Model.Title" />
+    <meta name="description" content="@Model.Description" />
+    @* Facebook, Others *@
+    <meta property="og:title" content="@Model.Title">
+    <meta property="og:description" content="@Model.Description">
+    <meta property="og:image" content="https://www.openmarket.com/anuncios/@Model.filename">
+    <meta property="og:url" content="https://www.openmarket.com/@Model.url">
+    <meta property="og:type" content="article" />
+    @* Twitter *@
+    <meta property="twitter:title" content="OpenMarket - @Model.Title">
+    <meta name="twitter:description"
+    content="@Model.Description">
+    <meta name="twitter:image" content="https://www.openmarket.com/anuncios/@Model.filename">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="canonical" href="https://www.openmarket.com/anuncio?id=@Model.id" />
+    <title>@Model.Title</title>
+    <link rel="stylesheet" href="~/css/adverts.css?v=104" />
+    <script async src="~/js/main.js?v=104"></script>
+    <link rel='shortlink' href='http://openmarket.com/anuncio?id=@Model.id'>
+}
+@section login{
+<div class="navbar-login">
+    <a class="login-link" href="~/entrar">My OpenMarket</a>
+</div>
+}
+@foreach (var item in Model.advert)
+{
+    valueFormat formatter = new valueFormat();
+    var user_pic = string.Empty;
+    if (item.user_picture != null)
+                            {
+                                byte[] byteImage = item.user_picture;
+                                var base64 = Convert.ToBase64String(byteImage);
+                                user_pic = String.Format("data:image/gif;base64,{0}", base64);
+                            }
+                            else
+                            {
+                                user_pic = String.Format("/imgs/WithoutPicture.jpg");
+                            }
+    <div id="sitemap">
+    @{
+            var group = "anuncios?categoria=" + @item.groupName;
+            var category = "anuncios?sub_categoria=" + @item.category;
+            var category_city = "anuncios?sub_categoria=" + @item.category + "&provincia=" + @item.city;
+
+            <div><button type="button" onclick="history.back()"><span>&#10094;</span> Voltar</button>
+                <div>
+                    <a href="Index">Página
+                        Principal</a> <span>&#10095;</span> <a href="@group">@item.groupName</a> <span>&#10095;</span> <a
+                    href="@category">@item.category</a> <span>&#10095;</span> <a href="@category_city">@item.category em
+                        @item.city</a>
+                </div>
+            </div>
+        }
+    </div>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2400255980233849"
+     crossorigin="anonymous"></script>
+<!-- Horizontal Kumbu -->
+<ins class="adsbygoogle"
+    <div id="advert-container">
+    <div id="advert">
+        @if (item.groupName != "Emprego")
+            {
+                <div ontouchstart="position(event)" ontouchmove="swipe(event)" ontouchend="swipeend()" id="advert-image">
+                    @if (Model.images.Count() > 0)
+                    {
+
+                        foreach (var image in Model.images)
+                        {
+                            var imgSrc = string.Empty;
+                            if (@image.filename != null)
+                            {
+                                imgSrc = "/anuncios/" + @image.filename;
+                                <img style="display: none;" class="advert-image" src="@imgSrc" onclick="fullscreen(this)"
+                alt="@Model.Title">
+                            }
+                        }
+                    }
+                    else
+                    {
+                        var imgSrc = string.Empty;
+                        imgSrc = "/imgs/WithoutImage.jpg";
+                        <img class="advert-image" src="@imgSrc" alt="Sem imagem">
+                    }
+                    <button class="advert-img previus" onclick="nextSlide(-1)">&#10094;</button>
+                    <button class="advert-img next" onclick="nextSlide(1)">&#10095;</button>
+                    <div class="dots-content">
+                        @for (int i = 1; i < Model.images.Count() + 1; i++)
+                        {
+                            <span class="dot" onclick="currentSlide(@i)"></span>
+                        }
+                    </div>
+                </div>
+            }
+            <div id="advert-info">
+                <div class="advert-date-favorites">
+                    @{
+                        var month = char.ToUpper(@item.date_month[0]) + @item.date_month.Substring(1);
+                        <p id="advert-date" class="advert-info date"> Publicado em @item.date.Day @month @item.date.Year</p>
+                    }
+                    <div id="advert-favorites">
+                        @if (Model.SessionUser != 0)
+                        {
+                            <img style="display: none;" onclick="remove_favorites('@item.id', '@Model.SessionUser')"
+                        id="advert-favorite-added" class="advert-info favorites" src="/imgs/heart-added.png"
+                        alt="Favoritos" title="Remover dos favoritos">
+                            <img style="display: none;" onmouseover="favorites_over()" onmouseout="favorites_out()"
+                        onclick="add_to_favorites('@item.id', '@Model.SessionUser')" id="advert-favorite"
+                        class="advert-info favorites" src="/imgs/heart.png" alt="Favoritos"
+                        title="Adicionar aos favoritos">
+                            if (Model.favorite_check == true)
+                            {
+                                <script>
+                                    document.getElementById("advert-favorite-added").style.display = "flex";
+                                </script>
+                            }
+                            else
+                            {
+                                <script>
+                                    document.getElementById("advert-favorite").style.display = "flex";
+                                </script>
+                            }
+                        }
+                        else
+                        {
+                            var url_entrar = "entrar?backUrl=anuncio";
+                            var advert_id = "&id=" + @item.id;
+                            url_entrar = url_entrar + "&name=" + formatter.urlFormat(@item.title) + advert_id;
+                            <img onmouseover="favorites_over()" onclick="window.location.href='/@url_entrar'"
+                        onmouseout="favorites_out()" id="advert-favorite" class="advert-info favorites"
+                        src="/imgs/heart.png" alt="Favoritos" title="Adicionar aos favoritos">
+                        }
+                    </div>
+                </div>
+                <h3 id="advert-title" class="advert-info title">@item.title</h3>
+                <div class="advert-attributes">
+                    <span>@item.type</span>
+                    <span>@item.vendor</span>
+                    @if (item.groupName != "Emprego" && item.groupName != "Serviços")
+                    {
+                        if (@item.condition == 0)
+                        {
+                            <span>Condição: Usado</span>
+                        }
+                        else if (@item.condition == 1)
+                        {
+                            <span>Condição: Novo</span>
+                        }
+                    }
+                </div>
+
+                @if (item.groupName == "Emprego")
+                {
+                    <div class="info-price-content">
+                        <p class="info-price-title">Faixa salarial</p>
+                        @if (item.price_min > 0 || item.price_max > 0)
+                        {
+                            double dmin = @item.price_min;
+                            double dmax = @item.price_max;
+                            string res_min = dmin.ToString("### ### ### ### ###.00");
+                            string res_max = dmax.ToString("### ### ### ### ###.00");
+                            <h2 content="telephone=no" class="info-price-value">@res_min € - @res_max €</h2>
+                        }
+                        else
+                        {
+                            <h2 class="info-price-value">Não definida</h2>
+                        }
+                    </div>
+                }
+                else
+                {
+                    if (item.price == 0 && item.price_min == 0 && item.price_max == 0)
+                    {
+                        <div class="advert-price-content">
+                        @{
+                            <h2 class="advert-info price">Sob consulta</h2>
+                        }
+                    </div>
+                    }
+                    else
+                    {
+                        <div class="advert-price-content">
+                        @{
+                            double d = @item.price;
+                            string res = d.ToString("### ### ### ### ###.00");
+                            <h2 content="telephone=no" class="advert-info price">@res €</h2>
+                            switch (@item.negotiable)
+                            {
+                                case 0:
+                                    <p>Fixo</p>
+                                    break;
+                                case 1:
+                                    <p>Negociável</p>
+                                    break;
+                            }
+                        }
+                    </div>
+                    }    
+                }
+                <h2 class="advert-info label-title">Descrição</h2>
+                <textarea readonly id="advert-description" class="advert-info description">@item.description</textarea>
+                <div class="advert-info status">
+                    <p class="advert-info id">ID do anúncio: @item.id</p>
+                    <p class="advert-info visits">Visualizações: @Model.views</p>
+                    <div class="advert-info report">
+                        <img src="/imgs/report.png" alt="Reportar">
+                        @{
+                            var url = "/contacte-nos?anuncio=" + @item.id + "&assunto=reportar_anuncio";
+                        }
+                        <a href="@url">Reportar</a>
+                    </div>
+                </div>
+            </div>
+            @if (Model.SessionUser == 0)
+            {
+                <div id="login-register">
+                    <img src="/imgs/user.png" alt="Conta utilizador">
+                    <p>Entra na tua conta OpenMarket ou cria uma nova para contactares este anunciante</p>
+                    @{
+                        var url_entrar = "entrar?backUrl=anuncio";
+                        var advert_id = "&id=" + @item.id;
+                        url_entrar = url_entrar + "&name=" + formatter.urlFormat(@item.title) + advert_id;
+                        <a href="@url_entrar">Entrar ou criar conta</a>
+                    }
+                </div>
+            }
+            <script async src="~/js/advert.js?v=104"></script>
+            <div id="user-email">
+                <div class="user-info">
+                    <div class="user-data">
+                        @{
+                            <a href="/perfil?@item.username&id=@item.account">
+                                <img class="user-pic" src="@user_pic" alt="@item.username">
+                            </a>
+                        }
+                        <div>
+                            <a href="/perfil?@item.username&id=@item.account">@item.username</a>
+                            @{
+                                month = char.ToUpper(@item.user_date_month[0]) + @item.user_date_month.Substring(1);
+                                <p>No OpenMarket desde @month de @item.user_date.Date.Year</p>
+                            }
+                            <p>@Model.last_login</p>
+                        </div>
+                    </div>
+                    <div id="user-contact-form" class="user-contact">
+                        <button type="button" id="buttonContact" class="buttonContact" onclick="showContact('@item.id', 'buttonContact', 'phone')">Mostrar telefone</button>
+                        @if(item.email_visible == 1)
+                        {
+                            @if (Model.SessionUser != 0)
+                            {
+                                <button type="button" id="buttonEmail" onclick="showEmailForm()" class="buttonContact">Enviar Email</button>
+                                <form id="email-form" class="email-form" method="post" asp-page-handler="Email">
+                                    <div>
+                                        <span onclick="closePanel('email-form')">&times;</span>
+                                        <p>Será enviado um email para @item.username</p>
+                                        <textarea name="email_body" id="email-body" placeholder="Escreve uma mensagem..."></textarea>
+                                        <input type="hidden" name="advert_id" value="@item.id">
+                                        <button type="button" name="button_email" onclick="emailForm('email-form','email-body')">Enviar</button>
+                                    </div>
+                                </form>
+                            }
+                            else
+                            {
+                                var url_entrar = "entrar?backUrl=anuncio";
+                                var advert_id = "&id=" + @item.id;
+                                url_entrar = url_entrar + "&name=" + formatter.urlFormat(@item.title) + advert_id;
+                                <button onclick="window.location.href='/@url_entrar'" type="button" id="buttonEmail" class="buttonContact">Enviar Email</button>
+                            }
+                        }
+                    </div>
+                </div>
+                @if (Model.SessionUser != 0)
+                {
+                    <form method="post" asp-page-handler="Chat" id="contact-chat">
+                        <textarea name="chat_body" id="chat-body" cols="30" rows="10"
+                    placeholder="Escreve uma mensagem..."></textarea>
+                        <div>
+                            <input type="hidden" name="advert_id" value="@item.id">
+                            <button name="button_email" onclick="emailForm('contact-chat', 'chat-body')"
+                        type="button">Enviar</button>
+                        </div>
+                    </form>
+                }
+                else
+                {
+                    var url_entrar = "entrar?backUrl=anuncio";
+                    var advert_id = "&id=" + @item.id;
+                    url_entrar = url_entrar + "&name=" + formatter.urlFormat(@item.title) + advert_id;
+                    <div onclick="window.location.href='/@url_entrar'" id="contact-chat">
+                        <textarea asp-for="@Model.Body" id="chat-body" placeholder="Escreve uma mensagem..."></textarea>
+                        <div>
+                            <input style="display: none;" type="file" id="email-attachment">
+                            <button>Enviar</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div id="sidebar-advert">
+            <div id="advert-user">
+                <h4>Anunciante</h4>
+                <div class="user-data sidebar">
+                    @{
+                        <img class="user-pic" src="@user_pic" alt="@item.username">
+                    }
+                    <div>
+                        <h4>@item.username</h4>
+                        @{
+                            month = char.ToUpper(@item.user_date_month[0]) + @item.user_date_month.Substring(1);
+                            <p>No OpenMarket desde @month de @item.user_date.Date.Year</p>
+                        }
+                        <p>@Model.last_login</p>
+                    </div>
+                </div>
+                <a href="/perfil?@item.username&id=@item.account">Todos os anúncios deste anunciante</a>
+                    <div class="sidebar-buttons">
+                        <button type="button" class="buttonContact" id="buttonShowContact"
+                        onclick="showContact('@item.id', 'buttonShowContact', 'phone')">Mostrar telefone</button>
+                        <a href="#user-email">Enviar mensagem</a>
+                    </div>
+            </div>
+            @if (Model.SessionUser == 0)
+            {
+                var url_entrar = "entrar?backUrl=anuncio";
+                var advert_id = "&id=" + @item.id;
+                url_entrar = url_entrar + "&name=" + formatter.urlFormat(@item.title) + advert_id;
+                <div id="login-register-sidebar">
+                    <a href="@url_entrar">Entrar ou criar conta</a>
+                </div>
+            }
+            <div id="share-buttons">
+                <h4>Partilhar</h4>
+                <div>
+                    @{
+                        var advert_title = formatter.urlFormat(@item.title);
+                        var advert_url = advert_title + "%26" + "id=" + @item.id;
+                        var facebook_url = "https://facebook.com/sharer.php?u=https://www.openmarket.com/anuncio?" +
+                        advert_url;
+                        var twitter_url = "https://twitter.com/intent/tweet/?text=" + @item.title +
+                        "%20no%20FazKumbu.&amp;url=https://openmarket.com/anuncio?" + advert_url;
+                        var whatsapp_url = "whatsapp://send?text=" + @item.title +
+                        "%20no%20FazKumbu.%20https://openmarket.com/anuncio?" + advert_url;
+                    }
+                    <a href="@facebook_url" target="_blank" title="Facebook">
+                        <img src="/imgs/social/facebook.png" alt="Facebook">
+                    </a>
+                    <a href="@twitter_url" target="_blank" title="Twitter">
+                        <img src="/imgs/social/twitter.png" alt="Twitter">
+                    </a>
+                    <a href="@whatsapp_url" target="_blank" title="Whatsapp">
+                        <img src="/imgs/social/whatsapp.png" alt="Whatsapp">
+                    </a>
+                    <button id="linkShare" onclick="share_link()" type="button" title="Copiar link">
+                        <img src="/imgs/social/link.png" alt="link">
+                    </button>
+                </div>
+            </div>
+            <div id="advert-location">
+                <h4>Localização</h4>
+                <div>
+                    <img src="/imgs/location.png" alt="Localização">
+                    <h4><span>@item.locality, @item.municipality,<br /></span>@item.city</h4>
+                </div>
+                <iframe id="mapa" src="@Model.GoogleMaps"></iframe>
+            </div>
+        </div>
+    </div>
+    @if (Model.user_adverts.Count() > 0)
+    {
+        <div id="user-adverts" class="suggestions">
+    <h3>Mais anúncios deste vendedor</h3>
+    <div>
+        @foreach (var item1 in Model.user_adverts.Where(x => x.groupName != "Emprego").Take(5))
+                {
+                    var url1 = "anuncio?";
+                    var advert_id = "&id=" + @item1.id;
+                    url1 = url1 + formatter.urlFormat(@item1.title) + advert_id;
+
+                    <a href="@url1" class="suggestion-content">
+                        @{
+                            var imgSrc = string.Empty;
+                            if (@item1.image_filename != null)
+                            {
+                                imgSrc = "/anuncios/" + @item1.image_filename;
+                            }
+                            else
+                            {
+                                imgSrc = "/imgs/WithoutImage.jpg";
+                            }
+                            <img class="suggestion-img" src="@imgSrc" alt="@item1.title">
+                        }
+
+                        <div>
+                            <h4 class="suggestion-title">@item1.title</h4>
+                            @if (item1.orc == "true" || item1.price == 0)
+                            {
+                                <p class="suggestion-price">Sob orçamento</p>
+                            }
+                            else
+                            {
+                                double d1 = @item1.price;
+                                string res1 = d1.ToString("### ### ### ### ###.00");
+                                <p class="suggestion-price">@res1 €</p>
+                            }
+                            <p class="suggestion-location">@item1.municipality, @item1.city</p>
+                            @{
+                                var date = @item1.date;
+                                if (date.Date == DateTime.Now.Date)
+                                {
+                                    <p class="suggestion-date">Hoje às @item1.date.ToString("HH:mm")</p>
+                                }
+                                else if (date.Date == DateTime.Now.Date.AddDays(-1))
+                                {
+                                    <p class="suggestion-date">Ontem às @item1.date.ToString("HH:mm")</p>
+                                }
+                                else
+                                {
+                                    var month1 = char.ToUpper(@item1.date_month[0]) + @item1.date_month.Substring(1);
+                                    <p class="suggestion-date">@item1.date.Day @month1</p>
+                                }
+                            }
+                            @if (item1.type == "Venda")
+                            {
+                                <span class="suggestion-type advert-type-sell">@item1.type.ToUpper()</span>
+                            }
+                            else if (item1.type == "Compra" || item1.type == "Procura")
+                            {
+                                <span class="suggestion-type advert-type-buy">@item1.type.ToUpper()</span>
+                            }
+                            @* else if(item.type == "Troca")
+                                {
+                                <span class="suggestion-type advert-type-change">@item.type.ToUpper()</span>
+                                } *@
+                            else if (item1.type == "Contratar" || item1.type == "Arrendar")
+                            {
+                                <span class="suggestion-type advert-type-contract">@item1.type.ToUpper()</span>
+                            }
+                            else if (item1.type == "Serviço")
+                            {
+                                <span class="suggestion-type advert-type-service">@item1.type.ToUpper()</span>
+                            }
+                        </div>
+                    </a>
+                }
+            </div>
+        </div>
+    }
+    
+    @if (Model.adverts_category.Count() > 0 && item.groupName != "Emprego")
+    {
+        <div id="adverts-category" class="suggestions">
+    <h3>Anúncios semelhantes</h3>
+    <div>
+        @foreach (var item2 in Model.adverts_category)
+                {
+                    var url2 = "anuncio?";
+                    var advert_id = "&id=" + @item2.id;
+                    url2 = url2 + formatter.urlFormat(@item2.title) + advert_id;
+
+                    <a href="@url2" class="suggestion-content">
+                        @{
+                            var imgSrc = string.Empty;
+                            if (@item2.image_filename != null)
+                            {
+                                imgSrc = "/anuncios/" + @item2.image_filename;
+                            }
+                            else
+                            {
+                                imgSrc = "/imgs/WithoutImage.jpg";
+                            }
+                            <img class="suggestion-img" src="@imgSrc" alt="@item2.title">
+                        }
+
+                        <div>
+                            <h4 class="suggestion-title">@item2.title</h4>
+                            @if (item2.orc == "true" || item2.price == 0)
+                            {
+                                <p class="suggestion-price">Sob orçamento</p>
+                            }
+                            else
+                            {
+                                double d2 = @item2.price;
+                                string res2 = d2.ToString("### ### ### ### ###.00");
+                                <p class="suggestion-price">@res2 €</p>
+                            }
+                            <p class="suggestion-location">@item2.municipality, @item2.city</p>
+                            @{
+                                var date = @item2.date;
+                                if (date.Date == DateTime.Now.Date)
+                                {
+                                    <p class="suggestion-date">Hoje às @item2.date.ToString("HH:mm")</p>
+                                }
+                                else if (date.Date == DateTime.Now.Date.AddDays(-1))
+                                {
+                                    <p class="suggestion-date">Ontem às @item2.date.ToString("HH:mm")</p>
+                                }
+                                else
+                                {
+                                    var month2 = char.ToUpper(@item2.date_month[0]) + @item2.date_month.Substring(1);
+                                    <p class="suggestion-date">@item2.date.Day @month2</p>
+                                }
+                            }
+                            @if (item2.type == "Venda")
+                            {
+                                <span class="suggestion-type advert-type-sell">@item2.type.ToUpper()</span>
+                            }
+                            else if (item2.type == "Compra" || item2.type == "Procura")
+                            {
+                                <span class="suggestion-type advert-type-buy">@item2.type.ToUpper()</span>
+                            }
+                            @* else if(item.type == "Troca")
+                                {
+                                <span class="suggestion-type advert-type-change">@item.type.ToUpper()</span>
+                                } *@
+                            else if (item2.type == "Contratar" || item2.type == "Arrendar")
+                            {
+                                <span class="suggestion-type advert-type-contract">@item2.type.ToUpper()</span>
+                            }
+                            else if (item2.type == "Serviço")
+                            {
+                                <span class="suggestion-type advert-type-service">@item2.type.ToUpper()</span>
+                            }
+                        </div>
+                    </a>
+                }
+            </div>
+        </div>
+    }
+}
+@if (Model.alerts_list != null)
+{
+    foreach (var alert in Model.alerts_list)
+    {
+        <div class="alerts-container">
+    <div class="alert-content">
+        <span onclick="closePanel('alerts-container');cookieAlert('fz_adv', '@alert.cookie_time');">&times;</span>
+        <h2>@alert.title</h2>
+        <textarea id="alert-text" readonly>@alert.text</textarea>
+        <script>
+            var textarea = document.getElementById("alert-text");
+            textarea.style.height = textarea.scrollHeight + 20 + "px";
+        </script>
+        @if (!string.IsNullOrEmpty(@alert.button_text))
+                {
+                    <a onclick="cookieAlert('fz_adv', '@alert.cookie_time')" href="@alert.button_url">@alert.button_text</a>
+                }
+            </div>
+        </div>
+    }
+}
+<div id="alert-message-container" class="alert-message-container" style="display: none;">
+    <div id="alert-content" class="alert-content">
+        <h3>Email enviado com sucesso</h3>
+        <p>Foi enviado um email para proprietário deste anúncio.</p>
+        <p>O vendedor irá responder para o seu email.</p>
+        <button onclick="closePanel('alert-message-container')" type="button">Fechar</button>
+    </div>
+</div>
+@if (Model.Msg == "email-enviado")
+{
+    <script>
+    document.getElementById("alert-message-container").style.display = "flex";
+</script>
+}
+else if (Model.Msg == "mensagem-enviada")
+{
+    <script type="text/javascript">
+    var div = document.getElementById("alert-content");
+    while (document.querySelector(".alert-content").children.length > 0) {
+        document
+            .getElementById("alert-content")
+            .removeChild(document.getElementById("alert-content").lastElementChild);
+    }
+    var h3 = document.createElement("h3");
+    var p = document.createElement("p");
+    var button = document.createElement("button");
+    var conversas = document.createElement("a");
+    var buttons = document.createElement("div");
+    h3.innerHTML = "Mensagem enviada com sucesso";
+    p.innerHTML = "A sua mensagem foi enviada para o proprietário deste anúncio."
+    button.setAttribute("type", "button");
+    button.innerHTML = "Fechar";
+    button.setAttribute("onclick", "closePanel('alert-message-container')");
+    conversas.innerHTML = "Conversas";
+    conversas.setAttribute("class", "chat-link");
+    conversas.href = "minha-conta/conversas";
+    div.appendChild(h3);
+    div.appendChild(p);
+    buttons.appendChild(conversas);
+    buttons.appendChild(button);
+    div.appendChild(buttons);
+    document.getElementById("alert-message-container").style.display = "flex";
+</script>
+}
+
+<div onclick="closePanel('image-fullscreen')" style="display: none;" class="image-fullscreen" id="image-fullscreen">
+    <span onclick="closePanel('image-fullscreen')">&times;</span>
+    <img id="image-full">
+</div>

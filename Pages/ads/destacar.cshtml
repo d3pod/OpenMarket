@@ -1,0 +1,133 @@
+﻿@page
+@model MyApp.Namespace.destacarModel
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+@section head{
+    <title>OpenMarket - @Model.Title</title>
+    <meta name="title" content="OpenMarket - @Model.Title" />
+    <meta name="description" content="Destaca os teus anúncios no OpenMarket e fecha o negócio mais rápido." />
+    @* Facebook, Others *@
+    <meta property="og:title" content="OpenMarket - @Model.Title">
+    <meta property="og:image" content="https://www.openmarket.com/imgs/Logotipo.jpg">
+    <meta property="og:image:width" content="400" />
+    <meta property="og:image:height" content="300" />
+    <meta property="og:url" content="https://www.openmarket.com/ads/destacar">
+    <meta property="og:type" content="article" />
+    <meta property="og:description" content="Destaca os teus anúncios no OpenMarket e fecha o negócio mais rápido.">
+                    @* Twitter *@
+    <meta property="twitter:title" content="OpenMarket - @Model.Title">
+    <meta name="twitter:description" content="Destaca os teus anúncios no OpenMarket e fecha o negócio mais rápido.">
+    <meta name="twitter:image" content="https://www.openmarket.com/imgs/Logotipo.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="~/css/account.css?v=104" />
+    <script async src="~/js/main.js?v=104"></script>
+}
+@section login{ 
+    <div class="navbar-login">
+        <a class="login-link" href="~/entrar">My OpenMarket</a>
+    </div>
+}
+<main id="ads-container">
+    <div id="ads-options">
+        
+            @if(@Model.plans.Count() > 0)
+            {
+                <h2>Destaque o seu anúncio e obtenha melhores resultados!</h2>
+        <h3>Escolha o seu plano entre as opções a baixo:</h3>            
+        <form method="post" asp-page-handler="Subscribe" asp-route-id="@Model.advert_id" id="ads-plans">
+                @foreach (var plan in Model.plans)
+                {
+                        <div class="plan-option">
+                            <img src="" alt="">
+                            <h2>@plan.name</h2>
+                    @* Principal *@
+                    @if (@plan.days_principal > 0)
+                    {
+                                    <p>Página Principal</p>
+                                    <p class="days-on"><b>@plan.days_principal</b> dias</p>
+                    }
+                    else
+                    {
+                                    <p>Página Principal</p>
+                                    <p class="days-on disabled">Não incluído</p>
+                    }
+                            <hr>
+                    @* Destaque *@
+                    @if (@plan.days_featured > 0)
+                    {
+                                    <p>Em destaque</p>
+                                    <p class="days-on"><b>@plan.days_featured</b> dias</p>
+                    }
+                    else
+                    {
+                                    <p>Em destaque</p>
+                                    <p class="days-on disabled">Não incluído</p>
+                    }
+                            <hr>
+                    @* Sugestões *@
+                    @if (@plan.days_top > 0)
+                    {
+                                    <p>Sugestões</p>
+                                    <p class="days-on"><b>@plan.days_top</b> dias</p>
+                    }
+                    else
+                    {
+                                    <p>Sugestões</p>
+                                    <p class="days-on disabled">Não incluído</p>
+                    }
+                            <hr>
+                            <p>Preço</p>
+                            <p><b>@plan.price</b> pontos</p>
+                            <hr>
+                            <button type="submit" name="plan_id" value="@plan.id">Comprar</button>
+                        </div>
+                }
+            </form>
+            }
+            else
+            {
+                <h2>Sem planos disponíveis para o seu anúncio.</h2>
+                <h3>Para mais informações contacte a nossa equipa.</h3>
+                <a href="~/minha-conta/conversas">Entrar em contacto</a>
+            }
+            
+    </div>
+</main>
+@if (Model.alerts_list != null)
+{
+    foreach (var alert in Model.alerts_list)
+    {
+                <div class="alerts-container">
+            <div class="alert-content">
+                <span onclick="closePanel('alerts-container');cookieAlert('fz_dstc', '@alert.cookie_time');">&times;</span>
+                <h2>@alert.title</h2>
+                <textarea id="alert-text" readonly>@alert.text</textarea>
+                <script>
+                    var textarea = document.getElementById("alert-text");
+                    textarea.style.height = textarea.scrollHeight + 20 + "px";
+                </script>
+                @if (!string.IsNullOrEmpty(@alert.button_text))
+                {
+                                <a onclick="cookieAlert('fz_dstc', '@alert.cookie_time')" href="@alert.button_url">@alert.button_text</a>
+                }
+                    </div>
+                </div>
+    }
+}
+<div id="alert-message-container" style="display: none;">
+    <div class="alert-content">
+        <h3 id="alert-message-title">Pontos insuficientes</h3>
+        <p id="alert-message-p1">Não dispões de pontos suficientes para adquirir este plano.</p>
+        <p id="alert-message-p2">Podes optar por outro plano ou adquirir mais pontos. Para mais informações contacta pelo chat a nossa equipa. </br> <a
+                href="~/minha-conta/conversas">Entrar nas Chat</a></p>
+        <button type="button"
+            onclick="document.getElementById('alert-message-container').style.display = 'none'">Fechar</button>
+    </div>
+</div>
+@if (Model._Msg == "SemPontos")
+{
+        <script type="text/javascript">
+        document.getElementById('alert-message-container').style.display = "flex";
+    </script>
+}

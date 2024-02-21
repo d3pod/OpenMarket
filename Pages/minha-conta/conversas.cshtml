@@ -1,0 +1,118 @@
+﻿@page
+@model MyApp.Namespace.conversasModel
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+@section head{
+<title>OpenMarket - Conversas</title>
+<meta name="title" content="OpenMarket - Conversas" />
+<meta name="description" content="Acede às tuas conversas no OpenMarket." />
+@* Facebook, Others *@
+<meta property="og:title" content="OpenMarket - Conversas">
+<meta property="og:image" content="https://www.openmarket.com/imgs/Logotipo.jpg">
+<meta property="og:url" content="https://www.openmarket.com/minha-conta/conversas">
+<meta property="og:type" content="article" />
+<meta property="og:description" content="Acede às tuas conversas no OpenMarket.">
+@* Twitter *@
+<meta property="twitter:title" content="OpenMarket - Conversas">
+<meta name="twitter:description" content="Acede às tuas conversas no OpenMarket.">
+<meta name="twitter:image" content="https://www.openmarket.com/imgs/Logotipo.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://www.openmarket.com/minha-conta/conversas" />
+<link rel="stylesheet" href="~/css/chat.css?v=104" />
+<script async src="~/js/main.js?v=104"></script>
+<script async src="~/js/chat.js?v=104"></script>
+}
+@section login{
+<div class="navbar-login">
+    <a class="login-link" href="~/entrar">My OpenMarket</a>
+</div>
+}
+<div id="chat-container">
+    <div id="sidebar-users-chat">
+        <div id="user-search">
+            <button id="backButton" type="button" onclick="history.back()"><span>&#10094;</span> Voltar</button>
+            @* <input type="search" name="user_search">
+                <button>Procurar</button> *@
+        </div>
+        <div id="list-chats">
+            <span id="closeList"></span>
+            @foreach (var chats in Model.chats)
+            {
+                if (chats.status == "Lido")
+                {
+                    <button onclick="sendButton(@chats.sender); posts(@chats.sender);">@chats.sender_username</button>
+                }
+                else
+                {
+                    <button onclick="sendButton(@chats.sender); posts(@chats.sender);"
+                class="to_read">@chats.sender_username</button>
+                }
+            }
+        </div>
+    </div>
+    <div id="chat-content">
+        <div id="chat-header">
+            <button id="chatsButton" type="button" onclick="showChats('closed')">&#10095;</button>
+            <div id="chat-info">
+            </div>
+        </div>
+        <div id="chat-posts">
+
+        </div>
+        <div id="chat-new-post">
+            <div id="new-post"></div>
+            <div id="post-extras"></div>
+        </div>
+    </div>
+</div>
+<div class="openmarket-ads vertical-ads chat-ads">
+    <a href="https://www.openmarket.com">
+        <img src="/pubs/anuncios-vertical.jpg" alt="OpenMarket">
+    </a>
+    <p>OpenMarket Ads</p>
+</div>
+@if (Model.alerts_list != null)
+{
+    foreach (var alert in Model.alerts_list)
+    {
+        <div class="alerts-container">
+    <div class="alert-content">
+        <span onclick="closePanel('alerts-container');cookieAlert('fz_cht', '@alert.cookie_time');">&times;</span>
+        <h2>@alert.title</h2>
+        <textarea id="alert-text" readonly>@alert.text</textarea>
+        <script>
+            var textarea = document.getElementById("alert-text");
+            textarea.style.height = textarea.scrollHeight + 20 + "px";
+        </script>
+        @if (!string.IsNullOrEmpty(@alert.button_text))
+                {
+                    <a onclick="cookieAlert('fz_cht', '@alert.cookie_time')" href="@alert.button_url">@alert.button_text</a>
+                }
+            </div>
+        </div>
+    }
+}
+<script>
+            var chat = document.getElementById("chat-container");
+            if(window.outerWidth > 1000)
+            {
+                chat.setAttribute("style", "height:" + (window.innerHeight - 90) + "px");
+            }
+            else if(window.outerWidth < 600)
+            {
+                chat.setAttribute("style", "height:" + (window.innerHeight - 105) + "px");
+            }
+            else if(window.outerWidth > 601 && window.outerWidth < 1199 && window.outerHeight >= window.outerWidth)
+            {
+                chat.setAttribute("style", "height:" + (window.innerHeight - 110) + "px");
+            }
+            else if(window.outerHeight > 600 && window.outerHeight < 1100 && window.outerWidth < 800 && window.outerWidth > window.outerHeight)
+            {
+                chat.setAttribute("style", "height:" + (window.innerHeight - 135) + "px");
+            }
+            else if (window.outerHeight > 300 && window.outerHeight < 599 && window.outerHeight < window.outerWidth)
+            {
+                chat.setAttribute("style", "height:" + (window.innerHeight - 120) + "px");
+            }
+        </script>

@@ -1,0 +1,24 @@
+﻿@page
+@model MyApp.Namespace.conversationsModel
+@{
+    <title>Conversas</title>
+    Layout = "~/Pages/Shared/_LayoutAdmin.cshtml";
+    <link rel="stylesheet" href="~/css/admin.css?v=104" />
+    <script async defer src="~/js/admin.js?v=104"></script>
+}
+<section class="navbar navbar-left">
+   <partial name="_AdminMenu"/>
+</section>
+<section id="conversations-container">
+    <form asp-page-handler="Send" id="post-content">
+        <select name="user_select" id="userSelect">
+            <option value="0">Todos</option>
+            @foreach (var item in Model.accounts)
+            {
+                <option value="@item.id">@item.username</option>
+            }
+        </select>
+        <textarea name="message_body" id="messageBody"></textarea>
+        <button type="submit">Enviar</button>
+    </form>
+</section>

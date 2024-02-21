@@ -1,0 +1,114 @@
+﻿@page
+@model MyApp.Namespace.accountsModel
+@{
+    <title>Utilizadores</title>
+    Layout = "~/Pages/Shared/_LayoutAdmin.cshtml";
+    <link rel="stylesheet" href="~/css/admin.css?v=104" />
+    <script async defer src="~/js/admin.js?v=104"></script>
+}
+<section class="navbar navbar-left">
+   <partial name="_AdminMenu"/>
+</section>
+<section id="accounts-container">
+    <form method="POST" asp-page-handler="Search" class="search-content">
+        <input type="text" name="searchText" class="search-text" placeholder="Procurar...">
+        <button class="search-button" type="submit"><img src="/imgs/search.png" title="Procurar utilizador"
+                alt="Search"></button>
+    </form>
+    @if (Model.accounts.Count > 0)
+    {
+        <table class="accounts-content">
+            <thead>
+                <tr class="account-row">
+                    <th>Nome</th>
+                    <th>E-mail</th>
+                    <th>Cidade</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.accounts)
+                {
+                    <tr class="account-row">
+                        <td>@item.username</td>
+                        <td>@Html.DisplayFor(x => item.email)</td>
+                        @if (!string.IsNullOrEmpty(item.city))
+                        {
+                            <td>@Html.DisplayFor(x => item.city)</td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                        @{
+                            var url = "/admin/adverts?user=" + @item.username.Replace(" ", "");
+                            <td>
+                                <a href="@url"><img src="/imgs/view.png" title="Ver anúncios" alt="Ver anúncio"></a>
+                                <a asp-page="edit-account" asp-route-id="@item.id"><img src="/imgs/edit.png" title="Editar conta"
+                                alt="Editar conta"></a>
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <h2>Sem contas de utilizador para apresentar!</h2>
+    }
+    <form method="POST" class="pagination">
+        @if (Model.TotalPages < 6)
+        {
+            @for (var i = 1; i <= Model.TotalPages; i++)
+            {
+                <li onclick="pagination('@i')" class="page-item @(i == Model.currentpage ? " active": "" )">
+                    <a name="pagination" class="page-link">@i</a>
+                </li>
+            }
+        }
+        else if (Model.TotalPages > 5 && Model.currentpage > 3)
+        {
+            if (Model.currentpage <= Model.TotalPages - 2)
+            {
+                @for (var i = @Model.currentpage - 2; i <= @Model.currentpage + 2; i++)
+                {
+                    <li onclick="pagination('@i')" class="page-item @(i == Model.currentpage ? " active": "" )">
+                        <a name="pagination" class="page-link">@i</a>
+                    </li>
+                }
+            }
+            else
+            {
+                if (Model.currentpage == Model.TotalPages - 1)
+                {
+                    @for (var i = @Model.currentpage - 3; i <= @Model.TotalPages; i++)
+                    {
+                        <li onclick="pagination('@i')" class="page-item @(i == Model.currentpage ? " active": "" )">
+                            <a name="pagination" class="page-link">@i</a>
+                        </li>
+                    }
+                }
+
+                else if (Model.currentpage == Model.TotalPages)
+                {
+                    @for (var i = @Model.currentpage - 4; i <= @Model.TotalPages; i++)
+                    {
+                        <li onclick="pagination('@i')" class="page-item @(i == Model.currentpage ? " active": "" )">
+                            <a name="pagination" class="page-link">@i</a>
+                        </li>
+                    }
+                }
+            }
+        }
+        else if (Model.TotalPages > 5 && Model.currentpage < 4)
+        {
+            @for (var i = 1; i <= 5; i++)
+            {
+                <li onclick="pagination('@i')" class="page-item @(i == Model.currentpage ? " active": "" )">
+                    <a name="pagination" class="page-link">@i</a>
+                </li>
+            }
+        }
+    </form>
+</section>

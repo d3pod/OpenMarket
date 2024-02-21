@@ -1,0 +1,94 @@
+﻿@page
+@model MyApp.Namespace.privacidade_cookiesModel
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+@section head{
+<title>OpenMarket - Privacidade e Cookies</title>
+<meta name="title" content="OpenMarket - Privacidade e Cookies" />
+<meta name="description" content="Politicas de privacidade e proteção de cookies." />
+@* Facebook, Others *@
+<meta property="og:title" content="OpenMarket - Privacidade e Cookies">
+<meta property="og:image" content="https://www.openmarket.com/imgs/Logotipo.jpg">
+<meta property="og:image:width" content="400" />
+<meta property="og:image:height" content="300" />
+<meta property="og:url" content="https://www.openmarket.com/privacidade-cookies">
+<meta property="og:type" content="article" />
+<meta property="og:description" content="Politicas de privacidade e proteção de cookies.">
+@* Twitter *@
+<meta property="twitter:title" content="OpenMarket - Privacidade e Cookies">
+<meta name="twitter:description" content="Politicas de privacidade e proteção de cookies.">
+<meta name="twitter:image" content="https://www.openmarket.com/imgs/Logotipo.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="canonical" href="https://www.openmarket.com/privacidade-cookies/" />
+<link rel="stylesheet" href="~/css/pages.css?v=104" />
+}
+@section login{
+<div class="navbar-login">
+    <a class="login-link" href="~/entrar">My OpenMarket</a>
+</div>
+}
+<div class="openmarket-ads vertical-ads pages-ads">
+    <a href="https://www.openmarket.com">
+            <img src="/pubs/anuncios-vertical.jpg" alt="OpenMarket">
+        </a>
+        <p>OpenMarket Ads</p>
+</div>
+<div class="info-content">
+    <h2>Privacidade e Cookies</h2>
+    <h4>O que são cookies</h4>
+    <p>Cookies são pequenos ficheiros de texto com informação relevante que é descarregada pelo seu dispositivo de
+        acesso (computador, telemóvel/smartphone ou tablet), através do navegador de internet (browser), quando um site
+        é visitado pelo utilizador, sendo utilizados para armazenar informações sobre as visitas dos utilizadores.</p>
+    <p>Os cookies, dependendo de quanto tempo o utilizador permanece na página, podem ser classificados como sessão ou
+        cookies permanentes. O primeiro tipo de cookies expira quando o utilizador fecha o browser. O segundo tipo de
+        cookies expira quando o seu objetivo foi concluído ou quando são desligados manualmente.</p>
+    <p>Os cookies usados no site <span>OpenMarket</span> não recolhem informações pessoais que permitam identificar o
+        utilizador.</p>
+    <p>Os cookies utilizados no site <span>OpenMarket</span> são:</p>
+    <p><span>Analíticos</span> – recolhem informação sobre a experiência de navegação dos utilizadores na página web, de
+        forma anónima, embora por vezes também permitam que um utilizador seja identificado, única e inequivocamente
+        para obter informações sobre os interesses do utilizador nos serviços prestados pela página web.</p>
+    <p><span>De publicidade</span> – ativos de forma persistente mas por período limitado, com o fim de recolherem
+        informação do utilizador sobre hábitos de navegação na internet de modo a que a publicidade visualizada por
+        aquele corresponda às suas necessidades e interesses.</p>
+    <p><span>De terceiros</span> – permitem ao site recordar preferências de navegação, idioma, região e recolhem
+        informação dos utilizadores para direcionar a publicidade para os seus interesses.</p>
+    <p>O site <span>OpenMarket</span> utiliza cookies para recolher informação estatística, de modo a analisar o
+        funcionamento do site e a experiência de navegação dos utilizadores, e avaliar a eficácia de campanhas
+        publicitárias e promocionais.</p>
+    <h4>Desativar a utilização dos cookies</h4>
+    <p>Todos os browsers permitem que o utilizador aceite, recuse ou apague os cookies através da seleção das
+        configurações apropriadas no seu browser. Assim, os utilizadores podem desativar a utilização dos cookies no
+        site <span>OpenMarket</span> a qualquer momento ao modificar as configurações do browser.</p>
+    <p>No entanto, é importante destacar que a desativação dos cookies pode impedir que alguns serviços da web funcionem
+        corretamente, afetando, total ou parcialmente, a navegação.</p>
+</div>
+<div class="openmarket-ads vertical-ads pages-ads">
+    <a href="https://www.openmarket.com">
+            <img src="/pubs/anuncios-vertical.jpg" alt="OpenMarket">
+        </a>
+        <p>OpenMarket Ads</p>
+</div>
+@if (Model.alerts_list != null)
+{
+    foreach (var alert in Model.alerts_list)
+    {
+        <div class="alerts-container">
+    <div class="alert-content">
+        <span onclick="closePanel('alerts-container');cookieAlert('fz_pc', '@alert.cookie_time');">&times;</span>
+        <h2>@alert.title</h2>
+        <textarea id="alert-text" readonly>@alert.text</textarea>
+        <script>
+            var textarea = document.getElementById("alert-text");
+            textarea.style.height = textarea.scrollHeight + 20 + "px";
+        </script>
+        @if (!string.IsNullOrEmpty(@alert.button_text))
+                {
+                    <a onclick="cookieAlert('fz_pc', '@alert.cookie_time')" href="@alert.button_url">@alert.button_text</a>
+                }
+            </div>
+        </div>
+    }
+}

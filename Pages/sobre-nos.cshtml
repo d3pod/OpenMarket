@@ -1,0 +1,99 @@
+﻿@page
+@model MyApp.Namespace.sobre_nosModel
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+@section head{
+<title>OpenMarket - Sobre nós</title>
+<meta name="title" content="OpenMarket - Sobre nós" />
+<meta name="description" content="Página onde contamos o percurso do OpenMarket e também das novidades implementadas no site." />
+@* Facebook, Others *@
+<meta property="og:title" content="OpenMarket - Sobre nós">
+<meta property="og:image" content="https://www.openmarket.com/imgs/Logotipo.jpg">
+<meta property="og:image:width" content="400" />
+<meta property="og:image:height" content="300" />
+<meta property="og:url" content="https://www.openmarket.com/minha-conta/sobre-nos">
+<meta property="og:type" content="article" />
+<meta property="og:description" content="Página onde contamos o percurso do OpenMarket e também das novidades implementadas no site.">
+@* Twitter *@
+<meta property="twitter:title" content="OpenMarket - Sobre nós">
+<meta name="twitter:description" content="Página onde contamos o percurso do OpenMarket e também das novidades implementadas no site.">
+<meta name="twitter:image" content="https://www.openmarket.com/imgs/Logotipo.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="canonical" href="https://www.openmarket.com/sobre-nos/" />
+<link rel="stylesheet" href="~/css/pages.css?v=104" />
+}
+@section login{
+<div class="navbar-login">
+    <a class="login-link" href="~/entrar">My OpenMarket</a>
+</div>
+}
+<div class="openmarket-ads vertical-ads pages-ads">
+    <a href="https://www.openmarket.com">
+            <img src="/pubs/anuncios-vertical.jpg" alt="OpenMarket">
+        </a>
+        <p>OpenMarket Ads</p>
+</div>
+<div class="info-content about-us">
+    <h2>Sobre o OpenMarket</h2>
+    <p>O OpenMarket é um site de classificados em Portugal, inaugurado pela OpenMarket em Fevereiro de 2022, que conecta
+        pessoas para comprar ou vender produtos e serviços de maneira rápida, fácil e segura.</p>
+    <p>Acreditamos que a tecnologia é a ferramenta que nos permite desenvolver soluções escaláveis, capazes de gerar o
+        impacto necessário para impulsionar a inclusão e o desenvolvimento de Portugal.</p>
+    <p>Desta forma, desenvolvemos o OpenMarket para que milhões de pessoas possam fazer os seus negócios, quer seja para
+        comprar ou vender, a qualquer dia da semana, a qualquer hora, esteja onde estiver.</p>
+    <p>No OpenMarket poderá comprar ou vender praticamente tudo, sem intermediários e apenas com alguns cliques.</p>
+    <p>Os produtos são divididos por categorias, como tecnologia, veículos, roupas, perfumes, imoveís, serviços e
+        empregos, e existem ainda filtros para ajudar na pesquisa.</p>
+    <p>Contamos com uma equipa de gestão do site, responsável pela verificação dos anúncios, de forma a melhorar a sua
+        experiência quer seja comprador ou vendedor.</p>
+    <p>Certamente irá encontrar boas oportunidades para comprar tudo o que precisa. Venha conhecer o melhor site de
+        classificados em Portugal.</p>
+
+    @if (Model.news.Count() > 0)
+    {
+        <h2>Novidades</h2>
+        <p>Apresentamos a lista de novidades lançadas no OpenMarket.</p>
+        <table>
+            <tr>
+                <th>Descrição</th>
+                <th>Data</th>
+            </tr>
+            @foreach (var item in Model.news.OrderByDescending(x => x.id).Take(10))
+            {
+                <tr>
+                    <td>@item.name</td>
+                    <td>@item.date.ToShortDateString()</td>
+                </tr>
+            }
+        </table>
+    }
+</div>
+<div class="openmarket-ads vertical-ads pages-ads">
+    <a href="https://www.openmarket.com">
+            <img src="/pubs/anuncios-vertical.jpg" alt="OpenMarket">
+        </a>
+        <p>OpenMarket Ads</p>
+</div>
+@if (Model.alerts_list != null)
+{
+    foreach (var alert in Model.alerts_list)
+    {
+        <div class="alerts-container">
+    <div class="alert-content">
+        <span onclick="closePanel('alerts-container');cookieAlert('fz_sn', '@alert.cookie_time');">&times;</span>
+        <h2>@alert.title</h2>
+        <textarea id="alert-text" readonly>@alert.text</textarea>
+        <script>
+            var textarea = document.getElementById("alert-text");
+            textarea.style.height = textarea.scrollHeight + 20 + "px";
+        </script>
+        @if (!string.IsNullOrEmpty(@alert.button_text))
+                {
+                    <a onclick="cookieAlert('fz_sn', '@alert.cookie_time')" href="@alert.button_url">@alert.button_text</a>
+                }
+            </div>
+        </div>
+    }
+}

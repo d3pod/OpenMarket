@@ -1,0 +1,219 @@
+is_global = true
+build_property.TargetFramework = net7.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = fazkumbu
+build_property.RootNamespace = fazkumbu
+build_property.ProjectDir = /Users/diogolamego/Dev/OpenMarket/openmarket/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = /Users/diogolamego/Dev/OpenMarket/openmarket
+build_property._RazorSourceGeneratorDebug = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/admin/accounts.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvYWRtaW4vYWNjb3VudHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/admin/adverts.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvYWRtaW4vYWR2ZXJ0cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/admin/alerts.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvYWRtaW4vYWxlcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/admin/attributes.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvYWRtaW4vYXR0cmlidXRlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/admin/categories.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvYWRtaW4vY2F0ZWdvcmllcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/admin/cities.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvYWRtaW4vY2l0aWVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/admin/conversations.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvYWRtaW4vY29udmVyc2F0aW9ucy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/admin/countries.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvYWRtaW4vY291bnRyaWVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/admin/dashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvYWRtaW4vZGFzaGJvYXJkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/admin/edit-advert.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvYWRtaW4vZWRpdC1hZHZlcnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/admin/groups.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvYWRtaW4vZ3JvdXBzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/admin/login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvYWRtaW4vbG9naW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/admin/marks.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvYWRtaW4vbWFya3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/admin/models.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvYWRtaW4vbW9kZWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/admin/municipalities.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvYWRtaW4vbXVuaWNpcGFsaXRpZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/admin/news.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvYWRtaW4vbmV3cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/admin/plans.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvYWRtaW4vcGxhbnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/admin/points.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvYWRtaW4vcG9pbnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/admin/tables.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvYWRtaW4vdGFibGVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/ads/destacar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvYWRzL2Rlc3RhY2FyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/anunciar-vender.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvYW51bmNpYXItdmVuZGVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/anuncio.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvYW51bmNpby5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/anuncios.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvYW51bmNpb3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/categorias.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvY2F0ZWdvcmlhcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/contacte-nos.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvY29udGFjdGUtbm9zLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/dicas-seguranca.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvZGljYXMtc2VndXJhbmNhLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/entrar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvZW50cmFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/inserir-anuncios.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvaW5zZXJpci1hbnVuY2lvcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/minha-conta.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvbWluaGEtY29udGEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/minha-conta/carteira.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvbWluaGEtY29udGEvY2FydGVpcmEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/minha-conta/conversas.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvbWluaGEtY29udGEvY29udmVyc2FzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/minha-conta/dados-pessoais.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvbWluaGEtY29udGEvZGFkb3MtcGVzc29haXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/minha-conta/favoritos.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvbWluaGEtY29udGEvZmF2b3JpdG9zLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/minha-conta/meu-anuncio.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvbWluaGEtY29udGEvbWV1LWFudW5jaW8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/minha-conta/recuperar-password.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvbWluaGEtY29udGEvcmVjdXBlcmFyLXBhc3N3b3JkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/paginas/municipios.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvcGFnaW5hcy9tdW5pY2lwaW9zLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/paginas/versoes.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvcGFnaW5hcy92ZXJzb2VzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/perfil.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvcGVyZmlsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/privacidade-cookies.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvcHJpdmFjaWRhZGUtY29va2llcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/Shared/_AdminMenu.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19BZG1pbk1lbnUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/Shared/_LayoutAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19MYXlvdXRBZG1pbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/Shared/_UserMenu.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19Vc2VyTWVudS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/sobre-nos.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvc29icmUtbm9zLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/termos-condicoes.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvdGVybW9zLWNvbmRpY29lcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/diogolamego/Dev/OpenMarket/openmarket/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 

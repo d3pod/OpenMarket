@@ -1,0 +1,181 @@
+﻿@page
+@model MyApp.Namespace.inserir_anunciosModel
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+@section head{
+<title>OpenMarket - Inserir Anúncios</title>
+<meta name="title" content="OpenMarket - Inserir Anúncios" />
+<meta name="description" content="Página com explicação de como inserir anúncios no OpenMarket." />
+@* Facebook, Others *@
+<meta property="og:title" content="OpenMarket - Inserir Anúncios">
+<meta property="og:image" content="https://www.openmarket.com/imgs/Logotipo.jpg">
+<meta property="og:image:width" content="400" />
+<meta property="og:image:height" content="300" />
+<meta property="og:url" content="https://www.openmarket.com/inserir-anuncios">
+<meta property="og:type" content="article" />
+<meta property="og:description" content="Página com explicação de como inserir anúncios no OpenMarket.">
+@* Twitter *@
+<meta property="twitter:title" content="OpenMarket - Inserir Anúncios">
+<meta name="twitter:description" content="Página com explicação de como inserir anúncios no OpenMarket.">
+<meta name="twitter:image" content="https://www.openmarket.com/imgs/Logotipo.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="canonical" href="https://www.openmarket.com/inserir-anuncios/" />
+<link rel="stylesheet" href="~/css/pages.css?v=104" />
+}
+@section login{
+<div class="navbar-login">
+    <a class="login-link" href="~/entrar">My OpenMarket</a>
+</div>
+}
+<div class="openmarket-ads vertical-ads pages-ads">
+    <a href="https://www.openmarket.com">
+        <img src="/pubs/anuncios-vertical.jpg" alt="OpenMarket">
+    </a>
+    <p>OpenMarket Ads</p>
+</div>
+<div class="info-content insert-adverts">
+    <h1>Como criar anúncios no OpenMarket</h1>
+    <h2>Tem vários artigos para anunciar?</h2>
+    <h2>Crie anúncios separados para melhores resultados</h2>
+    <div class="desktop-tutorial">
+        <h3>- Clique no botão <a href="~/anunciar-vender">Novo Anúncio</a> no canto superior do site</h3>
+        <img src="/static/examples/laptop-1.png" alt="Novo Anúncio">
+        <h3>- Preenche o formulário com a informação do artigo ou serviço</h3>
+        <article>
+            <img src="/static/examples/laptop-2.png" alt="Formulário">
+            <div>
+                <p>Insere o <span>título</span>, <span>grupo</span>, <span>categoria</span>, <span>descritivo</span>,
+                    <span>imagens</span> e <span>preço</span> do artigo. Lembra-te que quanto mais
+                    informação tiver, <span>maior a visibilidade</span> do mesmo.
+                </p>
+                <p>Se estiveres a representar uma <span>empresa</span>, deves escolher a opção <span>Profissional</span>
+                    no
+                    <span>Tipo de anúncio</span>.
+                </p>
+                <p>Por fim, escolhe a <span>Província</span>, <span>Município</span> e insere a <span>Localidade ou
+                        Bairro</span>.
+                </p>
+            </div>
+        </article>
+        <h3>- Clica em <span>Publicar anúncio</span></h3>
+        <h4>O teu anúncio foi inserido e será analisado pela nossa equipa.</h4>
+        <h4>Este método de segurança permite detectar possiveis burlas ou erros.</h4>
+        <h4>Receberás um email após a validação do anúncio.</h4>
+        <div class="insert-advert-button">
+            <h2>Queres criar um anúncio?</h2>
+            <a href="~/anunciar-vender">Anúnciar Agora</a>
+        </div>
+    </div>
+    <div class="mobile-tutorial">
+        <h3>- Clique no botão <a href="~/anunciar-vender">Anunciar</a> no menu principal</h3>
+        <img src="/static/examples/mobile-menu.png" alt="Anunciar">
+        <h3>- Preenche o formulário com a informação do artigo ou serviço</h3>
+        <article>
+            <img src="/static/examples/mobile.png" alt="Formulário">
+            <div>
+                <p>Insere o <span>título</span>, <span>grupo</span>, <span>categoria</span>, <span>descritivo</span>,
+                    <span>imagens</span> e <span>preço</span> do artigo. Lembra-te que quanto mais
+                    informação tiver, <span>maior a visibilidade</span> do mesmo.
+                </p>
+                <p>Se estiveres a representar uma <span>empresa</span>, deves escolher a opção <span>Profissional</span>
+                    no
+                    <span>Tipo de anúncio</span>.
+                </p>
+                <p>Por fim, escolhe a <span>Província</span>, <span>Município</span> e insere a <span>Localidade ou
+                        Bairro</span>.
+                </p>
+            </div>
+        </article>
+        <h3>- Clica em <span>Publicar anúncio</span></h3>
+        <h4>O teu anúncio foi inserido e será analisado pela nossa equipa.</h4>
+        <h4>Este método de segurança permite detectar possiveis burlas ou erros.</h4>
+        <h4>Receberás um email após a validação do anúncio.</h4>
+        <div class="insert-advert-button">
+            <h2>Queres criar um anúncio?</h2>
+            <a href="~/anunciar-vender">Anúnciar Agora</a>
+        </div>
+    </div>
+    <div class="faq">
+        <details>
+            <summary>Os anúncios são gratuitos?</summary>
+            <p>Sim, colocar um anúncio no <span>OpenMarket</span> é gratuito.</p>
+        </details>
+        <details>
+            <summary>Validade do anúncio</summary>
+            <p>Os anúncios tem uma validade de 180 dias após a aprovação da nossa equipa. Isto significa que, caso o
+                anúncio leve 1 dia para ser aprovado, o tempo de validade começará a contar no dia em que este ficar
+                visivel no site ou app.</p>
+            <p>Os anúncios permanecerão desativos durante 60 dias. Caso pretenda ativar novamente, basta aceder à sua
+                conta, escolher o anúncio e clicar em <span>Activar</span>.</p>
+            <p>Após esse tempo, caso os anúncios não sejam activados, estes serão eliminados definitivamente.</p>
+        </details>
+        <details>
+            <summary>Quanto tempo leva para um anúncio ser aprovado?</summary>
+            <p>O processo de aprovação de anúncio pode levar até 24h.</p>
+            <p>Este processo tem como principal objetivo detectar possiveis burlas, tornando assim o
+                <span>OpenMarket</span> um site mais seguro.
+            </p>
+            <p>Cada anúncio passa por um processo de aprovação antes de ser publicado e a rapidez deste processo está
+                ligada à quantidade de informação colocada no anúncio. Quanto mais informação, mais fácil é validar o
+                anúncio.</p>
+            <p>O processo pode ainda ser extendido caso existam duvidas sobre o anúncio. Nestes casos, o anunciante será
+                contactado de forma a dar mais detalhes sobre o seu anúncio.</p>
+        </details>
+        <details>
+            <summary>Anunciante certificado</summary>
+            <p>O anúnciante certificado é um utilizador que já tem um histórico de vendas no <span>OpenMarket</span> e com
+                avaliação positiva.</p>
+            <p>A avaliação do anunciante tem como base a avaliação atribuida por outros utilizadores.</p>
+            <p>O anunciante é considerado como certificado se tiver mais de 3 avaliações com média superior ou igual a
+                3.8 e tenha realizado pelo menos 3 negócios no <span>OpenMarket</span>.</p>
+            <p>Caso o anunciante certificado, desça a média de avaliação abaixo de 3.8, o mesmo perderá este distintivo.
+            </p>
+        </details>
+        <details>
+            <summary>Profissionais</summary>
+            <p>Anuanciantes profissionais são utilizadores são empresários individuais ou que representam uma empresa.
+            </p>
+            <p>Os profissionais tem acesso a gráficos que permitem uma analise mais detalhada dos seus anúncios e outras
+                funcionalidades extras.</p>
+            <p>Os anúncios dos profissionais não tem tempo de validade.</p>
+            <p>Para se tornar um profissional terá que aderir a um plano <span>PRO</span>.</p>
+        </details>
+        <details>
+            <summary>Pacotes</summary>
+            <p>O <span>OpenMarket</span> disponibiliza pacotes para melhorar os resultados das suas vendas. Estes pacotes
+                poderão ser de destaque na página principal, nas categorias ou em outras zonas do site ou app.</p>
+            <p>Os pacotes são dividos por tempo (7, 15 e 30 dias) e permitem que o seu anúncio tenha uma maior
+                visibilidade.</p>
+            <p>Para adquirir um pacote, navegue até à sua conta, escolha o anúncio e clique em <span>Destacar</span>.</p>
+        </details>
+    </div>
+</div>
+<div class="openmarket-ads vertical-ads pages-ads">
+    <a href="https://www.openmarket.com">
+        <img src="/pubs/anuncios-vertical.jpg" alt="OpenMarket">
+    </a>
+    <p>OpenMarket Ads</p>
+</div>
+@if (Model.alerts_list != null)
+{
+    foreach (var alert in Model.alerts_list)
+    {
+        <div class="alerts-container">
+    <div class="alert-content">
+        <span onclick="closePanel('alerts-container');cookieAlert('fz_ia', '@alert.cookie_time');">&times;</span>
+        <h2>@alert.title</h2>
+        <textarea id="alert-text" readonly>@alert.text</textarea>
+        <script>
+            var textarea = document.getElementById("alert-text");
+            textarea.style.height = textarea.scrollHeight + 20 + "px";
+        </script>
+        @if (!string.IsNullOrEmpty(@alert.button_text))
+                {
+                    <a onclick="cookieAlert('fz_ia', '@alert.cookie_time')" href="@alert.button_url">@alert.button_text</a>
+                }
+            </div>
+        </div>
+    }
+}

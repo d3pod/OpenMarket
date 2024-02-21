@@ -1,0 +1,153 @@
+﻿@page
+@model MyApp.Namespace.modelsModel
+@{
+    <title>Modelos</title>
+    <link rel="stylesheet" href="~/css/admin.css?v=104" />
+    Layout = "~/Pages/Shared/_LayoutAdmin.cshtml";
+    <script async src="~/js/admin.js?v=104"></script>
+}
+<section class="navbar navbar-left">
+    <partial name="_AdminMenu"/>
+</section>
+<section class="models-container main-container">
+    <form method="POST" asp-page-handler="Add" class="add-model-content add-element-content"
+        enctype="multipart/form-data">
+        <div class="model-mark">
+            <p>Marca</p>
+            <select asp-for="models.mark">
+                @foreach (var item in Model.marks)
+                {
+                    <option value="@item.id">@item.name</option>
+                }
+            </select>
+        </div>
+        <div class="model-name">
+            <p>Nome</p>
+            <input type="text" asp-for="models.name">
+        </div>
+        <div class="model-picture">
+            <p>Imagem</p>
+            <input type="file" accept="image/png, image/jpg, image/jpeg, image/gif" name="uploadImage">
+        </div>
+        <div class="model-ads">
+            <p>Destaque?</p>
+            <select asp-for="models.ads">
+                <option value="0">Não</option>
+                <option value="1">Sim</option>
+            </select>
+        </div>
+        <button type="submit">Adicionar</button>
+    </form>
+    <div class="models-content elements-content">
+        @if (Model.TotalModels > 0)
+        {
+            @foreach (var item in Model.models_list)
+            {
+                var imgSrc = string.Empty;
+                if (item.picture != null)
+                {
+                    byte[] byteImage = item.picture;
+                    var base64 = Convert.ToBase64String(byteImage);
+                    imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                }
+                <form method="POST" class="model-content element-content">
+                    <div class="model-name element-info">
+                        <img src="@imgSrc" alt="@item.name">
+                        <p>@Html.DisplayFor(x => item.name)</p>
+                    </div>
+                    <div class="models-control element-control">
+                        <span style="cursor: pointer;"
+                    onclick="ChangeCity_Country('.element-ads', '.button-preference', '@item.id')">D</span>
+                        <span style="cursor: pointer;"
+                    onclick="ChangeCity_Country('.element-image', '.button-image-model', '@item.id')">I</span>
+                        <button type="submit" value="@item.id" name="Delete" asp-page-handler="Delete">X</button>
+                    </div>
+                </form>
+            }
+        }
+        else
+        {
+            <h2>Sem modelos disponiveis</h2>
+        }
+        <form method="POST" class="preference element-ads" style="display: none;">
+            <div>
+                <span onclick="closePanel('preference')">&times;</span>
+                <h4>Em destaque?</h4>
+                <select name="ads">
+                    <option value="1">Sim</option>
+                    <option selected value="0">Não</option>
+                </select>
+                <button type="submit" class="button-preference" name="model_id" asp-page-handler="Ads">Guardar</button>
+            </div>
+        </form>
+
+        <form method="POST" class="image-model element-image" enctype="multipart/form-data" style="display: none;">
+            <div>
+                <span onclick="closePanel('image-model')">&times;</span>
+                <h4>Insira uma imagem do modelo</h4>
+                <input type="file" accept="image/png, image/jpg, image/jpeg, image/gif" name="uploadImage">
+                <button type="submit" class="button-image-model" name="model_id"
+                    asp-page-handler="Image">Guardar</button>
+            </div>
+        </form>
+    </div>
+    <form method="POST" class="pagination">
+        @if (Model.TotalPages < 6)
+        {
+            @for (var i = 1; i <= Model.TotalPages; i++)
+            {
+                <li onclick="pagination('@i')" class="page-item @(i == Model.currentpage ? " active": "" )">
+                    <a name="pagination" class="page-link">@i</a>
+                </li>
+            }
+        }
+        else if (Model.TotalPages > 5 && Model.currentpage > 3)
+        {
+            if (Model.currentpage <= Model.TotalPages - 2)
+            {
+                @for (var i = @Model.currentpage - 2; i <= @Model.currentpage + 2; i++)
+                {
+                    <li onclick="pagination('@i')" class="page-item @(i == Model.currentpage ? " active": "" )">
+                        <a name="pagination" class="page-link">@i</a>
+                    </li>
+                }
+            }
+            else
+            {
+                if (Model.currentpage == Model.TotalPages - 1)
+                {
+                    @for (var i = @Model.currentpage - 3; i <= @Model.TotalPages; i++)
+                    {
+                        <li onclick="pagination('@i')" class="page-item @(i == Model.currentpage ? " active": "" )">
+                            <a name="pagination" class="page-link">@i</a>
+                        </li>
+                    }
+                }
+
+                else if (Model.currentpage == Model.TotalPages)
+                {
+                    @for (var i = @Model.currentpage - 4; i <= @Model.TotalPages; i++)
+                    {
+                        <li onclick="pagination('@i')" class="page-item @(i == Model.currentpage ? " active": "" )">
+                            <a name="pagination" class="page-link">@i</a>
+                        </li>
+                    }
+                }
+            }
+        }
+        else if (Model.TotalPages > 5 && Model.currentpage < 4)
+        {
+            @for (var i = 1; i <= 5; i++)
+            {
+                <li onclick="pagination('@i')" class="page-item @(i == Model.currentpage ? " active": "" )">
+                    <a name="pagination" class="page-link">@i</a>
+                </li>
+            }
+        }
+    </form>
+    </div>
+</section>
+@if (Model.Msg != null)
+{
+    <script>alert("@Model.Msg")</script>
+}

@@ -1,0 +1,350 @@
+﻿@page
+@using openmarket.Models;
+@model MyApp.Namespace.anunciosModel
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+@section head{
+<title>OpenMarket - Anúncios</title>
+<meta name="description" content="OpenMarket - Anúncios" />
+<meta name="description" content="Conhece todos os anúncios disponiveis no OpenMarket" />
+@* Facebook, Others *@
+<meta property="og:title" content="OpenMarket - Anúncios">
+<meta property="og:description" content="Conhece todos os anúncios disponiveis no OpenMarket">
+<meta property="og:image" content="https://www.openmarket.com/imgs/Logotipo.jpg">
+<meta property="og:image:width" content="400" />
+<meta property="og:image:height" content="300" />
+<meta property="og:url" content="https://www.openmarket.com/anuncios">
+<meta property="og:type" content="article" />
+@* Twitter *@
+<meta property="twitter:title" content="OpenMarket - Anúncios">
+<meta name="twitter:description" content="Conhece todos os anúncios disponiveis no OpenMarket">
+<meta name="twitter:image" content="https://www.openmarket.com/imgs/Logotipo.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="canonical" href="https://www.openmarket.com/anuncios" />
+<link rel="stylesheet" href="~/css/adverts.css?v=104" />
+<link rel="stylesheet" href="~/css/loading.css?v=104" />
+<script src="~/js/main.js?v=104"></script>
+<script async src="~/js/adverts.js?v=104"></script>
+}
+@section login{
+<div class="navbar-login">
+    <a class="login-link" href="~/entrar">My OpenMarket</a>
+</div>
+}
+<div id="searchbar">
+    <div class="search-navbar" id="search-navbar">
+        <div onmouseleave="closeDiv('nav-results')" id="searchbar-search">
+            <input onsearch="loadAdvertsFilters('', 'Anuncios')" onkeypress="loadSuggestions('anuncios');" type="search"
+                id="searchbar-text" asp-for="@Model.searchText" placeholder="Pesquisar...">
+            <ul id="nav-results">
+
+            </ul>
+        </div>
+        <div onmouseleave="hideCities()" id="location">
+            <input placeholder="Portugal" readonly asp-for="@Model.location_name" type="search" id="search-city"
+                data-name="@Model.location_type" onclick="showCities()">
+            <ul id="nav-cities">
+                <li class="city-option">
+                    <a class="city-link" onclick="locationName('Portugal', 'pais'); loadAdvertsFilters('', 'Anuncios');"
+                        href="#">Portugal</a>
+                </li>
+                @foreach (var city in Model.cities)
+                {
+                    <li class="city-option">
+                        <a class="city-link"
+                        onclick="locationName('@city.name', 'provincia'); loadAdvertsFilters('', 'Anuncios');"
+                        href="#">@city.name <i></i></a>
+                        <ul class="sub-nav">
+                            <li class="municipality-option"><a
+                                onclick="locationName('@city.name', 'provincia'); loadAdvertsFilters('', 'Anuncios');"
+                                class="municipality-link" href="#">Região: @city.name</a></li>
+                            @foreach (var municipalities in Model.municipalities.Where(x => x.city == @city.id))
+                            {
+                                <li class="municipality-option"><a
+                                onclick="locationName('@municipalities.name', 'municipio'); loadAdvertsFilters('', 'Anuncios');"
+                                class="municipality-link" href="#">@municipalities.name</a></li>
+                            }
+                        </ul>
+                    </li>
+                }
+            </ul>
+        </div>
+        <button onclick="loadAdvertsFilters('', 'Anuncios')" title="Pesquisar" class="search-button" name="buttonSubmit"
+            type="button">Pesquisar<img class="button-search-image" src="imgs/search.png" alt="Search">@* <span
+                class="button-search-loading loading-effect"></span> *@</button>
+    </div>
+    <script async src="~/js/menu.js?v=104"></script>
+</div>
+<div id="adverts-container">
+    <div onclick="sidebarClose('sidebar-left')" class="sidebar sidebar-left">
+        <div id="category-content">
+            <span onclick="sidebarClose('sidebar-left')">&times;</span>
+            @{
+                valueFormat formatter = new valueFormat();
+                string groupName = formatter.encodeText(@Model.group_name);
+                if (!string.IsNullOrEmpty(Model.category_name))
+                {
+                    <a class="category-all" href="/categorias"><span>&#8249;</span> Todas categorias</a>
+                    <a class="group-item" href="/anuncios?categoria=@groupName">@Model.group_name</a>
+                    foreach (var sub_categories in Model.categories.OrderBy(x => x.name))
+                    {
+                        string categoryName = formatter.encodeText(@sub_categories.name);
+                        if (sub_categories.name == Model.category_name)
+                        {
+                            <a class="category-item selected" href="anuncios?sub_categoria=@categoryName">@sub_categories.name</a>
+                        }
+                        else
+                        {
+                            <a class="category-item" href="anuncios?sub_categoria=@categoryName">@sub_categories.name</a>
+                        }
+                    }
+                }
+                else if (!string.IsNullOrEmpty(Model.group_name) && string.IsNullOrEmpty(Model.category_name))
+                {
+                    <a class="category-all" class="category-item" href="/categorias"><span>&#8249;</span> Todas categorias</a>
+                    <a class="group-item selected" href="/anuncios?categoria=@groupName">@Model.group_name</a>
+                    foreach (var sub_categories in Model.categories.OrderBy(x => x.name))
+                    {
+                        string categoryName = formatter.encodeText(@sub_categories.name);
+                        <a class="category-item" href="anuncios?sub_categoria=@categoryName">@sub_categories.name</a>
+                    }
+                }
+                else
+                {
+                    <a class="category-all" class="category-item" href="/categorias"><span>&#8249;</span> Todas categorias</a>
+                    foreach (var group in Model.groups.OrderBy(x => x.name))
+                    {
+                        groupName = formatter.encodeText(@group.name);
+                        <a class="group-item" href="anuncios?categoria=@groupName">@group.name</a>
+                    }
+                }
+            }
+        </div>
+    </div>
+    <div class="main-content">
+        <div id="filters">
+            <button class="categories-sidebar" type="button" onclick="sidebarOpen('sidebar-left')">CATEGORIAS</button>
+            <button class="filters-sidebar" type="button" onclick="sidebarOpen('sidebar-right')">FILTROS</span></button>
+        </div>
+        <div id="anuncios">
+            @if (Model.adverts.Count() == 0)
+            {
+                <div id="noAdverts">
+                    <img src="/imgs/adverts.png" alt="Sem anúncios">
+                    <h3>Sem anúncios para apresentar</h3>
+                </div>
+            }
+            else
+            {
+                foreach (var item in Model.adverts)
+                {
+                    if (item.groupName == "Emprego")
+                    {
+                        var url = "anuncio?";
+                        var advert_id = "&id=" + @item.id;
+                        url = url + formatter.urlFormat(@item.title) + advert_id;
+
+                        <a href="@url" class="employment-content">
+                            <h4 class="employment-title">@item.title</h4>
+                            <div>
+                                @if (item.price_min > 0 || item.price_max > 0)
+                                {
+                                    double dmin = @item.price_min;
+                                    double dmax = @item.price_max;
+                                    string res_min = dmin.ToString("### ### ### ### ###.00");
+                                    string res_max = dmax.ToString("### ### ### ### ###.00");
+                                    <p class="employment-price-title">Faixa salarial</p>
+                                    <p class="employment-price">@res_min - &nbsp;&nbsp;<br />@res_max €</p>
+                                }
+                                else
+                                {
+                                    <p class="employment-price-title">Faixa salarial</p>
+                                    <p class="employment-price">Não definida</p>
+                                }
+                                <p class="employment-location">@item.municipality, @item.city</p>
+                                @{
+                                    var date = @item.date;
+                                    if (date.Date == DateTime.Now.Date)
+                                    {
+                                        <p class="employment-date">Hoje às @item.date.ToString("HH:mm")</p>
+                                    }
+                                    else if (date.Date == DateTime.Now.Date.AddDays(-1))
+                                    {
+                                        <p class="employment-date">Ontem às @item.date.ToString("HH:mm")</p>
+                                    }
+                                    else
+                                    {
+                                        var month = char.ToUpper(@item.date_month[0]) + @item.date_month.Substring(1);
+                                        <p class="employment-date">@item.date.Day @month</p>
+                                    }
+                                }
+                            </div>
+                            <span class="advert-type advert-type-employment">@item.type.ToUpper()</span>
+                        </a>
+                    }
+                    else
+                    {
+                        var url = "anuncio?";
+                        var advert_id = "&id=" + @item.id;
+                        url = url + formatter.urlFormat(@item.title) + advert_id;
+
+                        <a href="@url" class="advert-content">
+                            @{
+                                var imgSrc = string.Empty;
+                                if (@item.image_filename != null)
+                                {
+                                    imgSrc = "/anuncios/" + @item.image_filename;
+                                }
+                                else
+                                {
+                                    imgSrc = "/imgs/WithoutImage.jpg";
+                                }
+                                <img src="@imgSrc" alt="@item.title">
+                            }
+                            <div>
+                                <h4 class="advert-title">@item.title</h4>
+                                @if (item.orc == "true" || item.price == 0)
+                                {
+                                    <p class="advert-price">Sob orçamento</p>
+                                }
+                                else
+                                {
+                                    double d = @item.price;
+                                    string res = d.ToString("### ### ### ### ###.00");
+                                    <p class="advert-price">@res €</p>
+                                }
+                                <p class="advert-location">@item.municipality, @item.city</p>
+                                @{
+                                    var date = @item.date;
+                                    if (date.Date == DateTime.Now.Date)
+                                    {
+                                        <p class="advert-date">Hoje às @item.date.ToString("HH:mm")</p>
+                                    }
+                                    else if (date.Date == DateTime.Now.Date.AddDays(-1))
+                                    {
+                                        <p class="advert-date">Ontem às @item.date.ToString("HH:mm")</p>
+                                    }
+                                    else
+                                    {
+                                        var month = char.ToUpper(@item.date_month[0]) + @item.date_month.Substring(1);
+                                        <p class="advert-date">@item.date.Day @month</p>
+                                    }
+                                }
+                            </div>
+                            @if (item.type == "Venda")
+                            {
+                                <span class="advert-type advert-type-sell">@item.type.ToUpper()</span>
+                            }
+                            else if (item.type == "Compra" || item.type == "Procura")
+                            {
+                                <span class="advert-type advert-type-buy">@item.type.ToUpper()</span>
+                            }
+                            @* else if(item.type == "Troca")
+                                {
+                                <span class="advert-type advert-type-change">@item.type.ToUpper()</span>
+                                } *@
+                            else if (item.type == "Contratar" || item.type == "Arrendar")
+                            {
+                                <span class="advert-type advert-type-contract">@item.type.ToUpper()</span>
+                            }
+                            else if (item.type == "Serviço")
+                            {
+                                <span class="advert-type advert-type-service">@item.type.ToUpper()</span>
+                            }
+                        </a>
+                    }
+                }
+            }
+        </div>
+        <div class="pagination">
+
+        </div>
+    </div>
+    <div class="sidebar sidebar-pub">
+        <a href="https://www.openmarket.com">
+            <img src="/pubs/anuncios-vertical.jpg" alt="OpenMarket">
+        </a>
+        <p>OpenMarket Ads</p>
+    </div>
+    <div class="sidebar sidebar-right">
+        <div class="filters-content">
+            <span onclick="sidebarClose('sidebar-right')">&times;</span>
+            <div class="filter-option">
+                <label>Ordenar por</label>
+                <select class="select-style" id="orderby" onchange="loadAdvertsFilters('1', 'Anuncios')">
+                    <option value="">Mais recente</option>
+                    <option value="preco-baixo">Mais barato</option>
+                    <option value="preco-alto">Mais caro</option>
+                </select>
+            </div>
+            <div class="filter-option" id="filter-price">
+                <label>Preço</label>
+                <div>
+                    <input onkeyup="loadAdvertsFilters('1', 'Anuncios')" id="min-price" class="input-style"
+                        type="number" placeholder="de">
+                    <input onkeyup="loadAdvertsFilters('1', 'Anuncios')" id="max-price" class="input-style"
+                        type="number" placeholder="até">
+                </div>
+            </div>
+            <div class="filter-option">
+                <label>Negociável?</label>
+                <select class="select-style" id="filter-negotiable" onchange="loadAdvertsFilters('1', 'Anuncios')">
+                    <option selected value="">Todos</option>
+                    <option value="0">Não</option>
+                    <option value="1">Sim</option>
+                </select>
+            </div>
+            <div class="filter-option">
+                <label>Estado</label>
+                <select class="select-style" id="filter-status" onchange="loadAdvertsFilters('1', 'Anuncios')">
+                    <option selected value="">Todos</option>
+                    <option value="Novos">Novos</option>
+                    <option value="Usados">Usados</option>
+                </select>
+            </div>
+            <div class="filter-option">
+                <label>Tipo anunciante</label>
+                <select class="select-style" id="filter-user" onchange="loadAdvertsFilters('1', 'Anuncios')">
+                    <option selected value="">Todos</option>
+                    <option value="Particular">Particular</option>
+                    <option value="Profissional">Profissional</option>
+                </select>
+            </div>
+            @* <div class="filter-option">
+                <label>Tipo de negócio</label>
+                <select class="select-style" id="filter-type" onchange="loadAdvertsFilters()">
+
+                </select>
+                </div> *@
+        </div>
+    </div>
+</div>
+@if (Model.alerts_list != null)
+{
+    foreach (var alert in Model.alerts_list)
+    {
+        <div class="alerts-container">
+    <div class="alert-content">
+        <span onclick="closePanel('alerts-container');cookieAlert('fz_advs', '@alert.cookie_time');">&times;</span>
+        <h2>@alert.title</h2>
+        <textarea id="alert-text" readonly>@alert.text</textarea>
+        <script>
+            var textarea = document.getElementById("alert-text");
+            textarea.style.height = textarea.scrollHeight + 20 + "px";
+        </script>
+        @if (!string.IsNullOrEmpty(@alert.button_text))
+                {
+                    <a onclick="cookieAlert('fz_advs', '@alert.cookie_time')" href="@alert.button_url">@alert.button_text</a>
+                }
+            </div>
+        </div>
+    }
+}
+<div class="div-loading">
+    <span class="loading-effect"></span>
+</div>
+<script defer type="text/javascript">
+    pagination(@Model.currentpage, @Model.TotalPages, 'Anuncios');
+</script>

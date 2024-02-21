@@ -1,0 +1,1755 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.container {
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.selected {
+  border-bottom: 2px solid rgb(70, 70, 70) !important;
+  font-weight: bold;
+}
+.header-account > h2 {
+  text-align: left;
+  width: 70%;
+  margin: 3% 0;
+  color: rgb(70, 70, 70);
+  letter-spacing: 0.5px;
+}
+#menu-container {
+  width: 90%;
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 2% 1.5%;
+  background-color: white;
+}
+
+.notification-bar {
+  width: 16px;
+  height: 16px;
+  background-color: red;
+  border-radius: 50%;
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5px;
+}
+.notification-bar > p {
+  font-size: 0.65rem;
+  color: white;
+}
+.adverts-container {
+  width: 98%;
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+#noAdverts {
+  width: 100%;
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  order: 1;
+}
+#noAdverts > img {
+  width: 35%;
+}
+.noAdverts > h3 {
+  width: 90%;
+  text-align: center;
+  color: rgb(70, 70, 70);
+}
+#noAdverts > a {
+  cursor: pointer;
+  margin-top: 30px;
+  text-align: center;
+  padding: 15px 20px;
+  border-radius: 4px;
+  background-color: rgb(29, 29, 29);
+  font-weight: bold;
+  border: none;
+  color: white;
+  font-size: 14px;
+}
+.advert-content {
+  cursor: pointer;
+  width: 45%;
+  height: 160px;
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin: 1% 1%;
+  background-color: white;
+  /* box-shadow: 1px 1px 1px rgb(230, 230, 230); */
+  border: 10px solid white;
+}
+.advert-content:hover {
+  background-color: rgba(209, 218, 221, 0.3);
+  border-color: rgba(209, 218, 221, 0.005);
+  box-shadow: 0px 0px 2px rgb(191, 191, 191);
+}
+.advert-content > img {
+  width: 30%;
+  height: 100%;
+  min-height: 100%;
+  object-fit: cover;
+}
+.advert-content > div > h4 {
+  width: 80%;
+  height: 50%;
+  text-align: left;
+  margin: 2% 0 0 0;
+  color: #082c33;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+.advert-content > div {
+  position: relative;
+  width: 70%;
+  height: 100%;
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.buttons-functions {
+  position: absolute;
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  bottom: 0;
+  left: 15%;
+  width: auto !important;
+  height: auto !important;
+  flex-direction: row !important;
+}
+.employment-content > .buttons-functions {
+  left: 40%;
+}
+.buttons-functions > button,
+.buttons-functions > a {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 3px;
+  color: white;
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  border-radius: 2px;
+}
+.button-edit {
+  background-color: rgb(61, 61, 61) !important;
+}
+.button-delete {
+  background-color: rgb(240, 50, 2) !important;
+}
+.button-active {
+  background-color: rgb(32, 190, 93) !important;
+}
+.panel-disable {
+  position: fixed;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  margin: 0 !important;
+  background-color: rgba(32, 32, 32, 0.685);
+  z-index: 9;
+  overflow: hidden;
+}
+.panel-disable > div {
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  padding: 3%;
+}
+.panel-disable > div > h2 {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.panel-disable > div > p {
+  width: 70%;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.panel-disable > div > div {
+  width: 100%;
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 10px;
+}
+.panel-disable > div > div > button {
+  cursor: pointer;
+  padding: 10px 20px;
+  border: none;
+  color: white;
+  font-size: 1em;
+}
+.panel-disable > div > div :nth-child(1) {
+  background-color: rgb(42, 187, 102);
+}
+.panel-disable > div > div :nth-child(2), .disable-advert {
+  background-color: rgb(226, 40, 40) !important;
+}
+.advert-price {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: var(--main-green);
+  text-align: center;
+  margin-bottom: 1px;
+  width: 90%;
+  text-align: right;
+}
+.advert-date,
+.advert-location {
+  margin: 2px 0;
+  width: 90%;
+  font-size: 0.8em;
+  text-align: right;
+  color: #082c33b2;
+}
+.advert-status {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+}
+.adverts-status-labels{
+  width: 95%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3%;
+}
+.adverts-status-labels > div{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 0 2%;
+}
+.advert-label {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  margin-right: 2%;
+}
+.adverts-status-labels > div > label{
+  margin-left: 2px;
+}
+.pending {
+  background-color: rgb(255, 123, 0);
+  color: white;
+}
+.activated {
+  background-color: rgb(72, 185, 120);
+  color: white;
+}
+.disabled {
+  background-color: rgb(228, 15, 15);
+  color: white;
+}
+.sold {
+  background-color: rgb(55, 122, 221);
+  color: white;
+}
+.recover-password-container {
+  width: 100%;
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.recover-content {
+  width: 30%;
+  margin: 10% 0;
+  padding: 50px;
+  background-color: #f7f7f7;
+  box-shadow: 0px 0px 3px rgb(214, 214, 214);
+}
+.recover-content > h2 {
+  margin-bottom: 20px;
+}
+.passwordRecover-content > p {
+  margin-bottom: 7px;
+}
+.passwordRecover-content > div {
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
+}
+#email {
+  width: 70%;
+  resize: none;
+  padding: 16px 48px 16px 16px;
+  font-size: 16px;
+  color: rgb(49, 49, 49);
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border-image: initial;
+  border-color: rgb(242, 244, 245) rgb(242, 244, 245) rgb(242, 244, 245);
+  border-style: solid;
+  border-width: 2px;
+  background-color: rgb(255, 255, 255);
+  background-clip: padding-box;
+  outline: none;
+}
+.password-button {
+  cursor: pointer;
+  background-color: rgb(29, 29, 29);
+  color: white;
+  border: none;
+  font-size: 16px;
+  padding: 17px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+#recover-password-alert {
+  color: rgb(31, 140, 212);
+}
+.alert-content > h2 {
+  margin-bottom: 20px;
+}
+.personal-info-container {
+  width: 100%;
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+}
+.personal-info {
+  width: 40%;
+}
+.change-password {
+  width: 25%;
+}
+.personal-info,
+.change-password {
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 3%;
+  padding-bottom: 1%;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 1px rgb(187, 187, 187);
+}
+.personal-info > h3,
+.change-password > h3 {
+  margin: 20px 0;
+  width: 80%;
+  text-align: center;
+  opacity: 0.6;
+  color: rgb(21, 80, 128);
+}
+.account-info {
+  width: 80%;
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.account-info > div {
+  width: 40%;
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.personal-info > div > div > img {
+  cursor: pointer;
+  width: 90px;
+  height: 90px;
+  margin-bottom: 20px;
+  border-radius: 50%;
+}
+.personal-info > div > div > img:hover {
+  opacity: 0.5;
+}
+.personal-info > div > button,
+.change-password > button {
+  cursor: pointer;
+  margin-top: 6%;
+  width: 30%;
+  padding: 15px 0;
+  border-radius: 4px;
+  background-color: rgb(29, 29, 29);
+  font-weight: bold;
+  border: none;
+  color: white;
+  font-size: 14px;
+}
+.change-password :nth-child(2) {
+  margin-top: -3px;
+}
+.change-password > button {
+  margin-top: 20px !important;
+  margin-bottom: 7px;
+}
+.account-name {
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+#account-first-name,
+#account-last-name,
+#account-email {
+  width: 80%;
+  margin: 3px 0;
+  padding: 12px;
+  font-size: 14px;
+  text-align: center;
+}
+#account-email {
+  width: 120%;
+}
+#account-birthday {
+  width: 90%;
+  padding: 12px;
+  margin: 5px 0;
+  font-size: 14px;
+}
+.account-location {
+  width: 100%;
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 5px;
+}
+.account-location > div {
+  width: 30%;
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 2.3%;
+}
+.account-location > div > select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+}
+.account-location > div > input {
+  width: 100%;
+  padding: 12px;
+  font-size: 14px;
+}
+.account-label {
+  font-size: 14px;
+}
+.label-email {
+  width: 55%;
+  text-align: left;
+}
+.label-location {
+  width: 90%;
+  text-align: left;
+  margin-top: 1%;
+}
+.label-birthday {
+  text-align: center;
+  margin-top: 15px;
+}
+.change-password > label {
+  margin: 10px 0 5px 0;
+}
+#birthday-button {
+  width: 90%;
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+#birthday-button > div {
+  width: 30%;
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 10%;
+}
+.user-password {
+  margin: 7px 0;
+  width: 40%;
+  font-size: 14px;
+  padding: 12px;
+  text-align: left;
+}
+.header-account {
+  width: 80%;
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin: 3% 0 0 0;
+}
+.user-image {
+  margin-right: 2%;
+}
+.user-image > img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+.user-info > h2 {
+  margin-bottom: 2%;
+  color: #4b82be;
+}
+.user-info > p {
+  font-size: 0.9em;
+  margin: 2px 0;
+  color: #7e7e7e;
+}
+.header-account {
+  justify-content: center;
+}
+.advert-type {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  font-size: 0.7rem;
+  color: white;
+  padding: 5px 7px;
+  border-radius: 0 4px 0 0;
+}
+.advert-type-buy {
+  background-color: var(--type-buy);
+}
+.advert-type-sell {
+  background-color: var(--type-sell);
+}
+.advert-type-change {
+  background-color: var(--type-change);
+}
+.advert-type-contract {
+  background-color: var(--type-contract);
+}
+.advert-type-service {
+  background-color: var(--type-service);
+}
+.advert-type-employment {
+  background-color: var(--type-employment);
+  border-radius: 4px;
+}
+.employment-content {
+  cursor: pointer;
+  width: 45%;
+  height: 160px;
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  margin: 1% 1%;
+  background-color: white;
+  /* box-shadow: 1px 1px 1px rgb(230, 230, 230); */
+  border: 10px solid white;
+}
+.employment-content > h4 {
+  width: 65%;
+  height: 70%;
+  text-align: left;
+  color: #082c33;
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-left: 2%;
+}
+.employment-content > div {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+.employment-price-title {
+  font-size: 0.8rem;
+  color: #082c33b2;
+  height: 15%;
+}
+.employment-price {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: var(--main-green);
+  text-align: center;
+  margin-bottom: 1px;
+  width: 90%;
+  height: 40%;
+  text-align: right;
+}
+.employment-location,
+.employment-date {
+  margin: 2px 0;
+  width: 90%;
+  font-size: 0.8em;
+  text-align: right;
+  color: #082c33b2;
+}
+.pagination {
+  width: 95% !important;
+  margin-top: 3% !important;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.page-item {
+  cursor: pointer;
+  list-style-type: none;
+  background-color: rgb(209, 209, 209);
+  padding: 6px 11px;
+  max-width: 0 2px;
+  border-radius: 2px;
+  margin: 0 2px;
+  color: black;
+}
+.active {
+  background-color: rgb(75, 75, 75) !important;
+  color: white;
+}
+#advert-location {
+  margin-top: 0 !important;
+}
+#wallet-container {
+  width: 100%;
+}
+#wallet-content {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 3%;
+}
+#wallet-filters {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3%;
+}
+#wallet-movs {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.filter-option {
+  width: 80% !important;
+  display: flex;
+  flex-direction: column;
+}
+.filter-option > label {
+  margin-left: 10px;
+  margin-bottom: 5px;
+}
+.filter-option > select {
+  width: 70% !important;
+  background-color: white;
+  padding: 10px 16px;
+}
+.filter-option > div {
+  flex-direction: row;
+}
+.filter-option > div > input {
+  width: 30% !important;
+  background-color: white;
+  padding: 10px 16px;
+  text-align: center;
+}
+#wallet-value {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 2% 0;
+}
+#wallet-value > h2{
+  width: 35%;
+}
+#wallet-value > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--main-blue);
+  padding: 12px 20px;
+  border-radius: 120px;
+}
+#wallet-value > div > img {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  filter: invert(100%);
+}
+#wallet-value > div > h4 {
+  color: white;
+  font-size: 1.1em;
+  font-weight: normal;
+}
+#wallet-movs > table {
+  width: 90%;
+}
+#wallet-movs > table > thead {
+  background-color: #7e7e7e;
+  height: 30px;
+}
+#wallet-movs > table > thead > tr {
+  font-size: 1.1em;
+  color: white;
+}
+#wallet-movs > table > tbody {
+  font-weight: normal;
+}
+#wallet-movs > table > tbody > tr:nth-child(even) {
+  background-color: #e2e2e2;
+}
+#wallet-movs > table > tbody :nth-child(2) {
+  width: 15%;
+}
+#wallet-movs > table > tbody :nth-child(3) {
+  width: 15%;
+}
+#wallet-movs > table > tbody :nth-child(4) {
+  width: 20%;
+}
+#wallet-movs > table > tbody > tr {
+  font-size: 1.05em;
+  height: 25px;
+}
+#invite,
+#invite-mobile {
+  cursor: pointer;
+  width: 180px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #f7f7f7;
+  padding: 8px 5px;
+  border: 1px solid rgb(227, 227, 227);
+  border-radius: 30px;
+}
+#user-menu {
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  padding: 0.5% 0 1% 0;
+}
+#user-menu > h3 {
+  margin-bottom: 1%;
+}
+.user-mobile-menu {
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  border: none;
+  border-bottom: 1px solid #bbbbbb;
+  padding: 10px 0;
+  color: #353535;
+  background-color: transparent;
+  font-size: 1em;
+  position: relative;
+}
+.user-mobile-menu > div {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+.user-mobile-menu > span:first-child,
+.user-mobile-menu > div > span:first-child {
+  width: 99%;
+  text-align: left;
+  font-weight: normal;
+}
+.user-mobile-menu > span:hover, .user-mobile-menu > div > span:hover{
+  font-weight: bold;
+}
+#invite > label,
+#invite-mobile > label {
+  cursor: pointer;
+}
+#invite > img,
+#invite-mobile > img {
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+  border-radius: 4px;
+  margin-left: 15px;
+}
+.slogan {
+  width: 100%;
+  text-align: center;
+  margin: 2% 0;
+  color: #353535;
+}
+.user-footer {
+  width: 90%;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 10% 0 0 0;
+}
+.user-footer > h3 {
+  margin-bottom: 5px;
+}
+.user-footer > a {
+  width: 100%;
+  padding: 15px 0;
+  color: #353535;
+  border-bottom: 1px solid #bbbbbb;
+  font-size: 0.9em;
+  display: flex;
+  justify-content: flex-start;
+}
+.user-footer > a > span:first-child {
+  width: 98%;
+  text-align: left;
+}
+.social {
+  width: 100%;
+  margin-top: 5%;
+  text-align: center;
+}
+.user-mobile-menu > span > div{
+  left: 20% !important;
+  top: 30% !important;
+}
+.profile-adverts{
+  flex-direction: column;
+  margin-top: 3%;
+}
+.profile-adverts > h2{
+  margin-bottom: 1%;
+}
+#advert-container{
+  margin-top: 2%;
+}
+#ads-container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#ads-options{
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#ads-options > h2{
+  text-align: center;
+  margin-top: 5%;
+}
+#ads-options > h3{
+  text-align: center;
+  margin-top: 1%;
+  margin-bottom: 3%;
+}
+#ads-plans{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.plan-option{
+  width: 15%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 3% 3%;
+  background-color: white;
+  border-radius: 2px;
+}
+.plan-option > h2{
+  text-align: center;
+  margin-bottom: 10%;
+}
+.plan-option p{
+  letter-spacing: 0.7px;
+}
+.plan-option .days-on{
+  margin: 3% 0 2% 0;
+}
+.plan-option hr{
+  width: 100%;
+  margin: 7% 0;
+  border: 0.5px solid #ededed;
+}
+.plan-option button{
+  cursor: pointer;
+  border: none;
+  background-color: rgb(255, 123, 0);
+  color: white;
+  padding: 10px 25px;
+  font-size: 1em;
+  border-radius: 4px;
+  margin-top: 5%;
+}
+.plan-option button:hover{
+  background-color: rgb(251, 132, 21);;
+}
+.days-on.disabled{
+  color: rgb(187, 187, 187);
+  background-color: transparent;
+}
+#ads-options > a {
+  font-size: 1.3em;
+  color: #0d7cf3;
+  text-decoration: underline;
+  margin-top: -1%;
+}
+#ads-options > a:hover {
+  transform: scale(1.02);
+}
+@media (max-width: 600px) {
+  .adverts-status-labels{
+    margin-top: 5%;
+  }
+  #ads-plans{
+    flex-direction: column;
+  }
+  .plan-option{
+    width: 65%;
+    margin: 3% 0;
+    padding: 10% 7%;
+  }
+  #ads-options > h2{
+    font-size: 1.3em;
+  }
+  #ads-options > h3{
+    width: 80%;
+    font-size: 1.1em;
+    margin-top: 3%;
+  }
+  .panel-disable > div > p {
+    width: 90%;
+  }
+  .user-mobile-menu > span > div{
+    left: 25% !important;
+  }
+  #menu-container{
+    width: 95%;
+  }
+  #user-menu {
+    width: 90%;
+    display: flex;
+    margin: 1% 0 2% 0;
+  }
+  .user-footer {
+    display: flex;
+  }
+  #wallet-value {
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    margin: 5% 0 3% 0;
+  }
+  #wallet-value > h2
+  {
+    order: 2;
+    width: 100%;
+    text-align: center;
+    margin-top: 5%;
+  }
+  #wallet-filters {
+    display: none;
+  }
+  #wallet-movs {
+    width: 100%;
+  }
+  #wallet-movs > table {
+    width: 100%;
+  }
+  #wallet-movs > table > thead > tr {
+    font-size: 0.9em;
+  }
+  #wallet-movs > table > tbody > tr {
+    font-size: 0.8em;
+  }
+  .pagination {
+    width: 100% !important;
+  }
+  #advert-location {
+    margin-top: 7% !important;
+  }
+  .advert-date,
+  .advert-location,
+  .employment-location,
+  .employment-date {
+    font-size: 0.7rem !important;
+    margin: 1px 0;
+  }
+  .advert-date,
+  .employment-date {
+    margin-bottom: 3%;
+  }
+  .adverts-container {
+    width: 100%;
+    margin-left: 0;
+    justify-content: center;
+  }
+  #noAdverts > img {
+    width: 100%;
+  }
+  .buttons-functions {
+    left: 2%;
+    bottom: 2%;
+  }
+  .employment-content > .buttons-functions {
+    left: 30%;
+  }
+  .buttons-functions > button,
+  .buttons-functions > a {
+    font-size: 0.6rem;
+  }
+  .header-account {
+    margin-top: 7%;
+    justify-content: center;
+    align-items: center;
+  }
+  .user-image > img {
+    width: 70px;
+    height: 70px;
+  }
+  .user-info > h2 {
+    font-size: 1.3rem;
+  }
+  .advert-content,
+  .employment-content {
+    width: 97%;
+    height: 120px;
+    border: none;
+  }
+  .advert-type,
+  .advert-type-employment {
+    font-size: 0.6rem;
+  }
+  .advert-type-employment {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  .advert-content > img {
+    width: 35%;
+  }
+  .advert-content > div {
+    width: 65%;
+  }
+  .advert-content > div > h4 {
+    width: 90%;
+    font-size: 1rem;
+    margin-top: 3%;
+  }
+  .advert-price,
+  .employment-price {
+    font-size: 1.1rem;
+  }
+  .employment-content {
+    margin: 1% 0;
+  }
+  .employment-content > h4 {
+    width: 60%;
+  }
+  .employment-content > div {
+    width: 35%;
+  }
+  .employment-location,
+  .employment-date {
+    font-size: 0.8rem;
+  }
+  .advert-status {
+    top: 2%;
+    right: 1%;
+  }
+  .personal-info-container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 10%;
+  }
+  .personal-info {
+    width: 90%;
+  }
+  .account-info {
+    width: 100%;
+  }
+  .change-password {
+    width: 80%;
+  }
+  .user-password {
+    width: 50%;
+  }
+  .account-location {
+    flex-direction: column;
+  }
+  .account-location > div {
+    width: 50%;
+  }
+  .account-location > div > select {
+    margin-bottom: 7px;
+  }
+  #birthday-button {
+    flex-direction: column;
+  }
+  #birthday-button > div {
+    width: 40%;
+    margin: 0;
+  }
+  .label-birthday {
+    width: 100%;
+  }
+  .personal-info > div > button,
+  .change-password > button {
+    margin-top: 3%;
+    margin-bottom: 3%;
+  }
+  #account-birthday {
+    width: 100%;
+  }
+  .label-location {
+    text-align: center;
+  }
+  #noAdverts {
+    width: 80%;
+  }
+  #noAdverts h3 {
+    text-align: center;
+  }
+  .header-account > h2 {
+    text-align: center;
+    font-size: 1.2em;
+    margin-top: 5%;
+  }
+  .user-info > p {
+    font-size: 0.7rem;
+  }
+  .panel-disable > div {
+    width: 70%;
+    padding: 5% 3%;
+  }
+  .recover-content {
+    width: 80%;
+  }
+  .passwordRecover-content > div {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .password-button {
+    margin-top: 10px;
+  }
+}
+@media (min-width: 601px) and (max-width: 1199px) and (orientation: portrait) {
+  .user-mobile-menu > span > div{
+    left: 32% !important;
+  }
+  #user-menu {
+    display: flex;
+  }
+  .user-footer {
+    display: flex;
+    margin: 5% 0 14% 0;
+  }
+  #wallet-value {
+    width: 100%;
+    justify-content: center;
+    margin: 2% 0 2% 0;
+  }
+  #wallet-value > div > h4 {
+    font-size: 0.95em;
+  }
+  #wallet-filters {
+    display: none;
+  }
+  #wallet-content {
+    justify-content: center;
+  }
+  #wallet-movs {
+    width: 80%;
+  }
+  #wallet-movs > table {
+    width: 100%;
+  }
+  #wallet-movs > table > thead > tr {
+    font-size: 0.9em;
+  }
+  #wallet-movs > table > tbody > tr {
+    font-size: 0.8em;
+  }
+  .pagination {
+    width: 100% !important;
+  }
+  .adverts-container {
+    justify-content: center;
+  }
+  .advert-content,
+  .employment-content {
+    width: 80%;
+  }
+  .personal-info-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .personal-info {
+    width: 80%;
+  }
+  .change-password {
+    width: 50%;
+  }
+  #birthday-button > div {
+    width: 35%;
+  }
+  .user-password {
+    width: 50%;
+  }
+  .advert-content > div > h4{
+    width: 75%;
+  }
+  #ads-container{
+    padding-bottom: 12%;
+  }
+  #ads-options{
+    width: 95%;
+  }
+  .plan-option{
+    width: 30%;
+  }
+}
+@media (min-height: 300px) and (max-height: 599px) and (orientation: landscape) {
+  #ads-container{
+    padding-bottom: 12%;
+  }
+  #ads-options{
+    width: 95%;
+  }
+  .plan-option{
+    width: 35%;
+  }
+  .advert-content > div > h4{
+    width: 73%;
+  }
+  .user-mobile-menu > span > div{
+    left: 32% !important;
+  }
+  #user-menu {
+    display: flex;
+  }
+  .user-footer {
+    display: flex;
+    margin: 5% 0 12% 0;
+  }
+  #wallet-value {
+    width: 100%;
+    justify-content: center;
+    margin: 0 0 3% 0;
+  }
+  #wallet-value > div > h4 {
+    font-size: 0.95em;
+  }
+  #wallet-filters {
+    display: none;
+  }
+  #wallet-movs {
+    width: 100%;
+  }
+  #wallet-movs > table {
+    width: 100%;
+  }
+  #wallet-movs > table > thead > tr {
+    font-size: 0.9em;
+  }
+  #wallet-movs > table > tbody > tr {
+    font-size: 0.8em;
+  }
+  .pagination {
+    width: 100% !important;
+  }
+  .adverts-container {
+    justify-content: center;
+  }
+  .advert-content,
+  .employment-content {
+    width: 80%;
+  }
+  .personal-info-container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .personal-info {
+    width: 90%;
+  }
+  .account-info {
+    width: 100%;
+  }
+  .change-password {
+    width: 80%;
+  }
+  .user-password {
+    width: 30%;
+  }
+  .account-info > div {
+    width: 25%;
+  }
+  #account-first-name,
+  #account-last-name {
+    width: 80%;
+  }
+  .account-location {
+    flex-direction: column;
+  }
+  .account-location > div {
+    width: 50%;
+  }
+  .account-location > div > select {
+    width: 60%;
+    margin-bottom: 7px;
+  }
+  .account-location > div > input {
+    width: 50%;
+  }
+  #birthday-button {
+    flex-direction: column;
+  }
+  #birthday-button > div {
+    width: 40%;
+    margin-top: 3%;
+  }
+  .label-birthday {
+    width: 100%;
+  }
+  .personal-info > div > button,
+  .change-password > button {
+    margin-top: 5%;
+    margin-bottom: 3%;
+  }
+  #account-birthday {
+    width: 70%;
+  }
+  .label-location {
+    text-align: center;
+    margin-top: 3%;
+  }
+  #noAdverts {
+    width: 80%;
+  }
+  #noAdverts h3 {
+    text-align: center;
+  }
+  .header-account > h2 {
+    text-align: center;
+    font-size: 1.2em;
+    margin-top: 5%;
+  }
+  #menu-container {
+    flex-wrap: wrap;
+  }
+  .panel-disable > div {
+    width: 70%;
+    padding: 5% 3%;
+  }
+  .recover-content {
+    width: 80%;
+  }
+  .passwordRecover-content > div {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .password-button {
+    margin-top: 10px;
+  }
+}
+@media (min-height: 600px) and (max-height: 1100px) and (max-width: 1200px) and (orientation: landscape) {
+  #invite {
+    width: 140px;
+    padding: 7px 15px;
+    margin-top: 1%;
+  }
+  #invite > label {
+    font-size: 0.85em;
+  }
+  #invite > button > img {
+    width: 30px;
+    height: 30px;
+  }
+  #wallet-content {
+    margin-top: 3%;
+    justify-content: center;
+  }
+  #wallet-value {
+    width: 90%;
+  }
+  #wallet-filters {
+    display: none;
+  }
+
+  #wallet-movs {
+    width: 80%;
+  }
+  .personal-info {
+    width: 60%;
+    margin: 1%;
+  }
+  .change-password {
+    width: 35%;
+    margin: 1% 0;
+  }
+  .recover-content {
+    width: 50%;
+  }
+  .adverts-container {
+    justify-content: center;
+  }
+  .advert-content,
+  .employment-content {
+    width: 60%;
+  }
+  #wallet-value > h2{
+    width: 40%;
+  }
+  .advert-content > div > h4{
+    width: 75%;
+  }
+  #ads-plans{
+    flex-wrap: wrap;
+  }
+  .plan-option{
+    width: 25%;
+  }
+}
+@media (min-height: 600px) and (max-height: 1100px) and (max-width: 800px) and (orientation: landscape) {
+  #ads-container{
+    padding-bottom: 10%;
+  }
+  .plan-option{
+    width: 35%;
+  }
+  .advert-content > div > h4{
+    width: 76%;
+  }
+  .user-mobile-menu > span > div{
+    left: 26% !important;
+  }
+  .personal-info-container{
+    padding-bottom: 10%;
+  }
+  #user-menu {
+    display: flex;
+    padding: 1% 0 2% 0;
+  }
+  .user-footer {
+    display: flex;
+    margin: 3% 0 10% 0;
+  }
+  #invite {
+    width: 140px;
+  }
+  #invite > label {
+    font-size: 0.85em;
+  }
+  #invite > button > img {
+    width: 30px;
+    height: 30px;
+  }
+  #wallet-movs {
+    width: 100%;
+  }
+  #wallet-value 
+  {
+    margin: 4% 0 2% 0;
+  }
+  .pagination{
+    width: 100% !important;
+  }
+  #wallet-movs > table{
+    width: 100%;
+  }
+  .login-content {
+    width: 35%;
+  }
+  .recover-content {
+    width: 60%;
+  }
+  .user-password {
+    width: 60%;
+  }
+  .change-password > button {
+    width: 40%;
+  }
+  .label-location {
+    text-align: center;
+  }
+  .account-location {
+    flex-direction: column;
+    align-items: center;
+  }
+  .account-location > div {
+    width: 40%;
+    margin: 1% 0;
+  }
+  #birthday-button {
+    width: 100%;
+  }
+  #birthday-button > div {
+    width: 35%;
+  }
+  .header-account > h2 {
+    text-align: center;
+  }
+  .advert-content,
+  .employment-content {
+    width: 80% !important;
+  }
+  #advert-options,
+  #chart-views {
+    width: 43.2%;
+    height: 170px;
+    margin-top: 5% !important;
+  }
+  #advert-options {
+    float: left;
+    margin-right: 2%;
+    justify-content: flex-start !important;
+  }
+  #chart-views {
+    margin-bottom: 5%;
+  }
+}
+@media (min-width: 1921px) {
+}
+@media (max-width: 420px) and (orientation: portrait) {
+  #wallet-value > div > h4 {
+    font-size: 1em;
+  }
+  .header-account > h2 {
+    font-size: 1.3em;
+  }
+  .account-location > div {
+    width: 55%;
+  }
+  #birthday-button > div {
+    width: 45%;
+  }
+  .employment-content > h4 {
+    width: 50%;
+    font-size: 1.1rem;
+  }
+  .employment-content > div {
+    width: 50%;
+  }
+  #ads-options > h3{
+    width: 100%;
+  }
+  .plan-option{
+    width: 75%;
+  }
+}
+@media (max-width: 330px) and (orientation: portrait) {
+  .adverts-status-labels{
+    flex-wrap: wrap;
+  }
+  .adverts-status-labels > div{
+    width: 40%;
+    margin: 2px 0;
+  }
+  #invite {
+    width: 170px;
+    padding: 7px;
+  }
+  #invite > label {
+    font-size: 0.9em;
+  }
+  .buttons-functions {
+    flex-direction: column !important;
+  }
+  .buttons-functions > button,
+  .buttons-functions > a {
+    margin: 2px 0;
+  }
+  .adverts-container {
+    width: 100%;
+    padding: 1% 0 5% 0;
+    margin-left: 0;
+  }
+  .header-account > h2 {
+    font-size: 1.2em;
+  }
+  .recover-content > h2 {
+    font-size: 1.3em;
+  }
+  .personal-info > div > div > img {
+    width: 80px;
+    height: 80px;
+  }
+  #account-first-name,
+  #account-last-name {
+    width: 90%;
+  }
+  .account-location > div {
+    width: 65%;
+  }
+  #birthday-button > div {
+    width: 55%;
+  }
+  .personal-info > div > button,
+  .change-password > button {
+    width: 40%;
+  }
+  #advert-image > img {
+    margin-bottom: 10px;
+  }
+  .employment-content > h4 {
+    font-size: 0.9rem;
+    width: 50%;
+  }
+  .employment-price-title {
+    font-size: 0.75rem;
+  }
+  .advert-price,
+  .employment-price {
+    font-size: 0.85rem;
+  }
+  .advert-date,
+  .advert-location,
+  .employment-location,
+  .employment-date {
+    font-size: 0.65rem;
+  }
+  .employment-content > div {
+    width: 45%;
+  }
+  .advert-content,
+  .employment-content {
+    border: none;
+    margin: 0 0 10px 0;
+  }
+  .advert-content > img {
+    width: 40%;
+  }
+  .advert-content > div {
+    width: 60%;
+  }
+  .advert-content > div > h4 {
+    font-size: 0.9rem;
+  }
+  .employment-content > .buttons-functions {
+    left: 40%;
+  }
+  #wallet-value > div > h4 {
+    font-size: 0.9em;
+  }
+  .plan-option{
+    width: 80%;
+  }
+}

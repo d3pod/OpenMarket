@@ -1,0 +1,769 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.container {
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+}
+#submitContactForm {
+  width: 50%;
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 2% 0;
+}
+.contacte-nos > input {
+  width: 30%;
+}
+.info-content > h2 {
+  margin: 2%;
+}
+.info-content > input,
+.info-content > textarea {
+  padding: 12px;
+  font-size: 0.9rem !important;
+  margin: 1%;
+  background-color: #ffffff;
+  border: 1px solid rgb(226, 226, 226);
+}
+.info-content > select {
+  resize: none;
+  padding: 12px;
+  font-size: 14px;
+  background-color: #ebebeb;
+  margin-top: 1%;
+  border: 1px solid rgb(226, 226, 226);
+}
+.info-content > label {
+  margin-top: 2%;
+}
+.info-content > textarea {
+  width: 50%;
+}
+.info-content > button {
+  cursor: pointer;
+  margin-top: 2%;
+  background-color: rgb(49, 49, 49);
+  color: white;
+  border: none;
+  font-size: 16px;
+  padding: 15px 40px;
+  border-radius: 4px;
+}
+.info-content > button:hover {
+  background-color: rgb(8, 101, 163);
+}
+.alert-panel,
+#contact_panel {
+  position: fixed;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(32, 32, 32, 0.685);
+  z-index: 9;
+  overflow: hidden;
+}
+.alert-panel > div,
+#contact_panel > div {
+  width: 20%;
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(247, 247, 247);
+  border-radius: 2px;
+  border: 1px solid rgb(233, 233, 233);
+  padding: 30px;
+}
+.alert-panel > div > h3,
+#contact_panel > div > h3,
+#contact_panel > div > h4 {
+  width: 80%;
+  text-align: center;
+  margin-bottom: 10px;
+  color: rgb(49, 49, 49);
+}
+.alert-panel > div > button,
+#contact_panel > div > button {
+  cursor: pointer;
+  margin-top: 20px;
+  padding: 15px 25px;
+  background-color: rgb(31, 140, 212);
+  color: white;
+  border: none;
+  border-radius: 2px;
+}
+.info-content {
+  width: 50%;
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3%;
+}
+.info-content > h2 {
+  width: 80%;
+  text-align: center;
+  color: var(--main-blue);
+}
+.terms-conditions > h2 {
+  text-align: left;
+}
+.info-content > h4 {
+  width: 100%;
+  text-align: center;
+  margin: 20px 0 10px 0;
+  font-size: 1.2em;
+}
+.info-content p {
+  margin-bottom: 5px;
+  text-align: center;
+}
+.info-content span {
+  font-weight: bold;
+}
+.dot,
+.numeric {
+  width: 90%;
+  margin: 2% 0 2% 5%;
+}
+.info-content > details {
+  width: 80%;
+  background-color: #ebebeb;
+  border-radius: 4px;
+  margin: 3px 0;
+  padding: 10px 0 10px 20px;
+  box-shadow: 0px 0px 2px rgb(212, 212, 212);
+}
+.info-content :nth-child(2) {
+  margin-top: 10px;
+  font-size: 1em;
+}
+.contacte-nos :nth-child(2) {
+  background-color: white;
+}
+.contacte-nos > h3{
+  background-color: transparent !important;
+}
+.info-content > details > p {
+  width: 90%;
+}
+.contacte-nos > h3 {
+  color: #575757;
+  font-size: 1.3rem !important;
+}
+.advert-info {
+  width: 50%;
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 3% 0;
+  background-color: white;
+  border-radius: 2px;
+  border: 1px solid rgb(226, 226, 226);
+}
+.advert-info > img {
+  max-width: 40%;
+  max-height: 150px;
+  border-radius: 2px;
+}
+.advert-info > div {
+  width: 55%;
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  margin-right: 5%;
+}
+.advert-title {
+  width: 90%;
+  margin-bottom: 5px;
+  font-size: 1em;
+  font-weight: 300;
+  color: #082c33;
+}
+.advert-price {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: var(--main-green);
+  text-align: center;
+  margin-bottom: 1px;
+  width: 90%;
+  text-align: right;
+}
+.advert-data {
+  margin: 2px 0 !important;
+  width: 90%;
+  font-size: 0.7em;
+  text-align: right;
+  color: #082c33b2;
+}
+.about-us > h2 {
+  margin-top: 1%;
+}
+.about-us > table {
+  margin-top: 3%;
+  width: 70%;
+}
+.about-us > table tr:nth-child(even) {
+  background-color: rgb(241, 241, 241);
+}
+.about-us > table td {
+  text-align: center;
+  padding: 5px 0;
+}
+.insert-adverts > h1 {
+  color: var(--main-blue);
+  text-align: center;
+  margin-bottom: 1%;
+  font-size: 1.7rem;
+}
+.insert-adverts > div {
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  flex-direction: column;
+  margin-top: 5%;
+}
+.insert-adverts > h2 {
+  width: 100%;
+  text-align: center !important;
+  font-size: 1.2rem !important;
+  width: 100%;
+  text-align: left;
+  color: rgb(49, 49, 49);
+  margin: 0;
+}
+
+.insert-adverts h3 > a {
+  color: var(--main-green);
+}
+.insert-adverts h3 > span {
+  color: var(--main-green);
+}
+
+.insert-adverts img {
+  width: 70%;
+  margin-bottom: 5%;
+}
+.insert-adverts > div > article{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 2%;
+}
+.insert-adverts > div > article > div{
+  width: 27%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.insert-adverts > div > h4:first-of-type{
+  margin-top: 3%;
+}
+.insert-advert-button{
+  width: 50%;
+  margin-top: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(90deg, rgb(68, 200, 150) 0%, rgb(61, 205, 148) 35%, rgb(19, 193, 161) 100%);
+  padding: 5% 5%;
+  margin-left: 20%;
+  border-radius: 2px;
+}
+.insert-advert-button > h2{
+  color: rgb(255, 255, 255);
+  margin-bottom: 3%;
+  text-shadow: 0.5px 0.5px 3px rgb(50, 50, 50);
+  text-align: center;
+}
+.insert-advert-button > a{
+  cursor: pointer;
+  color: white;
+  background-color: #303030;
+  padding: 15px 20px;
+  border-radius: 30px;
+}
+.insert-advert-button > a:hover{
+  transform: scale(1.02);
+}
+.insert-adverts > div > div > div > p, .insert-adverts > div > div > div > p > span{
+  font-size: 0.95em !important;
+}
+.versions {
+  align-items: flex-start;
+  margin-bottom: 3%;
+}
+.versions > h2 {
+  width: 100%;
+}
+.versions > h3 {
+  width: 100%;
+  text-align: center;
+  margin-top: 7%;
+  margin-bottom: 10px;
+}
+.versions > p {
+  text-align: left;
+}
+.insert-adverts > a {
+  color: white;
+  padding: 20px;
+  background-color: #303030;
+  border-radius: 4px;
+}
+.faq {
+  width: 100%;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-top: 10%;
+}
+.faq details {
+  width: 100%;
+  margin-top: 10px;
+  font-size: 1em;
+  padding: 10px 0 10px 20px;
+  background-color: #ebebeb;
+  border-radius: 4px;
+  box-shadow: 0px 0px 2px rgb(212 212 212);
+}
+.faq > details p{
+  text-align: left;
+}
+.mobile-tutorial{
+  display: none !important;
+}
+.mobile-tutorial > article > img{
+  width: 50%;
+}
+.mobile-tutorial > article > div{
+  width: 40% !important;
+}
+.mobile-tutorial > article > div p{
+  width: 100%
+}
+.mobile-tutorial > h3{
+  font-size: 1.1em;
+}
+@media (max-width: 600px) {
+  .mobile-tutorial > h3
+  {
+    margin-top: 5%;
+  }
+  .mobile-tutorial > h3:last-of-type{
+    margin-bottom: 5%;
+  }
+  .desktop-tutorial{
+    display: none !important;
+  }
+  .mobile-tutorial{
+    display: flex !important;
+  }
+  .insert-advert-button{
+    width: 80%;
+    margin-left: 5%;
+  }
+  .faq p{
+    width: 92%;
+    padding-right: 3%;
+  }
+  .insert-adverts > div > h4{
+    font-weight: normal;
+  }
+  .faq details{
+    width: 95%;
+  }
+  .about-us > table{
+    width: 100%;
+  }
+  .info-content > h2{
+    text-align: center;
+  }
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .info-content {
+    width: 90%;
+  }
+  #submitContactForm {
+    width: 90%;
+  }
+  .advert-info {
+    width: 90%;
+    margin-bottom: 10%;
+  }
+  .info-content > details {
+    width: 90%;
+  }
+  .info-content > input {
+    width: 60%;
+    margin-bottom: 3%;
+  }
+  .info-content > textarea {
+    width: 80%;
+  }
+  .terms-conditions li,
+  .terms-conditions li,
+  .terms-conditions p {
+    max-width: 90% !important;
+  }
+  .alert-panel > div,
+  #contact_panel > div {
+    width: 70%;
+  }
+  .alert-panel > div > h3,
+  #contact_panel > div > h3,
+  #contact_panel > div > h4 {
+    width: 90%;
+  }
+  .insert-adverts > h1 {
+    width: 80%;
+    font-size: 1.4rem;
+    margin-top: 5%;
+  }
+  .insert-adverts > div {
+    margin-bottom: 8%;
+  }
+  .insert-adverts > h2 {
+    font-size: 1.1rem !important;
+  }
+  .insert-adverts > div {
+    flex-direction: column;
+  }
+  .insert-adverts img {
+    width: 100%;
+  }
+  .step-by-step.second > div {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 0;
+    order: 1;
+  }
+  .step-by-step.second > img {
+    order: 2;
+  }
+  .step-by-step.second p {
+    margin: 5px 0;
+  }
+  .step-by-step.third p {
+    width: 90%;
+    font-size: 0.9rem;
+    margin-top: 5px;
+    margin-bottom: 0;
+  }
+}
+@media (min-width: 601px) and (max-width: 1199px) and (orientation: portrait) {
+  .container {
+    flex-direction: row;
+  }
+  .advert-info {
+    width: 90% !important;
+  }
+  .contacte-nos > input {
+    width: 80% !important;
+  }
+  .info-content{
+    width: 65%;
+    margin: 5% 2%;
+  }
+  .info-content > textarea {
+    width: 80% !important;
+  }
+  .info-content > select{
+    width: 90%;
+  }
+  .insert-adverts {
+    width: 80%;
+  }
+  .insert-adverts > h1 {
+    width: 80%;
+    font-size: 1.5rem;
+  }
+  .insert-adverts > h2 {
+    font-size: 1.1rem;
+  }
+  .insert-adverts > div {
+    flex-direction: column;
+  }
+  .insert-adverts img {
+    width: 100%;
+  }
+  .step-by-step.second > div {
+    width: 100%;
+    margin-left: 0;
+    order: 1;
+    margin-top: 0;
+  }
+  .step-by-step.second > img {
+    order: 2;
+  }
+  .step-by-step.second p {
+    margin: 5px 0;
+  }
+  .step-by-step.third p {
+    width: 90%;
+    font-size: 1rem;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .mobile-tutorial > h3
+  {
+    margin-top: 5%;
+  }
+  .mobile-tutorial > h3:last-of-type{
+    margin-bottom: 5%;
+  }
+  .desktop-tutorial{
+    display: none !important;
+  }
+  .mobile-tutorial{
+    display: flex !important;
+  }
+  .insert-advert-button{
+    width: 80%;
+    margin-left: 5%;
+  }
+  .faq p{
+    width: 92%;
+    padding-right: 3%;
+  }
+  .insert-adverts > div > h4{
+    font-weight: normal;
+  }
+  .container{
+    padding-bottom: 5%;
+  }
+}
+@media (min-height: 300px) and (max-height: 599px) and (orientation: landscape) {
+  .container{
+    padding-bottom: 10%;
+  }
+  .mobile-tutorial > h3
+  {
+    margin-top: 5%;
+  }
+  .mobile-tutorial > h3:last-of-type{
+    margin-bottom: 5%;
+  }
+  .desktop-tutorial{
+    display: none !important;
+  }
+  .mobile-tutorial{
+    display: flex !important;
+  }
+  .insert-advert-button{
+    width: 80%;
+    margin-left: 5%;
+  }
+  .faq p{
+    width: 92%;
+    padding-right: 3%;
+  }
+  .insert-adverts > div > h4{
+    font-weight: normal;
+  }
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .info-content {
+    width: 70%;
+    margin-top: 5%;
+  }
+  .contacte-nos textarea {
+    width: 90% !important;
+  }
+  .info-content > button {
+    margin-top: 5%;
+  }
+  .terms-conditions > h2 {
+    font-size: 1.2em;
+  }
+  .contacte-nos > input{
+    width: 75%;
+  }
+}
+@media (min-height: 600px) and (max-height: 1100px) and (max-width: 800px) and (orientation: landscape) {
+  .container{
+    padding-bottom: 5%;
+  }
+  .mobile-tutorial > h3
+  {
+    margin-top: 5%;
+  }
+  .mobile-tutorial > h3:last-of-type{
+    margin-bottom: 5%;
+  }
+  .desktop-tutorial{
+    display: none !important;
+  }
+  .mobile-tutorial{
+    display: flex !important;
+  }
+  .insert-advert-button{
+    width: 80%;
+    margin-left: 5%;
+  }
+  .faq p{
+    width: 92%;
+    padding-right: 3%;
+  }
+  .insert-adverts > div > h4{
+    font-weight: normal;
+  }
+  .container {
+    flex-direction: row;
+  }
+  .info-content {
+    width: 60% !important;
+    margin: 5% 2%;
+  }
+  .advert-info {
+    width: 75% !important;
+  }
+  .contacte-nos > input {
+    width: 60% !important;
+  }
+  .info-content > textarea {
+    width: 70% !important;
+  }
+  .insert-adverts > h1 {
+    width: 80%;
+    font-size: 1.5rem;
+  }
+  .insert-adverts > h2 {
+    font-size: 1.1rem;
+  }
+  .insert-adverts > div {
+    flex-direction: column;
+  }
+  .insert-adverts img {
+    width: 100%;
+  }
+  .step-by-step.second > div {
+    width: 100%;
+    margin-left: 0;
+    order: 1;
+    margin-top: 0;
+  }
+  .step-by-step.second > img {
+    order: 2;
+  }
+  .step-by-step.second p {
+    margin: 5px 0;
+  }
+  .step-by-step.third p {
+    width: 90%;
+    font-size: 1rem;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+@media (min-height: 600px) and (max-height: 1100px) and (max-width: 1200px) and (orientation: landscape) {
+  .advert-info {
+    width: 60%;
+  }
+  .contacte-nos > input {
+    width: 40%;
+  }
+}
+@media (min-width: 1921px) {
+}
+@media (max-width: 420px) and (orientation: portrait) {
+  .info-content > textarea {
+    width: 90%;
+  }
+  .info-content {
+    width: 90%;
+  }
+  .dot,
+  .numeric {
+    width: 100%;
+  }
+  .info-content.security ul {
+    width: 95%;
+  }
+  .terms-conditions li,
+  .terms-conditions li,
+  .terms-conditions p {
+    max-width: 90% !important;
+  }
+  .insert-adverts > h1 {
+    width: 90%;
+    font-size: 1.3rem;
+  }
+  .step-by-step.third p {
+    width: 100%;
+  }
+  .versions > p {
+    text-align: center;
+  }
+  .contacte-nos > input {
+    width: 75%;
+  }
+  .mobile-tutorial > article > img{
+    width: 55%;
+  }
+  .insert-advert-button > h2{
+    font-size: 1.2em;
+  }
+}
+@media (max-width: 330px) and (orientation: portrait) {
+  .info-content > h2 {
+    font-size: 1.2em;
+  }
+
+  .contacte-nos > input {
+    width: 90%;
+  }
+  .info-content > button {
+    font-size: 14px;
+  }
+  .info-content.terms-conditions details {
+    width: 90%;
+    padding-right: 10px;
+  }
+  .insert-advert-button > h2{
+    font-size: 1.4em;
+  }
+  .mobile-tutorial > article > img{
+    width: 90%;
+  }
+  .insert-adverts > div > article > div{
+    display: none;
+  }
+}

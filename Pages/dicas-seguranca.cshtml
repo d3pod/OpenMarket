@@ -1,0 +1,85 @@
+﻿@page
+@model MyApp.Namespace.dicas_segurancaModel
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+@section head{
+<title>OpenMarket - Dicas de Segurança</title>
+<meta name="title" content="OpenMarket - Dicas de Segurança" />
+<meta name="description" content="Dicas de segurança para comprar no OpenMarket." />
+@* Facebook, Others *@
+<meta property="og:title" content="OpenMarket - Dicas de Segurança">
+<meta property="og:image" content="https://www.openmarket.com/imgs/Logotipo.jpg">
+<meta property="og:image:width" content="400" />
+<meta property="og:image:height" content="300" />
+<meta property="og:url" content="https://www.openmarket.com/dicas-seguranca">
+<meta property="og:type" content="article" />
+<meta property="og:description" content="Dicas de segurança para comprar no OpenMarket.">
+@* Twitter *@
+<meta property="twitter:title" content="OpenMarket - Dicas de Segurança">
+<meta name="twitter:description" content="Dicas de segurança para comprar no OpenMarket.">
+<meta name="twitter:image" content="https://www.openmarket.com/imgs/Logotipo.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://www.openmarket.com/dicas-seguranca/" />
+<link rel="stylesheet" href="~/css/pages.css?v=104" />
+}
+@section login{
+<div class="navbar-login">
+    <a class="login-link" href="~/entrar">My OpenMarket</a>
+</div>
+}
+<div class="openmarket-ads vertical-ads pages-ads">
+    <a href="https://www.openmarket.com">
+            <img src="/pubs/anuncios-vertical.jpg" alt="OpenMarket">
+        </a>
+        <p>OpenMarket Ads</p>
+</div>
+<div class="info-content security">
+    <h2>Dicas de Segurança</h2>
+    <ul>
+        <li class="dot">Nunca adiantes dinheiro a um vendedor que não conheçes.</li>
+        <li class="dot">Nunca compres algo sem saber bastante informação sobre o produto e vendedor.</li>
+        <li class="dot">Encontre o vendedor em um local público com o qual estejas familiarizado.</li>
+        <li class="dot">Fica atento aos preços demasiado baixos.</li>
+        <li class="dot">Obtem o máximo de informação sobre o vendedor: nome, morada, telefone. Verifica se os dados são
+            coerentes.</li>
+        <li class="dot">Desconfia sempre quando dizem que tens de fazer primeiro a transferência antes de fazer o
+            negócio.</li>
+        <li class="dot">Mesmo quando o vendedor apresente informação pessoal ou o número da conta bancária, isso não te
+            protege de ser enganado(a).</li>
+        <li class="dot">Não forneças informações pessoais (detalhes bancários, número de cartão de crédito/débito)</li>
+        <li class="dot">Sempre que possível, no caso de produtos novos, solicita a factura/recibo original do produto e
+            um recibo da compra. Caso se trate de um produto usado, solicita fotografias além das publicadas no anúncio
+            e analisa-as bem.</li>
+        <li class="dot">O <span>OpenMarket</span> nunca envirará uma confirmação de pagamento.</li>
+        <li class="dot">Se fores o vendedor, não envies o produto sem ter as condições de pagamento devidamente
+            acordadas e finalizadas.</li>
+    </ul>
+</div>
+<div class="openmarket-ads vertical-ads pages-ads">
+    <a href="https://www.openmarket.com">
+            <img src="/pubs/anuncios-vertical.jpg" alt="OpenMarket">
+        </a>
+        <p>OpenMarket Ads</p>
+</div>
+@if (Model.alerts_list != null)
+{
+    foreach (var alert in Model.alerts_list)
+    {
+        <div class="alerts-container">
+    <div class="alert-content">
+        <span onclick="closePanel('alerts-container');cookieAlert('fz_ds', '@alert.cookie_time');">&times;</span>
+        <h2>@alert.title</h2>
+        <textarea id="alert-text" readonly>@alert.text</textarea>
+        <script>
+            var textarea = document.getElementById("alert-text");
+            textarea.style.height = textarea.scrollHeight + 20 + "px";
+        </script>
+        @if (!string.IsNullOrEmpty(@alert.button_text))
+                {
+                    <a onclick="cookieAlert('fz_ds', '@alert.cookie_time')" href="@alert.button_url">@alert.button_text</a>
+                }
+            </div>
+        </div>
+    }
+}

@@ -1,0 +1,81 @@
+﻿@page
+@model MyApp.Namespace.categoriasModel
+@using openmarket.Models;
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+@section head{
+<title>OpenMarket - Categorias</title>
+<meta name="title" content="OpenMarket - Categorias" />
+<meta name="description" content="Descubre todas as categorias do OpenMarket" />
+@* Facebook, Others *@
+<meta property="og:title" content="OpenMarket - Categorias">
+<meta property="og:image" content="https://www.openmarket.com/imgs/Logotipo.jpg">
+<meta property="og:image:width" content="400" />
+<meta property="og:image:height" content="300" />
+<meta property="og:url" content="https://www.openmarket.com/categorias">
+<meta property="og:type" content="article" />
+<meta property="og:description" content="Descubre todas as categorias do OpenMarket">
+@* Twitter *@
+<meta property="twitter:title" content="OpenMarket - Categorias">
+<meta name="twitter:description" content="Descubre todas as categorias do OpenMarket">
+<meta name="twitter:image" content="https://www.openmarket.com/imgs/Logotipo.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://www.openmarket.com/categorias" />
+<link rel="stylesheet" href="~/css/adverts.css?v=104" />
+}
+@section login{
+<div class="navbar-login">
+    <a class="login-link" href="~/entrar">My OpenMarket</a>
+</div>
+}
+<h3 class="categories-slogan">Encontre anúncios por categorias</h3>
+<div class="groups-container">
+    <div class="groups-content">
+        @foreach (var item in Model.Groups.OrderBy(x => x.name))
+        {
+            <a href="#@item.name">@item.name</a>
+        }
+        <div class="adsense">
+           
+        </div>
+    </div>
+    <div class="categoriesOptions-content">
+        @foreach (var item in Model.Groups.OrderBy(x => x.name))
+        {
+            valueFormat formatter = new valueFormat();
+            string groupName = formatter.encodeText(@item.name);
+            <div class="categories-bygroup">
+                <a href="anuncios?categoria=@groupName" id="@item.name" class="categories-bygroup groups">@item.name</a>
+                <div class="categories-bygroup categories">
+                    @foreach (var item2 in Model.Categories.Where(x => x.group_id == item.id).OrderBy(x => x.name))
+                    {
+                        string categoryName = formatter.encodeText(@item2.name);
+                        <a href="~/anuncios?sub_categoria=@categoryName">@item2.name</a>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@if (Model.alerts_list != null)
+{
+    foreach (var alert in Model.alerts_list)
+    {
+        <div class="alerts-container">
+    <div class="alert-content">
+        <span onclick="closePanel('alerts-container');cookieAlert('fz_ctg', '@alert.cookie_time');">&times;</span>
+        <h2>@alert.title</h2>
+        <textarea id="alert-text" readonly>@alert.text</textarea>
+        <script>
+            var textarea = document.getElementById("alert-text");
+            textarea.style.height = textarea.scrollHeight + 20 + "px";
+        </script>
+        @if (!string.IsNullOrEmpty(@alert.button_text))
+                {
+                    <a onclick="cookieAlert('fz_ctg', '@alert.cookie_time')" href="@alert.button_url">@alert.button_text</a>
+                }
+            </div>
+        </div>
+    }
+}

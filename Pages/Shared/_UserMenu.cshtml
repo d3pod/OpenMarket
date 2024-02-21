@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+@using openmarket.Models;
+<form method="POST" id="user-menu">
+    <h3>Menu</h3>
+    <a class="user-mobile-menu" href="~/minha-conta"><span>Minha conta</span><span>&#10095;</span></a>
+    <a class="user-mobile-menu" href="/minha-conta/carteira"><span>Carteira</span><span>&#10095;</span></a>
+    @{
+        notificationIcon chat = new notificationIcon(Model.db);
+        if (Model.SessionUser > 0 && chat.counter(Model.SessionUser) > 0)
+        {
+            <a class="user-mobile-menu" href="/minha-conta/conversas">
+                <span>Conversas
+                    <div class="notification mobile-notification">
+                        <p>@chat.counter(Model.SessionUser)</p>
+                    </div>
+                </span>
+                <span>&#10095;</span>
+            </a>
+        }
+        else
+        {
+            <a class="user-mobile-menu" href="/minha-conta/conversas"><span>Conversas</span><span>&#10095;</span></a>
+        }
+    }
+    <a class="user-mobile-menu" href="/minha-conta/favoritos"><span>Favoritos</span><span>&#10095;</span></a>
+    <a class="user-mobile-menu" href="/minha-conta/dados-pessoais"><span>Dados pessoais</span><span>&#10095;</span></a>
+    @{
+        accounts_functions user = new accounts_functions(@Model.db);
+        <div class="user-mobile-menu" onclick="myLink('@user.linkShare(Model.SessionUser)')">
+            <div><span id="userLink">Copiar convite</span></div>
+        </div>
+    }
+    <button type="submit" asp-page-handler="Logout" class="user-mobile-menu" href=""><span>Terminar
+            sessão</span><span>&#10095;</span></button>
+</form>

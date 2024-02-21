@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/css/layout.css" />
+    <script async defer src="~/js/admin.js"></script>
+    <meta property="og:image" content="/imgs/logo.png">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar-container">
+            <div class="navbar top">
+                <div class="logo">
+                    <a href="~/admin/dashboard"><img src="/imgs/logotipo.png" alt="OpenMarket"></a>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+                @RenderBody()
+        </div>
+</body>
+
+</html>

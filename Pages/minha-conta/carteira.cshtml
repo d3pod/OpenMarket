@@ -1,0 +1,188 @@
+﻿@page
+@model MyApp.Namespace.carteiraModel
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+@section head{
+<title>OpenMarket - Carteira</title>
+<meta name="title" content="OpenMarket - Carteira" />
+<meta name="description" content="A minha carteira no OpenMarket." />
+@* Facebook, Others *@
+<meta property="og:title" content="OpenMarket - Carteira">
+<meta property="og:image" content="https://www.openmarket.com/imgs/Logotipo.jpg">
+<meta property="og:image:width" content="400" />
+<meta property="og:image:height" content="300" />
+<meta property="og:url" content="https://www.openmarket.com/minha-conta/carteira">
+<meta property="og:type" content="article" />
+<meta property="og:description" content="A minha carteira no OpenMarket.">
+@* Twitter *@
+<meta property="twitter:title" content="OpenMarket - Carteira">
+<meta name="twitter:description" content="A minha carteira no OpenMarket.">
+<meta name="twitter:image" content="https://www.openmarket.com/imgs/Logotipo.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="canonical" href="https://www.openmarket.com/minha-conta/carteira" />
+<link rel="stylesheet" href="~/css/account.css?v=104" />
+}
+@section login{
+<div class="navbar-login">
+    <a class="login-link" href="~/entrar">My OpenMarket</a>
+</div>
+}
+<nav id="menu-container">
+    <partial name="_UserMenu" />
+    <div class="openmarket-ads ads-menu vertical-ads"></div>
+</nav>
+<main id="wallet-container">
+    <section id="wallet-value">
+        <h2>Os meus movimentos</h2>
+        <div>
+            <img src="/static/imgs/wallet.png" alt="Saldo na carteira">
+            <h4>Saldo na carteira: @Model.walletValue</h4>
+        </div>
+    </section>
+    <section id="wallet-content">
+        <aside class="openmarket-ads vertical-ads">
+            @* Publicidade *@
+        </aside>
+        <article id="wallet-movs">
+            @* Movimentos *@
+            <table>
+                <thead>
+                    <tr>
+                        <th>Descrição</th>
+                        <th>Tipo</th>
+                        <th>Valor</th>
+                        <th>Data</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.movsList)
+                    {
+                        <tr>
+                            <th>@item.description</th>
+                            <th>@item.type</th>
+                            <th>@item.value</th>
+                            <th>@item.date.Date.ToShortDateString()</th>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="pagination">
+                @if (Model.TotalPages < 6)
+                {
+                    @for (var i = 1; i <= Model.TotalPages; i++)
+                    {
+                        var url = "carteira?pagina=" + @i;
+                        <a href="@url" class="page-item @(i == Model.currentpage ? " active": "" )">
+                            @i
+                        </a>
+                    }
+                }
+                else if (Model.TotalPages > 5 && Model.currentpage > 3)
+                {
+                    if (Model.currentpage <= Model.TotalPages - 2)
+                    {
+                        @for (var i = @Model.currentpage - 2; i <= @Model.currentpage + 2; i++)
+                        {
+                            var url = "carteira?pagina=" + @i;
+                            <a href="@url" class="page-item @(i == Model.currentpage ? " active": "" )">
+                                @i
+                            </a>
+                        }
+                    }
+                    else
+                    {
+                        if (Model.currentpage == Model.TotalPages - 1)
+                        {
+                            @for (var i = @Model.currentpage - 3; i <= @Model.TotalPages; i++)
+                            {
+                                var url = "carteira?pagina=" + @i;
+                                <a href="@url" class="page-item @(i == Model.currentpage ? " active": "" )">
+                                    @i
+                                </a>
+                            }
+                        }
+
+                        else if (Model.currentpage == Model.TotalPages)
+                        {
+                            @for (var i = @Model.currentpage - 4; i <= @Model.TotalPages; i++)
+                            {
+                                var url = "carteira?pagina=" + @i;
+                                <a href="@url" class="page-item @(i == Model.currentpage ? " active": "" )">
+                                    @i
+                                </a>
+                            }
+                        }
+                    }
+                }
+                else if (Model.TotalPages > 5 && Model.currentpage < 4)
+                {
+                    @for (var i = 1; i <= 5; i++)
+                    {
+                        var url = "carteira?pagina=" + @i;
+                        <a href="@url" class="page-item @(i == Model.currentpage ? " active": "" )">
+                            @i
+                        </a>
+                    }
+                }
+            </div>
+        </article>
+        <nav id="wallet-filters">
+            @* Filtros *@
+            @* <div class="filter-option">
+                <label>Ordenar por</label>
+                <select class="select-style" id="orderby">
+                <option value="">Mais recente</option>
+                <option value="preco-baixo">Valor</option>
+                <option value="preco-alto">Tipo</option>
+                </select>
+                </div>
+                <div class="filter-option" id="filter-price">
+                <label>Preço</label>
+                <div>
+                <input id="min-price" class="input-style" type="number" placeholder="de">
+                <input id="max-price" class="input-style" type="number" placeholder="até">
+                </div>
+                </div> *@
+        </nav>
+    </section>
+</main>
+<div class="user-footer">
+    <h3>Mais informações</h3>
+    <a href="~/sobre-nos"><span>Sobre o OpenMarket</span><span>&#10095;</span></a>
+    <a href="~/inserir-anuncios"><span>Vender no OpenMarket</span><span>&#10095;</span></a>
+    <a href="~/contacte-nos"><span>Contacte-nos</span><span>&#10095;</span></a>
+    <a href="~/termos-condicoes"><span>Termos e Condições</span><span>&#10095;</span></a>
+    <a href="~/privacidade-cookies"><span>Privacidade e Cookies</span><span>&#10095;</span></a>
+    <a href="~/dicas-seguranca"><span>Dicas de Segurança</span><span>&#10095;</span></a>
+    <a href="~/categorias"><span>Anúncios por Categorias</span><span>&#10095;</span></a>
+    <a href="~/paginas/municipios"><span>Anúncios por Municípios</span><span>&#10095;</span></a>
+    <div class="social">
+        <h4>Siga-nos</h4>
+        <a href="http://www.facebook.com/openmarket"><img src="/imgs/social/facebook.png" alt="Facebook"></a>
+        <a href="http://www.instagram.com/openmarket"><img src="/imgs/social/instagram.png" alt="Instagram"></a>
+        <a href="http://www.linkedin.com/company/openmarket"><img src="/imgs/social/linkedin.png" alt="LinkedIn"></a>
+    </div>
+</div>
+@if (Model.alerts_list != null)
+{
+    foreach (var alert in Model.alerts_list)
+    {
+        <div class="alerts-container">
+    <div class="alert-content">
+        <span onclick="closePanel('alerts-container');cookieAlert('fz-wlt', '@alert.cookie_time');">&times;</span>
+        <h2>@alert.title</h2>
+        <textarea id="alert-text" readonly>@alert.text</textarea>
+        <script>
+            var textarea = document.getElementById("alert-text");
+            textarea.style.height = textarea.scrollHeight + 20 + "px";
+        </script>
+        @if (!string.IsNullOrEmpty(@alert.button_text))
+                {
+                    <a onclick="cookieAlert('fz_wlt', '@alert.cookie_time')" href="@alert.button_url">@alert.button_text</a>
+                }
+            </div>
+        </div>
+    }
+}

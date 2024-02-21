@@ -1,0 +1,111 @@
+﻿@page
+@model MyApp.Namespace.pointsModel
+@{
+    <title>Pontos</title>
+    Layout = "~/Pages/Shared/_LayoutAdmin.cshtml";
+    <link rel="stylesheet" href="~/css/admin.css?v=104" />
+    <script async defer src="~/js/admin.js?v=104"></script>
+}
+<section class="navbar navbar-left">
+    <partial name="_AdminMenu" />
+</section>
+<section id="points-container">
+    <form asp-page-handler="Update" id="points-content">
+        <select name="user_select" id="userSelect">
+            <option value="0">Todos</option>
+            @foreach (var item in Model.accounts)
+            {
+                <option value="@item.id">@item.username</option>
+            }
+        </select>
+        <select name="type">
+            @foreach (var item in @Model.movsType)
+            {
+                <option value="@item.id">@item.name</option>
+            }
+        </select>
+        <input type="number" name="value">
+        <button type="submit">Enviar</button>
+    </form>
+    <article id="movs-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Descrição</th>
+                    <th>Tipo</th>
+                    <th>Valor</th>
+                    <th>Data</th>
+                    <th>Utilizador</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.movsList)
+                {
+                    <tr>
+                        <th>@item.description</th>
+                        <th>@item.type</th>
+                        <th>@item.value</th>
+                        <th>@item.date.Date.ToShortDateString()</th>
+                        <th>@item.username</th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </article>
+    <article>
+        <form method="POST" class="pagination">
+    @if (Model.TotalPages < 6)
+    {
+        @for (var i = 1; i <= Model.TotalPages; i++)
+        {
+            <li onclick="pagination('@i')" class="page-item @(i == Model.currentpage ? " active": "" )">
+                <a name="pagination" class="page-link">@i</a>
+            </li>
+        }
+    }
+    else if (Model.TotalPages > 5 && Model.currentpage > 3)
+    {
+        if (Model.currentpage <= Model.TotalPages - 2)
+        {
+            @for (var i = @Model.currentpage - 2; i <= @Model.currentpage + 2; i++)
+            {
+                <li onclick="pagination('@i')" class="page-item @(i == Model.currentpage ? " active": "" )">
+                    <a name="pagination" class="page-link">@i</a>
+                </li>
+            }
+        }
+        else
+        {
+            if (Model.currentpage == Model.TotalPages - 1)
+            {
+                @for (var i = @Model.currentpage - 3; i <= @Model.TotalPages; i++)
+                {
+                    <li onclick="pagination('@i')" class="page-item @(i == Model.currentpage ? " active": "" )">
+                        <a name="pagination" class="page-link">@i</a>
+                    </li>
+                }
+            }
+
+            else if (Model.currentpage == Model.TotalPages)
+            {
+                @for (var i = @Model.currentpage - 4; i <= @Model.TotalPages; i++)
+                {
+                    <li onclick="pagination('@i')" class="page-item @(i == Model.currentpage ? " active": "" )">
+                        <a name="pagination" class="page-link">@i</a>
+                    </li>
+                }
+            }
+        }
+    }
+    else if (Model.TotalPages > 5 && Model.currentpage < 4)
+    {
+        @for (var i = 1; i <= 5; i++)
+        {
+            <li onclick="pagination('@i')" class="page-item @(i == Model.currentpage ? " active": "" )">
+                <a name="pagination" class="page-link">@i</a>
+            </li>
+        }
+    }
+</form>
+    </article>
+</section>

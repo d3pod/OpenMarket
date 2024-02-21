@@ -1,0 +1,93 @@
+﻿@page
+@model MyApp.Namespace.versoesModel
+@{
+    <title>OpenMarket - Versões</title>
+    <meta name="title" content="OpenMarket - Versões" />
+    <meta name="description" content="Versões de desenvolvimento no OpenMarket." />
+    @* Facebook, Others *@
+    <meta property="og:title" content="OpenMarket - Versões">
+    <meta property="og:image" content="https://www.openmarket.com/imgs/Logotipo.jpg">
+    <meta property="og:image:width" content="400" />
+    <meta property="og:image:height" content="300" />
+    <meta property="og:url" content="https://www.openmarket.com/minha-conta/paginas/versoes">
+    <meta property="og:type" content="article" />
+    <meta property="og:description" content="Versões de desenvolvimento no OpenMarket.">
+    @* Twitter *@
+    <meta property="twitter:title" content="OpenMarket - Versões">
+    <meta name="twitter:description" content="Versões de desenvolvimento no OpenMarket.">
+    <meta name="twitter:image" content="https://www.openmarket.com/imgs/Logotipo.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://www.openmarket.com/paginas/versoes" />
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+    <link rel="stylesheet" href="~/css/pages.css?v=104" />
+}
+@section login{
+<div class="navbar-login">
+    <a class="login-link" href="~/entrar">My OpenMarket</a>
+</div>
+}
+<div class="openmarket-ads vertical-ads pages-ads">
+    <a href="https://www.openmarket.com">
+        <img src="/pubs/anuncios-vertical.jpg" alt="OpenMarket">
+    </a>
+    <p>OpenMarket Ads</p>
+</div>
+<div class="info-content versions">
+    <h2>O que são as versões das páginas?</h2>
+    <p>O OpenMarket está em constante desenvolvimento.</p>
+    <p>Este desenvolvimento pode ser de novas funcionalidades ou melhorias que serão introduzidas no site.</p>
+    <p>Em alguns casos, iremos disponibilizar as funcionalidades, mesmo que estas não estejam 100% completas ou ainda a
+        precisar de melhorias e correções.</p>
+    <p>O intuito destas versões é analisar o comportamento em ambiente real para que possam ser aplicadas melhorias até
+        chegar à versão final.</p>
+    <p>Nesses casos será apresentada uma mensagem com o tipo de versão e que pode consultar a baixo o significado de
+        cada uma.</p>
+
+    <h3>Versão Final</h3>
+    <p>Nesta versão não aparece nenhuma informação na página.</p>
+    <p>Uma página em versão final pode sofrer alterações, com impacto mínimo na utilização, como ajustes no design
+        (alterações de cor, tipo de letra, etc.) ou funcionalidades especificas que não interfiram com outras
+        funcionalidades ou que não seja necessário um período de testes.</p>
+
+    <h3>Versão Beta</h3>
+    <p>As páginas que apresentarem uma mensagem com esta informação, significa que se encontram em fase de
+        desenvolvimento, o que pode apresentar erros durante o uso da mesma.</p>
+    <p>Poderão surgir alterações ao design, no comportamento da página ou adicionadas novas funcionalidades.</p>
+    <p>Na versão Beta já foram realizados alguns testes e portanto é garantido que durante a utilização da página todos
+        os dados serão mantidos mesmo com as alterações que ainda irão ocorrer durante o desenvolvimento.</p>
+
+    <h3>Versão Alpha</h3>
+    <p>As páginas que apresentarem uma mensagem com esta informação, significa que se encontram em fase de
+        desenvolvimento incial, sendo esperados erros durante o uso da mesma, podendo mesmo não funcionar em algumas
+        ocasiões.</p>
+    <p>Poderão surgir diversos tipos de alterações ou mesmo eliminada a página.</p>
+    <p>Na versão Alpha foram realizados apenas testes superficiais e poderá haver perdas de informações durante o uso
+        desta página.</p>
+</div>
+<div class="openmarket-ads vertical-ads pages-ads">
+    <a href="https://www.openmarket.com">
+        <img src="/pubs/anuncios-vertical.jpg" alt="OpenMarket">
+    </a>
+    <p>OpenMarket Ads</p>
+</div>
+@if (Model.alerts_list != null)
+{
+    foreach (var alert in Model.alerts_list)
+    {
+        <div class="alerts-container">
+    <div class="alert-content">
+        <span onclick="closePanel('alerts-container');cookieAlert('fz_vs', '@alert.cookie_time');">&times;</span>
+        <h2>@alert.title</h2>
+        <textarea id="alert-text" readonly>@alert.text</textarea>
+        <script>
+            var textarea = document.getElementById("alert-text");
+            textarea.style.height = textarea.scrollHeight + 20 + "px";
+        </script>
+        @if (!string.IsNullOrEmpty(@alert.button_text))
+                {
+                    <a onclick="cookieAlert('fz_vs', '@alert.cookie_time')" href="@alert.button_url">@alert.button_text</a>
+                }
+            </div>
+        </div>
+    }
+}

@@ -1,0 +1,149 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.fazkumbu-ads {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.vertical-ads{
+  width: 25%;
+  margin-top: 10%;
+}
+.horizontal-ads{
+  width: 100%;
+}
+.fazkumbu-ads > a {
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.fazkumbu-ads > a > img {
+  width: 100%;
+  border-radius: 4px;
+}
+.ads-menu{
+  width: 50%;
+}
+.chat-ads{
+  margin-top: 1%;
+}
+.fazkumbu-ads p{
+  font-size: 0.9em;
+  color: rgba(60, 60, 60, 0.5);
+  font-style: italic;
+  margin-top: 1%;
+}
+@media (max-width: 600px) {
+  .vertical-ads {
+    display: none;
+  }
+  .ads-menu{
+    display: none;
+  }
+}
+@media (min-width: 601px) and (max-width: 1199px) and (orientation: portrait) {
+  .vertical-ads {
+    display: none;
+  }
+  .horizontal-ads.ads-bottom{
+    margin-bottom: 7%;
+  }
+  .fazkumbu-ads.login-ads {
+    width: 25%;
+    margin-top: 5%;
+  }
+  .fazkumbu-ads.login-ads > a {
+    width: 90%;
+  }
+  .fazkumbu-ads.pages-ads:first-of-type{
+    display: none;
+  }
+  .fazkumbu-ads.pages-ads{
+    width: 30%;
+    margin-top: 5%;
+  }
+  .fazkumbu-ads.pages-ads > a{
+    width: 90%;
+  }
+  .chat-ads{
+    display: none;
+  }
+  .chat-ads > a{
+    width: 90%;
+  }
+}
+@media (min-height: 300px) and (max-height: 599px) and (orientation: landscape) {
+  .vertical-ads {
+    display: none;
+  }
+  .horizontal-ads.ads-bottom{
+    margin-bottom: 10%;
+  }
+  .fazkumbu-ads:first-of-type {
+    display: none;
+  }
+  .fazkumbu-ads.login-ads {
+    width: 35%;
+    margin-top: 5%;
+  }
+  .fazkumbu-ads > a {
+    width: 80%;
+  }
+  .fazkumbu-ads.pages-ads{
+    display: none;
+  }
+  .ads-menu{
+    display: flex !important;
+    width: 50%;
+  }
+  .chat-ads{
+    display: none;
+  }
+}
+@media (min-height: 600px) and (max-height: 1100px) and (max-width: 1200px) and (orientation: landscape) {
+  .fazkumbu-ads.login-ads > a {
+    width: 80%;
+  }
+  .chat-ads{
+    margin-top: 5%;
+  }
+  .chat-ads > a
+  {
+    width: 90%;
+  }
+}
+@media (min-height: 600px) and (max-height: 1100px) and (max-width: 800px) and (orientation: landscape) {
+  .vertical-ads{
+    width: 35%;
+    margin-top: 5%;
+  }
+  .horizontal-ads.ads-bottom{
+    margin-bottom: 10%;
+  }
+  .fazkumbu-ads:first-of-type {
+    display: none;
+  }
+  .fazkumbu-ads.login-ads {
+    width: 30%;
+  }
+  .fazkumbu-ads.pages-ads > a {
+    width: 80%;
+  }
+  .ads-menu{
+    display: flex !important;
+    width: 50%;
+  }
+  .chat-ads{
+    display: none;
+  }
+}
+@media (min-width: 1921px) {
+}
+@media (max-width: 420px) and (orientation: portrait) {
+}
+@media (max-width: 330px) and (orientation: portrait) {
+}

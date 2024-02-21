@@ -1,0 +1,138 @@
+﻿@page
+@model MyApp.Namespace.alertsModel
+@{
+    <title>Alertas</title>
+    Layout = "~/Pages/Shared/_LayoutAdmin.cshtml";
+    <link rel="stylesheet" href="~/css/admin.css?v=104" />
+    <script async defer src="~/js/admin.js?v=104"></script>
+}
+<section class="navbar navbar-left">
+    <partial name="_AdminMenu" />
+</section>
+<section id="alerts-container">
+    <div class="add-alert"><span class="add-alert-button" onclick="showPanel('panel-new-alert')">+</span></div>
+    <form method="post" asp-page-handler="Add" id="panel-new-alert">
+        <div>
+            <label>Titulo</label>
+            <input type="text" asp-for="alerts.title">
+        </div>
+        <div>
+            <label>Descrição</label>
+            <textarea name="alerts.text" type="text" asp-for="alerts.text" cols="30" rows="10"></textarea>
+        </div>
+        <div>
+            <label>Texto do Botão</label>
+            <input asp-for="alerts.button_text">
+        </div>
+        <div>
+            <label>URL</label>
+            <input placeholder="minha-conta/conversas" asp-for="alerts.button_url">
+        </div>
+        <div>
+            <label>Data de expiração</label>
+            <input type="date" value='@DateTime.Now.ToString("yyyy-MM-dd")' asp-for="alerts.validation">
+        </div>
+        <div>
+            <label>Intervalo do cookie (dias)</label>
+            <input type="number" asp-for="alerts.cookie_time">
+        </div>
+        <div>
+            <label>Página</label>
+            <input placeholder="Index" asp-for="alerts.page">
+        </div>
+        <div>
+            <button type="submit">Gravar</button>
+        </div>
+    </form>
+    @if (Model.alerts_list != null)
+    {
+        <form method="post" id="alerts-list">
+            @foreach (var item in Model.alerts_list)
+            {
+                <div class="alert-content">
+                    <h4>Titulo: @item.title</h4>
+                    <p>Botão: @item.button_text</p>
+                    <p>Url: @item.button_url</p>
+                    <p>Expira: @item.validation.ToShortDateString()</p>
+                    @if (@item.status == 1)
+                    {
+                        <p>Estado: Activo</p>
+                    }
+                    else
+                    {
+                        <p>Estado: Desactivo</p>
+                    }
+                    <p>Pagina: @item.page</p>
+
+                    @if (@item.status == 1)
+                    {
+                        <button type="submit" asp-page-handler="Disable" name="id" value="@item.id">Desactivar</button>
+                    }
+                    else
+                    {
+                        <button type="submit" asp-page-handler="Active" name="id" value="@item.id">Activar</button>
+                    }
+                    <button type="submit" asp-page-handler="Delete" name="id" value="@item.id">Eliminar</button>
+                </div>
+            }
+        </form>
+        <form method="POST" class="pagination">
+            @if (Model.TotalPages < 6)
+            {
+                @for (var i = 1; i <= Model.TotalPages; i++)
+                {
+                    <li onclick="pagination('@i')" class="page-item @(i == Model.currentpage ? " active": "" )">
+                        <a name="pagination" class="page-link">@i</a>
+                    </li>
+                }
+            }
+            else if (Model.TotalPages > 5 && Model.currentpage > 3)
+            {
+                if (Model.currentpage <= Model.TotalPages - 2)
+                {
+                    @for (var i = @Model.currentpage - 2; i <= @Model.currentpage + 2; i++)
+                    {
+                        <li onclick="pagination('@i')" class="page-item @(i == Model.currentpage ? " active": "" )">
+                            <a name="pagination" class="page-link">@i</a>
+                        </li>
+                    }
+                }
+                else
+                {
+                    if (Model.currentpage == Model.TotalPages - 1)
+                    {
+                        @for (var i = @Model.currentpage - 3; i <= @Model.TotalPages; i++)
+                        {
+                            <li onclick="pagination('@i')" class="page-item @(i == Model.currentpage ? " active": "" )">
+                                <a name="pagination" class="page-link">@i</a>
+                            </li>
+                        }
+                    }
+
+                    else if (Model.currentpage == Model.TotalPages)
+                    {
+                        @for (var i = @Model.currentpage - 4; i <= @Model.TotalPages; i++)
+                        {
+                            <li onclick="pagination('@i')" class="page-item @(i == Model.currentpage ? " active": "" )">
+                                <a name="pagination" class="page-link">@i</a>
+                            </li>
+                        }
+                    }
+                }
+            }
+            else if (Model.TotalPages > 5 && Model.currentpage < 4)
+            {
+                @for (var i = 1; i <= 5; i++)
+                {
+                    <li onclick="pagination('@i')" class="page-item @(i == Model.currentpage ? " active": "" )">
+                        <a name="pagination" class="page-link">@i</a>
+                    </li>
+                }
+            }
+        </form>
+    }
+</section>
+@if (Model.Msg != null)
+{
+    <script>alert("@Model.Msg")</script>
+}

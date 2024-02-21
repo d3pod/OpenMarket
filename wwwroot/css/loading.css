@@ -1,0 +1,104 @@
+.div-loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+}
+.loading-effect {
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 3px solid #f3f3f3 !important;
+  border-top: 3px solid #3d3d3d !important;
+  border-radius: 50% !important;
+  width: 70px !important;
+  height: 70px !important;
+  animation: spin 2s linear infinite;
+  -moz-animation: spin 2s linear infinite;
+  -webkit-animation: spin 2s linear infinite;
+}
+.effect-white {
+  border: 5px solid #ffffff !important;
+  border-top: 5px solid #3d3d3d !important;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@-moz-keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.loading-advert {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.loading-advert > h1 {
+  margin-bottom: 20px;
+  color: #5ae0cc;
+}
+.loading-advert > h2 {
+  margin-bottom: 50px;
+  color: white;
+}
+@media (max-width: 600px) {
+  .loading-advert > h1 {
+    width: 90%;
+    font-size: 1.5em;
+    text-align: center;
+  }
+  .loading-advert > h2 {
+    width: 90%;
+    font-size: 1.2em;
+    text-align: center;
+  }
+}
+@media (min-width: 601px) and (max-width: 1199px) and (orientation: portrait) {
+  .loading-advert > h1 {
+    width: 90%;
+    text-align: center;
+  }
+  .loading-advert > h2 {
+    width: 90%;
+    text-align: center;
+  }
+}
+@media (min-height: 300px) and (max-height: 599px) and (orientation: landscape) {
+}
+@media (min-height: 600px) and (max-height: 1100px) and (max-width: 800px) and (orientation: landscape) {
+}
+@media (min-height: 600px) and (max-height: 1100px) and (max-width: 1200px) and (orientation: landscape) {
+}
+@media (min-width: 1921px) {
+}
+@media (max-width: 420px) and (orientation: portrait) {
+}
+@media (max-width: 330px) and (orientation: portrait) {
+}

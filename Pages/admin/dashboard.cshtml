@@ -1,0 +1,199 @@
+﻿@page
+@model MyApp.Namespace.dashboardModel
+@{
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="~/css/admin.css?v=104" />
+    Layout = "~/Pages/Shared/_LayoutAdmin.cshtml";
+    <script async src="~/js/admin.js?v=104"></script>
+    <script async src="~/js/social.js?v=104"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+}
+<section class="navbar navbar-left">
+    <partial name="_AdminMenu" />
+</section>
+<section class="dashboard-container">
+    <div class="navbar navbar-right">
+        <form method="POST" class="control-panel">
+            <button class="sitemap" type="submit" asp-page-handler="Sitemap">Sitemap</button>
+            <button class="anuncios" type="submit" asp-page-handler="Anuncios">Anuncios</button>
+            <button id="Facebook" type="submit" asp-page-handler="Facebook" type="button">Facebook</button>
+        </form>
+    </div>
+    <div id="resume-panel">
+        <h4>Resumo de anúncios</h4>
+        <p>Pendentes: @Model.adverts_pending</p>
+        <p>Atualizados: @Model.adverts_update</p>
+    </div>
+    <div class="charts">
+        <select id="month" class="filter-select" onchange="refreshCharts()">
+            @foreach (var item in Model.month_list)
+            {
+                if (item.id == Model.Month)
+                {
+                            <option selected value="@item.id">@item.name</option>
+                }
+                else
+                {
+                            <option value="@item.id">@item.name</option>
+                }
+            }
+        </select>
+        <h2>Visualizações (@Model.views.Sum(x => x.valueY))</h2>
+        <canvas id="views_chart" class="charts_content"></canvas>
+        <script>
+            var xValues = [];
+            var yValues = [];
+            @foreach (var item in Model.views.OrderBy(x => x.valueX))
+            {
+                @:yValues.push("@item.valueY");
+                DateTime date = new DateTime(DateTime.Now.Year, 1, 1).AddDays(item.valueX - 1);
+                string date_string = date.ToString("dd/MM");
+                @:xValues.push("@date_string");
+            }
+                new Chart("views_chart", {
+                    type: "line",
+                    data: {
+                        labels: xValues,
+                        datasets: [{
+                            fill: false,
+                            lineTension: 0,
+                            backgroundColor: "rgba(0,0,255,1.0)",
+                            borderColor: "rgba(0,0,255,0.1)",
+                            data: yValues
+                        }]
+                    },
+                    options: {
+                        legend: { display: false },
+                        scales: {
+                            yAxes: [{ ticks: { min: 0, max: @Model.views.OrderByDescending(x => x.valueY).Select(x => x.valueY).Take(1).SingleOrDefault() + 10 } }],
+                        }
+                    }
+                });
+        </script>
+    </div>
+    @if (Model.Permission == 1)
+    {
+            <div class="charts">
+                <h2>Anúncios (@Model.adverts.Sum(x => x.valueY))</h2>
+                <canvas id="adverts_chart" class="charts_content"></canvas>
+                <script>
+                    var xValues = [];
+                    var yValues = [];
+                @foreach (var item in Model.adverts.OrderBy(x => x.valueX))
+                {
+                    @:yValues.push("@item.valueY");
+                    DateTime date = new DateTime(DateTime.Now.Year, 1, 1).AddDays(item.valueX - 1);
+                    string date_string = date.ToString("dd/MM");
+                    @:xValues.push("@date_string");
+                }
+                        new Chart("adverts_chart", {
+                            type: "line",
+                            data: {
+                                labels: xValues,
+                                datasets: [{
+                                    fill: false,
+                                    lineTension: 0,
+                                    backgroundColor: "rgba(0,0,255,1.0)",
+                                    borderColor: "rgba(0,0,255,0.1)",
+                                    data: yValues
+                                }]
+                            },
+                            options: {
+                                legend: { display: false },
+                                scales: {
+                                    yAxes: [{ ticks: { min: 0, max: @Model.adverts.OrderByDescending(x => x.valueY).Select(x => x.valueY).Take(1).SingleOrDefault() + 5 } }],
+                                }
+                            }
+                        });
+                </script>
+            </div>
+            <div class="charts">
+                <h2>Registo de utilizadores (@Model.users.Sum(x => x.valueY))</h2>
+                <canvas id="users_chart" class="charts_content"></canvas>
+                <script>
+                    var xValues = [];
+                    var yValues = [];
+                @foreach (var item in Model.users.OrderBy(x => x.valueX))
+                {
+                    @:yValues.push("@item.valueY");
+                    DateTime date = new DateTime(DateTime.Now.Year, 1, 1).AddDays(item.valueX - 1);
+                    string date_string = date.ToString("dd/MM");
+                    @:xValues.push("@date_string");
+                }
+                        new Chart("users_chart", {
+                            type: "line",
+                            data: {
+                                labels: xValues,
+                                datasets: [{
+                                    fill: false,
+                                    lineTension: 0,
+                                    backgroundColor: "rgba(0,0,255,1.0)",
+                                    borderColor: "rgba(0,0,255,0.1)",
+                                    data: yValues
+                                }]
+                            },
+                            options: {
+                                legend: { display: false },
+                                scales: {
+                                    yAxes: [{ ticks: { min: 0, max: @Model.users.OrderByDescending(x => x.valueY).Select(x => x.valueY).Take(1).SingleOrDefault() + 5 } }],
+                                }
+                            }
+                        });
+                </script>
+            </div>
+            <div id="views-today" class="views-list">
+                <h3>Lista de anúncios mais vistos hoje</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Anúncio</th>
+                            <th>Visualizações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @if (Model.Views_today.Count > 0)
+                    {
+                        @foreach (var item in Model.Views_today)
+                        {
+                                        <tr class="advert-row">
+                                            <td>@Html.DisplayFor(x => item.title)</td>
+                                            <td>@Html.DisplayFor(x => item.views)</td>
+                                        </tr>
+                        }
+                    }
+                    else
+                    {
+                                <h2>Sem visualizações hoje</h2>
+                    }
+                    </tbody>
+                </table>
+            </div>
+            <div id="views-week" class="views-list">
+                <h3>Lista de anúncios mais esta semana</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Anúncio</th>
+                            <th>Visualizações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @if (Model.Views_week.Count > 0)
+                    {
+                        @foreach (var item in Model.Views_week)
+                        {
+                                        <tr class="advert-row">
+                                            <td>@Html.DisplayFor(x => item.title)</td>
+                                            <td>@Html.DisplayFor(x => item.views)</td>
+                                        </tr>
+                        }
+                    }
+                    else
+                    {
+                                <h2>Sem visualizações hoje</h2>
+                    }
+                    </tbody>
+                </table>
+            </div>
+    }
+</section>

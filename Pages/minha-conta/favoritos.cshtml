@@ -1,0 +1,267 @@
+﻿@page
+@using openmarket.Models;
+@model MyApp.Namespace.favoritosModel
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+@section head{
+<title>OpenMarket - Favoritos</title>
+<meta name="title" content="OpenMarket - Favoritos" />
+<meta name="description" content="Acesso aos meus favoritos." />
+@* Facebook, Others *@
+<meta property="og:title" content="OpenMarket - Favoritos">
+<meta property="og:image" content="https://www.openmarket.com/imgs/Logotipo.jpg">
+<meta property="og:image:width" content="400" />
+<meta property="og:image:height" content="300" />
+<meta property="og:url" content="https://www.openmarket.com/minha-conta/favoritos">
+<meta property="og:type" content="article" />
+<meta property="og:description" content="Acesso aos meus favoritos.">
+@* Twitter *@
+<meta property="twitter:title" content="OpenMarket - Favoritos">
+<meta name="twitter:description" content="Acesso aos meus favoritos.">
+<meta name="twitter:image" content="https://www.openmarket.com/imgs/Logotipo.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="canonical" href="https://www.openmarket.com/minha-conta/favoritos" />
+<link rel="stylesheet" href="~/css/account.css?v=104" />
+<script src="~/js/main.js?v=104"></script>
+}
+@section login{
+<div class="navbar-login">
+    <a class="login-link" href="~/entrar">My OpenMarket</a>
+</div>
+}
+<div id="menu-container">
+    <partial name="_UserMenu"/>
+    <div class="openmarket-ads ads-menu vertical-ads"></div>
+</div>
+<h2 class="slogan">Os meus favoritos</h2>
+<div id="adverts-container" class="adverts-container">
+    @if (Model.adverts_list.Count() == 0)
+    {
+        <div id="noAdverts">
+            <img src="~/imgs/adverts.png" alt="Sem anúncios">
+            <h3>Sem anúncios nos favoritos</h3>
+        </div>
+    }
+    else
+    {
+        foreach (var item in Model.adverts_list)
+        {
+            if (item.groupName == "Emprego")
+            {
+                valueFormat formatter = new valueFormat();
+                var url = "anuncio?";
+                var advert_id = "&id=" + @item.id;
+                url = url + formatter.urlFormat(@item.title) + advert_id;
+
+                <a href="@url" class="employment-content">
+                    <h4 class="employment-title">@item.title</h4>
+                    <div>
+                        @if (item.price_min > 0 || item.price_max > 0)
+                        {
+                            double dmin = @item.price_min;
+                            double dmax = @item.price_max;
+                            string res_min = dmin.ToString("### ### ### ### ###.00");
+                            string res_max = dmax.ToString("### ### ### ### ###.00");
+                            <p class="employment-price-title">Faixa salarial</p>
+                            <p class="employment-price">@res_min - &nbsp;&nbsp;<br />@res_max €</p>
+                        }
+                        else
+                        {
+                            <p class="employment-price-title">Faixa salarial</p>
+                            <p class="employment-price">Não definida</p>
+                        }
+                        <p class="employment-location">@item.municipality, @item.city</p>
+                        @{
+                            var date = @item.date;
+                            if (date.Date == DateTime.Now.Date)
+                            {
+                                <p class="employment-date">Hoje às @item.date.ToString("HH:mm")</p>
+                            }
+                            else if (date.Date == DateTime.Now.Date.AddDays(-1))
+                            {
+                                <p class="employment-date">Ontem às @item.date.ToString("HH:mm")</p>
+                            }
+                            else
+                            {
+                                var month = char.ToUpper(@item.date_month[0]) + @item.date_month.Substring(1);
+                                <p class="employment-date">@item.date.Day @month</p>
+                            }
+                        }
+                    </div>
+                    <span class="advert-type advert-type-employment">@item.type.ToUpper()</span>
+
+                </a>
+            }
+            else
+            {
+                valueFormat formatter = new valueFormat();
+                var url = "anuncio?";
+                var advert_id = "&id=" + @item.id;
+                url = url + formatter.urlFormat(@item.title) + advert_id;
+                <a href="~/@url" class="advert-content">
+                    @{
+                        var imgSrc = string.Empty;
+                        if (@item.image_filename != null)
+                        {
+                            imgSrc = "/anuncios/" + @item.image_filename;
+                        }
+                        else
+                        {
+                            imgSrc = "/imgs/WithoutImage. pg";
+                        }
+                        <img src="@imgSrc" alt="@item.title">
+                    }
+                    <div>
+                        <h4 class="advert-title">@item.title</h4>
+                        @if (item.orc == "true" || item.price == 0)
+                        {
+                            <p class="advert-price">Sob orçamento</p>
+                        }
+                        else
+                        {
+                            double d = @item.price;
+                            string res = d.ToString("### ### ### ### ###.00");
+                            <p class="advert-price">@res €</p>
+                        }
+                        <p class="advert-location">@item.municipality, @item.city</p>
+                        @{
+                            var date = @item.date;
+                            if (date.Date == DateTime.Now.Date)
+                            {
+                                <p class="advert-date">Hoje às @item.date.ToString("HH:mm")</p>
+                            }
+                            else if (date.Date == DateTime.Now.Date.AddDays(-1))
+                            {
+                                <p class="advert-date">Ontem às @item.date.ToString("HH:mm")</p>
+                            }
+                            else
+                            {
+                                var month = char.ToUpper(@item.date_month[0]) + @item.date_month.Substring(1);
+                                <p class="advert-date">@item.date.Day @month</p>
+                            }
+                        }
+                    </div>
+                    @if (item.type == "Venda")
+                    {
+                        <span class="advert-type advert-type-sell">@item.type.ToUpper()</span>
+                    }
+                    else if (item.type == "Compra" || item.type == "Procura")
+                    {
+                        <span class="advert-type advert-type-buy">@item.type.ToUpper()</span>
+                    }
+                    @* else if(item.type == "Troca")
+                        {
+                        <span class="advert-type advert-type-change">@item.type.ToUpper()</span>
+                        } *@
+                    else if (item.type == "Contratar" || item.type == "Arrendar")
+                    {
+                        <span class="advert-type advert-type-contract">@item.type.ToUpper()</span>
+                    }
+                    else if (item.type == "Serviço")
+                    {
+                        <span class="advert-type advert-type-service">@item.type.ToUpper()</span>
+                    }
+                </a>
+            }
+        }
+    }
+</div>
+<div class="pagination">
+    @if (Model.TotalPages < 6)
+    {
+        @for (var i = 1; i <= Model.TotalPages; i++)
+        {
+            var url = "favoritos?pagina=" + @i;
+            <a href="@url" class="page-item @(i == Model.currentpage ? " active": "" )">
+                @i
+            </a>
+        }
+    }
+    else if (Model.TotalPages > 5 && Model.currentpage > 3)
+    {
+        if (Model.currentpage <= Model.TotalPages - 2)
+        {
+            @for (var i = @Model.currentpage - 2; i <= @Model.currentpage + 2; i++)
+            {
+                var url = "favoritos?pagina=" + @i;
+                <a href="@url" class="page-item @(i == Model.currentpage ? " active": "" )">
+                    @i
+                </a>
+            }
+        }
+        else
+        {
+            if (Model.currentpage == Model.TotalPages - 1)
+            {
+                @for (var i = @Model.currentpage - 3; i <= @Model.TotalPages; i++)
+                {
+                    var url = "favoritos?pagina=" + @i;
+                    <a href="@url" class="page-item @(i == Model.currentpage ? " active": "" )">
+                        @i
+                    </a>
+                }
+            }
+
+            else if (Model.currentpage == Model.TotalPages)
+            {
+                @for (var i = @Model.currentpage - 4; i <= @Model.TotalPages; i++)
+                {
+                    var url = "favoritos?pagina=" + @i;
+                    <a href="@url" class="page-item @(i == Model.currentpage ? " active": "" )">
+                        @i
+                    </a>
+                }
+            }
+        }
+    }
+    else if (Model.TotalPages > 5 && Model.currentpage < 4)
+    {
+        @for (var i = 1; i <= 5; i++)
+        {
+            var url = "favoritos?pagina=" + @i;
+            <a href="@url" class="page-item @(i == Model.currentpage ? " active": "" )">
+                @i
+            </a>
+        }
+    }
+</div>
+<div class="user-footer">
+    <h3>Mais informações</h3>
+    <a href="~/sobre-nos"><span>Sobre o OpenMarket</span><span>&#10095;</span></a>
+    <a href="~/inserir-anuncios"><span>Vender no OpenMarket</span><span>&#10095;</span></a>
+    <a href="~/contacte-nos"><span>Contacte-nos</span><span>&#10095;</span></a>
+    <a href="~/termos-condicoes"><span>Termos e Condições</span><span>&#10095;</span></a>
+    <a href="~/privacidade-cookies"><span>Privacidade e Cookies</span><span>&#10095;</span></a>
+    <a href="~/dicas-seguranca"><span>Dicas de Segurança</span><span>&#10095;</span></a>
+    <a href="~/categorias"><span>Anúncios por Categorias</span><span>&#10095;</span></a>
+    <a href="~/paginas/municipios"><span>Anúncios por Municípios</span><span>&#10095;</span></a>
+    <div class="social">
+        <h4>Siga-nos</h4>
+        <a href="http://www.facebook.com/openmarket"><img src="/imgs/social/facebook.png" alt="Facebook"></a>
+        <a href="http://www.instagram.com/openmarket"><img src="/imgs/social/instagram.png" alt="Instagram"></a>
+        <a href="http://www.linkedin.com/company/openmarket"><img src="/imgs/social/linkedin.png" alt="LinkedIn"></a>
+    </div>
+</div>
+@if (Model.alerts_list != null)
+{
+    foreach (var alert in Model.alerts_list)
+    {
+        <div class="alerts-container">
+    <div class="alert-content">
+        <span onclick="closePanel('alerts-container');cookieAlert('fz_whsl', '@alert.cookie_time');">&times;</span>
+        <h2>@alert.title</h2>
+        <textarea id="alert-text" readonly>@alert.text</textarea>
+        <script>
+            var textarea = document.getElementById("alert-text");
+            textarea.style.height = textarea.scrollHeight + 20 + "px";
+        </script>
+        @if (!string.IsNullOrEmpty(@alert.button_text))
+                {
+                    <a onclick="cookieAlert('fz_whsl', '@alert.cookie_time')" href="@alert.button_url">@alert.button_text</a>
+                }
+            </div>
+        </div>
+    }
+}

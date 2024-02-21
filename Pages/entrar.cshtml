@@ -1,0 +1,239 @@
+﻿@page 
+@model MyApp.Namespace.entrarModel
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+@section head{
+<title>OpenMarket - Entrar</title>
+<meta name="title" content="OpenMarket - Entrar" />
+<meta name="description" content="Página de inicio de sessão e registo." />
+@* Facebook, Others *@
+<meta property="og:title" content="OpenMarket - Entrar">
+<meta property="og:image" content="https://www.openmarket.com/imgs/Logotipo.jpg">
+<meta property="og:image:width" content="400" />
+<meta property="og:image:height" content="300" />
+<meta property="og:url" content="https://www.openmarket.com/entrar">
+<meta property="og:type" content="article" />
+<meta property="og:description" content="Página de inicio de sessão e registo.">
+@* Twitter *@
+<meta property="twitter:title" content="OpenMarket - Entrar">
+<meta name="twitter:description" content="Página de inicio de sessão e registo.">
+<meta name="twitter:image" content="https://www.openmarket.com/imgs/Logotipo.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="canonical" href="https://www.openmarket.com/entrar/" />
+<link rel="stylesheet" href="~/css/login.css?v=104" />
+<link rel="stylesheet" href="~/css/loading.css?v=104" />
+<script defer src="~/js/main.js?v=104"></script>
+<script async src="~/js/social.js?v=104"></script>
+}
+<div id="alert-message-container" style="display: none;">
+    <div class="alert-content">
+        <h4 id="message"></h4>
+        <button onclick="document.getElementById('alert-message-container').style.display = 'none'">Voltar</button>
+    </div>
+</div>
+<section class="login-container">
+    <div class="openmarket-ads login-ads vertical-ads">
+        <a href="https://www.openmarket.com">
+            <img src="/pubs/anuncios-vertical.jpg" alt="OpenMarket">
+        </a>
+        <p>OpenMarket Ads</p>
+    </div>
+    <div class="login-content">
+        <div class="login-options">
+            <button id="button-login" onclick="login_form()" type="button">Entrar</button>
+            <button id="button-register" onclick="register_form()" type="button">Registar</button>
+        </div>
+        <form method="POST" asp-page-handler="Login" id="login-form" class="login-form">
+            <div>
+                <label>E-mail</label>
+                <input placeholder="E-mail" asp-for="accounts.email" type="email">
+            </div>
+            <div>
+                <label>Password</label>
+                <input placeholder="Password" asp-for="accounts.password" type="password">
+            </div>
+            <a href="/minha-conta/recuperar-password">Recuperar password</a>
+            @if (!string.IsNullOrEmpty(Model.backUrl))
+            {
+                <button value="@Model.backUrl" name="backUrl" type="submit">Efectuar o meu
+                    login</button>
+            }
+            else
+            {
+                <button name="button_login" type="submit">Efectuar o meu
+                    login</button>
+            }
+            <button onclick="register_form()" type="button">Criar um conta</button>
+            <div class="social-content">
+                <div onclick="loginfb();" id="facebook-button" class="social-buttons">
+                    <img src="/imgs/social/facebook.png" alt="Facebook">
+                    <p>Entrar com o Facebook</p>
+                </div>
+
+                @* <div onclick="loginGoogle()" class="g-signin2" data-onsuccess="onSignIn"></div> *@
+            </div>
+            <p>Ao fazer o login está a aceitar os <a href="termos-condicoes">Termos e Condições</a> do OpenMarket.</p>
+        </form>
+        <form method="POST" asp-page-handler="Facebook" id="facebook-login" class="login-social">
+            @if (!string.IsNullOrEmpty(Model.backUrl))
+            {
+                <button value="@Model.backUrl" name="backUrl" id="facebookButton" type="submit"></button>
+            }
+            else
+            {
+                <button name="button_login" id="facebookButton" type="submit"></button>
+            }
+        </form>
+        <form method="POST" asp-page-handler="Google" id="google-login" class="login-social">
+        </form>
+        <form method="POST" asp-page-handler="Register" id="register-form" class="register-form">
+            <div>
+                <label>Primeiro e último nome</label>
+                <input maxlength="20" asp-for="accounts.username" id="account-username" type="text">
+                <span style="display: none;" id="username-alert">O nome de utilizador não pode conter espaços ou
+                    caracteres especiais</span>
+            </div>
+            <div>
+                <label>E-mail</label>
+                <input asp-for="accounts.email" id="account-email" type="email">
+                <span style="display: none;" id="email-alert">Introduza um email válido</span>
+            </div>
+            <div>
+                <label>Password</label>
+                <input asp-for="accounts.password" id="account-password" type="password">
+            </div>
+            <p>Ao clicar em <b>Registar</b> aceito os <a href="termos-condicoes">Termos e Condições</a>.</p>
+            <p>Reconheço que o OpenMarket utiliza a minha informação pessoal de acordo com a <a
+                    href="privacidade-cookies">Política de Privacidade e Cookies</a>. O OpenMarket utiliza sistemas
+                automatizados e parceiros para analisar o meu uso dos serviços e facultar funcionalidades de produto
+                relevantes, conteúdo, publicidade visada e baseada nos meus interesses, bem como protecção contra spam,
+                malware e utilização não autorizada.</p>
+            <div class="login-newsletter">
+                <input id="newsletter-check" asp-for="accounts.newsletter" checked type="checkbox">
+                <p>Sim, eu quero receber actualizações sobre produtos e serviços, promoções, ofertas especiais,
+                    novidades e eventos do OpenMarket, suas afiliadas e parceiros de negócio (e.g. através de newsletters
+                    e/ou mensagens SMS).</p>
+            </div>
+            @if (!string.IsNullOrEmpty(Model.backUrl))
+            {
+                <button id="register_button" class="loading-button" type="button" value="@Model.backUrl" name="backUrl"
+                onclick="validateRegister()"><span class="button-text">Registar</span></button>
+            }
+            else if (!string.IsNullOrEmpty(Model.convite))
+            {
+                <button id="register_button" class="loading-button" type="button" value="@Model.convite" name="invite"
+                onclick="validateRegister()"><span class="button-text">Registar</span></button>
+            }
+            else
+            {
+                <button id="register_button" class="loading-button" type="button" onclick="validateRegister()"><span
+                    class="button-text">Registar</span></button>
+            }
+            <button type="button" onclick="login_form()">Já tenho uma conta</button>
+        </form>
+    </div>
+    <div class="openmarket-ads login-ads vertical-ads">
+        <a href="https://www.openmarket.com">
+            <img src="/pubs/anuncios-vertical.jpg" alt="OpenMarket">
+        </a>
+        <p>OpenMarket Ads</p>
+    </div>
+</section>
+<div class="user-footer">
+    <h3>Mais informações</h3>
+    <a href="~/sobre-nos"><span>Sobre o OpenMarket</span><span>&#10095;</span></a>
+    <a href="~/inserir-anuncios"><span>Vender no OpenMarket</span><span>&#10095;</span></a>
+    <a href="~/contacte-nos"><span>Contacte-nos</span><span>&#10095;</span></a>
+    <a href="~/termos-condicoes"><span>Termos e Condições</span><span>&#10095;</span></a>
+    <a href="~/privacidade-cookies"><span>Privacidade e Cookies</span><span>&#10095;</span></a>
+    <a href="~/dicas-seguranca"><span>Dicas de Segurança</span><span>&#10095;</span></a>
+    <a href="~/categorias"><span>Anúncios por Categorias</span><span>&#10095;</span></a>
+    <a href="~/paginas/municipios"><span>Anúncios por Municípios</span><span>&#10095;</span></a>
+    <div class="social">
+        <h4>Siga-nos</h4>
+        <a href="http://www.facebook.com/openmarket"><img src="/imgs/social/facebook.png" alt="Facebook"></a>
+        <a href="http://www.instagram.com/openmarket"><img src="/imgs/social/instagram.png" alt="Instagram"></a>
+        <a href="http://www.linkedin.com/company/openmarket"><img src="/imgs/social/linkedin.png" alt="LinkedIn"></a>
+    </div>
+</div>
+<div class="div-loading loading-advert">
+    <h1>Aguarde um momento, por favor!</h1>
+    <h2>Estamos a criar a sua conta.</h2>
+    <span class="loading-effect effect-white"></span>
+</div>
+@if (Model.alerts_list != null)
+{
+    foreach (var alert in Model.alerts_list)
+    {
+        <div class="alerts-container">
+    <div class="alert-content">
+        <span onclick="closePanel('alerts-container');cookieAlert('fz_lg', '@alert.cookie_time');">&times;</span>
+        <h2>@alert.title</h2>
+        <textarea id="alert-text" readonly>@alert.text</textarea>
+        <script>
+            var textarea = document.getElementById("alert-text");
+            textarea.style.height = textarea.scrollHeight + 20 + "px";
+        </script>
+        @if (!string.IsNullOrEmpty(@alert.button_text))
+                {
+                    <a onclick="cookieAlert('fz_lg', '@alert.cookie_time')" href="@alert.button_url">@alert.button_text</a>
+                }
+            </div>
+        </div>
+    }
+}
+@if (Model.register == true)
+{
+    <script type="text/javascript">
+        var login = document.getElementById("login-form");
+        var register = document.getElementById("register-form");
+        var login_button = document.getElementById("button-login");
+        var register_button = document.getElementById("button-register");
+        login.style.display = "none";
+        register.style.display = "flex";
+        login_button.style.borderBottom = "1px solid black";
+        register_button.style.borderBottom = "2px solid black";
+        login_button.style.fontWeight = "normal";
+        register_button.style.fontWeight = "bold";
+    </script>
+}
+@switch (Model._Msg)
+{
+    case "nao-encontrado":
+        <script async type="text/javascript">
+    document.getElementById('alert-message-container').style.display = "flex";
+    document.getElementById('message').innerHTML = "Email não encontrado!";
+</script>
+        break;
+
+    case "email-registado":
+        <script type="text/javascript">
+    document.getElementById('alert-message-container').style.display = "flex";
+    document.getElementById('message').innerHTML = "O email inserido já está em uso!";
+    register_form();
+</script>
+        break;
+        case "conta-bloqueada":
+        <script type="text/javascript">
+    document.getElementById('alert-message-container').style.display = "flex";
+    document.getElementById('message').innerHTML = "Esta conta encontra-se bloqueada. Para mais informações contacte a nossa equipa.";
+</script>
+        break;
+
+    case "nome-utilizador-registado":
+        <script type="text/javascript">
+    document.getElementById('alert-message-container').style.display = "flex";
+    document.getElementById('message').innerHTML = "O nome de utilizador inserido já está em uso!";
+    register_form();
+</script>
+        break;
+
+    case "login-incorrecto":
+        <script type="text/javascript">
+    document.getElementById('alert-message-container').style.display = "flex";
+    document.getElementById('message').innerHTML = "Email ou password errado! <br/> Tente novamente.";
+</script>
+        break;
+}

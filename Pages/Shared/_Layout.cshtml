@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+@using openmarket.Models;
+<html lang="pt">
+
+<head>
+    @RenderSection("head", required: false)
+    <meta property="og:site_name" content="OpenMarket">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="keywords"
+        content="classificados, compra, venda, online, produtos, comercio online, roupa, carros, motas, consolas, terrenos, moradias, vivendas, apartamentos, agricultura, smartphones, telemoveis, tablets, relogios, perfumes, sapatos, animais, caes, gatos, desporto, futebol, moda, camisas, moveis, camas, mobilia, tecnologia, computador, impressora, software, imoveis, arrendar, ferramentas, servicos, pintor, emprego, recrutamento">
+    <meta name="news_keywords"
+        content="classificados, compra, venda, online, produtos, comercio online, roupa, carros, motas, consolas, terrenos, moradias, vivendas, apartamentos, agricultura, smartphones, telemoveis, tablets, relogios, perfumes, sapatos, animais, caes, gatos, desporto, futebol, moda, camisas, moveis, camas, mobilia, tecnologia, computador, impressora, software, imoveis, arrendar, ferramentas, servicos, pintor, emprego, recrutamento">
+    <meta name='copyright' content='OpenMarket'>
+    <meta name='author' content='OpenMarket, geral@openmarket.com'>
+    <meta property='og:email' content='openmarket@gmail.com'>
+    <link rel="stylesheet" media="all" href="~/css/layout.css?v=104" />
+    <link rel="stylesheet" href="~/css/alerts.css?v=104" />
+    <link rel="stylesheet" href="~/css/ads.css?v=104" />
+    <script async src="~/js/default.js?v=104"></script>
+     crossorigin="anonymous"></script>
+</head>
+
+<body>
+    @if (Model.Cookies != 1)
+    {
+        <div class="cookies">
+            <div>
+                <p>Ao aceitar a política de cookies do OpenMarket deverá ter em consideração que a utilização de cookies
+                    possibilita a personalização da utilização e a apresentação de serviços e ofertas adaptadas ao seu
+                    interesse. <a href="~/privacidade-cookies">Saber
+                        mais</a></p>
+                <button onclick="setCookies()">Concordo</button>
+            </div>
+        </div>
+    }
+    <header>
+        <nav class="navbar-container">
+            <div class="navbar top">
+                <div class="logo">
+                    <a href="~/index"><img src="/imgs/logotipo.png" alt="OpenMarket"></a>
+                </div>
+                <div class="settings-login">
+                    @if (Model.SessionUser > 0)
+                    {
+                        notificationIcon chat = new notificationIcon(Model.db);
+                        <div id="icons">
+                            @if (chat.counter(Model.SessionUser) > 0)
+                            {
+                                <div id="notification">
+                                    <p>@chat.counter(Model.SessionUser)</p>
+                                </div>
+                            }
+                            <a id="chat-icon" href="~/minha-conta/conversas"><img src="/static/imgs/chat.png"
+                                alt="Conversas"></a>
+                        </div>
+                        wallet wallet = new wallet(Model.db);
+                        <a href="~/minha-conta/carteira" id="wallet">
+                            <img src="/static/imgs/wallet.png" alt="Carteira">
+                            <p id="walletValue">@wallet.walletValue(Model.SessionUser)</p>
+                        </a>
+                    }
+                    <div class="navbar-sell">
+                        <a href="~/anunciar-vender?backUrl=anunciar-vender">Novo Anúncio</a>
+                    </div>
+                    @RenderSection("login", required: false)
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div id="main" class="container">
+        @RenderBody()
+    </div>
+    <nav id="menu-mobile">
+        <a href="~/index">
+            <img src="/static/imgs/menu/home.png" alt="Explorar">
+            <p>Explorar</p>
+        </a>
+        <a href="~/minha-conta/favoritos?backUrl=minha-conta/favoritos">
+            <img src="/static/imgs/menu/wishlist.png" alt="Favoritos">
+            <p>Favoritos</p>
+        </a>
+        <a href="~/anunciar-vender?backUrl=anunciar-vender">
+            <img src="/static/imgs/menu/add.png" alt="Anunciar">
+            <p>Anunciar</p>
+        </a>
+        @{
+            notificationIcon chat1 = new notificationIcon(Model.db);
+            if (Model.SessionUser > 0 && chat1.counter(Model.SessionUser) > 0)
+            {
+                <a href="~/minha-conta/conversas?backUrl=minha-conta/conversas">
+                    <div class="notification mobile-notification">
+                        <p>@chat1.counter(Model.SessionUser)</p>
+                    </div>
+                    <img src="/static/imgs/chat.png" alt="Conversas">
+                    <p>Conversas</p>
+                </a>
+            }
+            else
+            {
+                <a href="~/minha-conta/conversas?backUrl=minha-conta/conversas">
+                    <img src="/static/imgs/chat.png" alt="Conversas">
+                    <p>Conversas</p>
+                </a>
+            }
+        }
+        <a href="~/minha-conta">
+            <img src="/static/imgs/menu/user.png" alt="Conta">
+            <p>Conta</p>
+        </a>
+    </nav>
+    <footer>
+        <div class="about">
+            <h4>Empresa</h4>
+            <a href="~/sobre-nos">Sobre o OpenMarket</a>
+            <a href="~/inserir-anuncios">Anunciar no OpenMarket</a>
+        </div>
+        <div class="others">
+            <h4>Informações</h4>
+            <a href="~/contacte-nos">Contacte-nos</a>
+            <a href="~/termos-condicoes">Termos e Condições</a>
+            <a href="~/privacidade-cookies">Privacidade e Cookies</a>
+            <a href="~/dicas-seguranca">Dicas de Segurança</a>
+            <a href="~/categorias">Anúncios por Categorias</a>
+            <a href="~/paginas/municipios">Anúncios por Municípios</a>
+        </div>
+        <div class="copyright">
+            <div class="social">
+                <h4>Siga-nos</h4>
+                <a href="http://www.facebook.com/openmarket"><img src="/imgs/social/facebook.png" alt="Facebook"></a>
+                <a href="http://www.instagram.com/openmarket"><img src="/imgs/social/instagram.png" alt="Instagram"></a>
+                <a href="http://www.linkedin.com/company/openmarket"><img src="/imgs/social/linkedin.png"
+                        alt="LinkedIn"></a>
+            </div>
+            <p>© 2024 OpenMarket <br /> Todos os direitos reservados</p>
+        </div>
+    </footer>
+    @RenderSection("scripts", required: false)
+</body>
+</html>
